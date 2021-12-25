@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [Tokencookies, setTokenCookie, removeTokenCookie] = useCookies([
+    "Token",
+  ]);
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
 
@@ -25,9 +29,9 @@ export default function LoginPage() {
     };
 
     dispatch(loginUser(body)).then((response) => {
-      console.log("dispatch", response.payload);
       if (response.payload) {
         navigate(-1);
+        setTokenCookie("Token", response.payload, { path: "/" });
       } else {
         console.log("login error");
       }
