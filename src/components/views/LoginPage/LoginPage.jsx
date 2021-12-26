@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 export default function LoginPage() {
+  // const [Tokencookie, setTokenCookie, removeTokenCookie] = useCookies([
+  //   "Token",
+  // ]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cookies = new Cookies();
 
-  const [Tokencookie, setTokenCookie, removeTokenCookie] = useCookies([
-    "Token",
-  ]);
-
-  const Token = useSelector((state) => state.user.Token);
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
+
+  const Token = useSelector((state) => state.user.Token);
+  const nickname = useSelector((state) => state.user.nickname);
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);
   };
+
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
   };
@@ -33,10 +36,11 @@ export default function LoginPage() {
 
     dispatch(loginUser(body)).then((response) => {
       if (response.payload) {
-        console.log("login");
-        setTokenCookie("Token", response.payload, { path: "/" });
+        console.log("login success");
+        console.log(response.payload);
+        cookies.set("Token", response.payload.account_token, { path: "/" });
+        cookies.set("Nickname", response.payload.nickname, { path: "/" });
         navigate("/");
-        console.log("reduxtoken", Token);
       } else {
         console.log("login error");
       }

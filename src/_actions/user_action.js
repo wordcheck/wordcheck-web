@@ -2,13 +2,12 @@ import axios from "axios";
 import { LOGIN_USER, SIGNUP_USER } from "./types";
 
 export async function loginUser(dataToSubmit) {
-  //  console.log("asdf", dataToSubmit);
   const formData = new FormData();
   formData.append("nickname", dataToSubmit?.nickname);
   formData.append("password", dataToSubmit?.password);
-  const request = axios
+  const request = await axios
     .post("http://52.78.37.13/api/accounts/normal_login/", formData)
-    .then((response) => response.data.account_token)
+    .then((response) => response.data)
     .catch((err) => {
       console.log("==>", err);
     });
@@ -20,7 +19,6 @@ export async function loginUser(dataToSubmit) {
 }
 
 export function SignUpUser(dataToSubmit) {
-  //  console.log("asdf", dataToSubmit);
   const formData = new FormData();
   formData.append("nickname", dataToSubmit?.nickname);
   formData.append("password", dataToSubmit?.password);
