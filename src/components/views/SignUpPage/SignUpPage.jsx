@@ -40,7 +40,7 @@ export default function SignUpPage() {
         // handle success
 
         if (response.data.msg === "success") {
-          toast.dark("사용해도 좋은 닉네임입니다.", {
+          toast.success("사용해도 좋은 닉네임입니다.", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -49,12 +49,12 @@ export default function SignUpPage() {
       .catch((error) => {
         console.log("err", error);
         if (!Nickname) {
-          toast.dark("사용할 닉네임 값을 입력해주세요.", {
+          toast.error("사용할 닉네임 값을 입력해주세요.", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         } else {
-          toast.dark("중복된 닉네임입니다.", {
+          toast.error("중복된 닉네임입니다.", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });

@@ -15,7 +15,8 @@ export default function Home() {
   }
 
   const onClickLogoutHandler = () => {
-    cookies.remove("Token", "Nickname");
+    cookies.remove("Token");
+    cookies.remove("Nickname");
     navigate("/login");
   };
 
