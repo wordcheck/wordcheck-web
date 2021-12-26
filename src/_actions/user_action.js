@@ -1,7 +1,7 @@
 import axios from "axios";
 import { LOGIN_USER, SIGNUP_USER } from "./types";
 
-export function loginUser(dataToSubmit) {
+export async function loginUser(dataToSubmit) {
   //  console.log("asdf", dataToSubmit);
   const formData = new FormData();
   formData.append("nickname", dataToSubmit?.nickname);

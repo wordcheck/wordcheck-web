@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [Tokencookies, setTokenCookie, removeTokenCookie] = useCookies([
+
+  const [Tokencookie, setTokenCookie, removeTokenCookie] = useCookies([
     "Token",
   ]);
+
+  const Token = useSelector((state) => state.user.Token);
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
 
@@ -30,8 +33,10 @@ export default function LoginPage() {
 
     dispatch(loginUser(body)).then((response) => {
       if (response.payload) {
-        navigate(-1);
+        console.log("login");
         setTokenCookie("Token", response.payload, { path: "/" });
+        navigate("/");
+        console.log("reduxtoken", Token);
       } else {
         console.log("login error");
       }
@@ -58,6 +63,9 @@ export default function LoginPage() {
         <input type="password" value={Password} onChange={onPasswordHandler} />
         <br />
         <button type="submit">Login</button>
+        {/* <Link to="signup">
+          <button>sign up </button>
+        </Link> */}
       </form>
     </div>
   );

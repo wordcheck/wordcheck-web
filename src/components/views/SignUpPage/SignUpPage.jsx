@@ -42,6 +42,7 @@ export default function SignUpPage() {
     dispatch(SignUpUser(body)).then((response) => {
       // console.log("dispatch", response.payload.msg);
       if (response.payload?.msg === "success") {
+        
         navigate(-1);
       } else {
         console.log("sign up error");

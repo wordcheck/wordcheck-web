@@ -1,18 +1,18 @@
 import React from "react";
-import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function Home() {
-  const [cookies, setCookie, removeCookie] = useCookies(["haha"]);
+  const Token = useSelector((state) => state.user.Token);
 
-  setCookie("haha", "hie", { path: "/" });
+  if (!Token) {
+    console.log("home token", Token);
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div>
       <div>home</div>
-      <Link to="/login">
-        <button>login</button>
-      </Link>
       <button>logout</button>
     </div>
   );
