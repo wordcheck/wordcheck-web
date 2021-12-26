@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 export default function LoginPage() {
@@ -14,9 +14,6 @@ export default function LoginPage() {
 
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
-
-  const Token = useSelector((state) => state.user.Token);
-  const nickname = useSelector((state) => state.user.nickname);
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);
@@ -67,9 +64,9 @@ export default function LoginPage() {
         <input type="password" value={Password} onChange={onPasswordHandler} />
         <br />
         <button type="submit">Login</button>
-        {/* <Link to="signup">
+        <Link to="signup">
           <button>sign up </button>
-        </Link> */}
+        </Link>
       </form>
     </div>
   );
