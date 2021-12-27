@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import TextField from "@mui/material/TextField";
-import { styled as muiStyled } from "@mui/material/styles";
+
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { ColorButton, CssTextField } from "../../style/LoginStyle";
 // import Button from "@mui/material/Button";
 
 export default function LoginPage() {
@@ -29,23 +31,40 @@ export default function LoginPage() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("nickname", Nickname);
+    formData.append("password", Password);
 
-    const body = {
-      nickname: Nickname,
-      password: Password,
-    };
-
-    dispatch(loginUser(body)).then((response) => {
-      if (response.payload) {
-        console.log("login success");
-        console.log(response.payload);
-        cookies.set("Token", response.payload.account_token, { path: "/" });
-        cookies.set("Nickname", response.payload.nickname, { path: "/" });
-        navigate("/");
-      } else {
-        console.log("login error");
-      }
-    });
+    axios
+      .post("http://52.78.37.13/api/accounts/normal_login/", formData)
+      .then((response) => {
+        if (response) {
+          console.log("login success");
+          console.log(response);
+          cookies.set("Token", response.account_token, { path: "/" });
+          cookies.set("Nickname", response.nickname, { path: "/" });
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("==>", err);
+        if (!Nickname) {
+          toast.error("닉네임을 입력해주세요", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+        } else if (!Password) {
+          toast.error("패스워드를 입력해주세요", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+        } else {
+          toast.error("아이디나 패스워드가 올바르지 않아요.", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+        }
+      });
   };
 
   return (
@@ -59,7 +78,7 @@ export default function LoginPage() {
         alignContent: "center",
       }}
     >
-      <Logo>wordcheck</Logo>
+      <Logo>WordCheck</Logo>
       <form
         onSubmit={onSubmitHandler}
         style={{
@@ -82,11 +101,12 @@ export default function LoginPage() {
           onChange={onPasswordHandler}
         />
 
-        <Button type="submit">Login</Button>
+        <ColorButton type="submit">Login</ColorButton>
       </form>
       <Link to="signup">
         <div>Sign up </div>
       </Link>
+      <ToastContainer />
     </Container>
   );
 }
@@ -111,45 +131,10 @@ export const InputDiv = styled.div`
   width: 80%;
 `;
 
-const CssTextField = muiStyled(TextField)({
-  "& label.Mui-focused": {
-    color: "green",
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "green",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#bfbfbf",
-    },
-    "&:hover fieldset": {
-      borderColor: "#bfbfbf",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "green",
-    },
-  },
-});
-
 export const ButtonDiv = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 2vh;
-`;
-
-export const Button = styled.button`
-  border-radius: 5px;
-  /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
-  width: ${(props) => props.buttonWidth || "100%"};
-  background-color: Green;
-  border: none;
-  color: white;
-  padding: 1vh;
-  text-align: center;
-  /* text-decoration: none; */
-  display: inline-block;
-  font-size: 2.5vh;
-  margin: 1vh;
 `;

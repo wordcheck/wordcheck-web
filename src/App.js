@@ -9,9 +9,9 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="wordcheck-web/" element={<Home />} />
-          <Route path="wordcheck-web/login" element={<LoginPage />} />
-          <Route path="wordcheck-web/login/signup" element={<SignUpPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login/signup" element={<SignUpPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
