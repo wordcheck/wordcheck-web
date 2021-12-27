@@ -108,9 +108,9 @@ export default function SignUpPage() {
           onChange={onNicknameHandler}
           value={Nickname}
         />
-        <button type="button" onClick={onClickNicknameCheckHandler}>
-          check
-        </button>
+        <ColorButton type="button" onClick={onClickNicknameCheckHandler}>
+          닉네임 중복 확인
+        </ColorButton>
 
         <CssTextField
           label="Password"
