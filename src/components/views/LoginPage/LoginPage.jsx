@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import styled from "styled-components";
@@ -50,7 +49,7 @@ export default function LoginPage() {
             position: toast.POSITION.BOTTOM_CENTER,
           });
         } else {
-          toast.error("아이디나 패스워드가 올바르지 않아요.", {
+          toast.error("닉네임이나 패스워드가 올바르지 않아요.", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -99,7 +98,7 @@ export default function LoginPage() {
         to="signup"
         style={{ textDecoration: "none", color: "black", paddingTop: "1vh" }}
       >
-        <div>Sign up </div>
+        <div>Sign up</div>
       </Link>
       <ToastContainer />
     </Container>

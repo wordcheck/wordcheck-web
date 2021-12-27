@@ -29,7 +29,7 @@ export default function Home() {
       <div> </div>
 
       <div>안녕하세요 {Nickname} 님 </div>
-      <button onClick={onClickLogoutHandler}>logout</button>
+      <button onClick={onClickLogoutHandler}>Sign out</button>
     </div>
   );
 }

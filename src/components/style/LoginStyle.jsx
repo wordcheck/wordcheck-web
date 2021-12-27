@@ -2,6 +2,7 @@ import { styled as muiStyled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { green } from "@mui/material/colors";
 import Button from "@mui/material/Button";
+import styled from "styled-components";
 
 export const CssTextField = muiStyled(TextField)({
   "& label.Mui-focused": {
@@ -44,3 +45,11 @@ export const ColorButton = muiStyled(Button)(({ theme }) => ({
     backgroundColor: green[700],
   },
 }));
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

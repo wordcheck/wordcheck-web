@@ -100,7 +100,7 @@ export default function SignUpPage() {
       <Info>아래 폼을 작성해주세요 </Info>
       <form
         onSubmit={onSubmitHandler}
-        style={{ display: "flex", flexDirection: "column", width: "80%" }}
+        style={{ display: "flex", flexDirection: "column", width: "30vh" }}
       >
         <CssTextField
           margin="normal"
