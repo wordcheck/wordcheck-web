@@ -6,6 +6,7 @@ import { SignUpUser } from "../../../_actions/user_action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import styled from "styled-components";
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export default function SignUpPage() {
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [SecretCode, setSecretCode] = useState("");
-  const [ToastNickname, setToastNickname] = useState(false);
+  const [CheckNickname, setCheckNickname] = useState(false);
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);
@@ -39,6 +40,7 @@ export default function SignUpPage() {
       .post("http://52.78.37.13/api/accounts/nickname_check/", nicknameformData)
       .then((response) => {
         if (response.data.msg === "success") {
+          setCheckNickname(true);
           toast.success("사용가능한 닉네임입니다.", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
@@ -63,9 +65,16 @@ export default function SignUpPage() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-
-    if (Password !== ConfirmPassword) {
-      return alert("비밀번호를 확인해주세요.");
+    if (!CheckNickname) {
+      toast.error("아이디 중복 검사를 해주세요", {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    } else if (Password !== ConfirmPassword) {
+      toast.error("비밀번호를 확인해주세요", {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
     }
 
     const body = {
@@ -86,21 +95,12 @@ export default function SignUpPage() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignContent: "center",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
-      <div>WordCheck</div>
-      <div>아래 폼을 작성해주세요 </div>
+    <Container>
+      <Logo>WordCheck</Logo>
+      <Info>아래 폼을 작성해주세요 </Info>
       <form
         onSubmit={onSubmitHandler}
-        style={{ display: "flex", flexDirection: "column" }}
+        style={{ display: "flex", flexDirection: "column", width: "80%" }}
       >
         <CssTextField
           margin="normal"
@@ -139,6 +139,23 @@ export default function SignUpPage() {
         <ColorButton type="submit">회원가입</ColorButton>
         <ToastContainer />
       </form>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Logo = styled.div`
+  padding-top: 3vh;
+  font-size: 5vh;
+  font-size: bolder;
+`;
+const Info = styled.div`
+  padding-bottom: 4vh;
+  padding-top: 1vh;
+`;

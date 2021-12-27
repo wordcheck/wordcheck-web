@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../../_actions/user_action";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
@@ -11,10 +9,6 @@ import { ColorButton, CssTextField } from "../../style/LoginStyle";
 // import Button from "@mui/material/Button";
 
 export default function LoginPage() {
-  // const [Tokencookie, setTokenCookie, removeTokenCookie] = useCookies([
-  //   "Token",
-  // ]);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cookies = new Cookies();
 
@@ -34,15 +28,12 @@ export default function LoginPage() {
     const formData = new FormData();
     formData.append("nickname", Nickname);
     formData.append("password", Password);
-
     axios
       .post("http://52.78.37.13/api/accounts/normal_login/", formData)
       .then((response) => {
-        if (response) {
-          console.log("login success");
-          console.log(response);
-          cookies.set("Token", response.account_token, { path: "/" });
-          cookies.set("Nickname", response.nickname, { path: "/" });
+        if (response.data) {
+          cookies.set("Token", response.data.account_token, { path: "/" });
+          cookies.set("Nickname", response.data.nickname, { path: "/" });
           navigate("/");
         }
       })
@@ -70,8 +61,6 @@ export default function LoginPage() {
   return (
     <Container
       style={{
-        // width: "80%",
-        // height: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -84,6 +73,7 @@ export default function LoginPage() {
         style={{
           display: "flex",
           flexDirection: "column",
+          width: "30vh",
         }}
       >
         <CssTextField
@@ -101,9 +91,14 @@ export default function LoginPage() {
           onChange={onPasswordHandler}
         />
 
-        <ColorButton type="submit">Login</ColorButton>
+        <ColorButton style={{ marginTop: "1vh", padding: "1vh" }} type="submit">
+          Login
+        </ColorButton>
       </form>
-      <Link to="signup">
+      <Link
+        to="signup"
+        style={{ textDecoration: "none", color: "black", paddingTop: "1vh" }}
+      >
         <div>Sign up </div>
       </Link>
       <ToastContainer />

@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { ColorButton } from "../style/LoginStyle";
 
 // 로그인한 유저만 들어올 수 있음
 export default function Home() {
@@ -22,7 +22,12 @@ export default function Home() {
 
   return (
     <div>
-      <div>home</div>
+      <div>wordcheck</div>
+      <Link to="/cardcreate" style={{ textDecoration: "none" }}>
+        <ColorButton>단어장 추가하기</ColorButton>
+      </Link>
+      <div> </div>
+
       <div>안녕하세요 {Nickname} 님 </div>
       <button onClick={onClickLogoutHandler}>logout</button>
     </div>
