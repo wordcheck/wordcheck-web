@@ -33,7 +33,7 @@ export default function SignUpPage() {
     setSecretCode(event.currentTarget.value);
   };
 
-  const onClickNicknameCheckHandler = () => {
+  const onNicknameCheckHandler = () => {
     const nicknameformData = new FormData();
     nicknameformData.append("nickname", Nickname);
     axios
@@ -108,7 +108,7 @@ export default function SignUpPage() {
           onChange={onNicknameHandler}
           value={Nickname}
         />
-        <ColorButton type="button" onClick={onClickNicknameCheckHandler}>
+        <ColorButton type="button" onClick={onNicknameCheckHandler}>
           닉네임 중복 확인
         </ColorButton>
 

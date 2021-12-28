@@ -7,6 +7,7 @@ import promiseMiddleware from "redux-promise";
 import reduxThunk from "redux-thunk";
 import Reducer from "./_reducer";
 import { CookiesProvider } from "react-cookie";
+import { Reset } from "styled-reset";
 
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
@@ -22,6 +23,7 @@ ReactDOM.render(
             window.__REDUX_DEVTOOLS_EXTENSION__()
         )}
       >
+        <Reset />
         <App />
       </Provider>
     </CookiesProvider>
