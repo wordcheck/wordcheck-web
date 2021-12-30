@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 import { ColorButton } from "../../style/LoginStyle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import CardList from "./CardList";
+import WordList from "./WordList";
 export default function Card() {
   const [wordlist, setWordlist] = useState([]);
   const cookies = new Cookies();
@@ -58,7 +58,7 @@ export default function Card() {
         <div>{wordlist[0]?.contents}</div>
         <ColorButton>시험보기</ColorButton>
       </HeaderDiv>
-      <CardList wordlist={wordlist} setSetId={setSetId} />
+      <WordList wordlist={wordlist} setSetId={setSetId} />
     </Container>
   );
 }

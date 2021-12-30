@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-export default function CardList({ wordlist, setSetId }) {
+export default function WordList({ wordlist, setSetId }) {
   return (
     <div>
       {wordlist.map((word) => (
