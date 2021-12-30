@@ -32,6 +32,7 @@ export default function Home() {
 
   const CardList = cards.map((card, index) => (
     <Link
+      key={card.contents}
       to={`/card/${card.contents}`}
       style={{ textDecoration: "none", color: "black" }}
     >

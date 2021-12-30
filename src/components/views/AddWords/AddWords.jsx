@@ -26,6 +26,7 @@ export default function AddWords() {
   const onCategoryHandler = (event) => {
     setCategory(event.target.value);
   };
+  const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
   return (
     <Container>
@@ -49,12 +50,11 @@ export default function AddWords() {
         <div>
           <label>품사</label>
           <NativeSelect defaultValue="n" onChange={onCategoryHandler}>
-            <option value="n">n</option>
-            <option value="v">v</option>
-            <option value="adj">adj</option>
-            <option value="adv">adv</option>
-            <option value="phr">phr</option>
-            <option value="prep">prep</option>
+            {categoryList.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </NativeSelect>
         </div>
       </CardContainer>

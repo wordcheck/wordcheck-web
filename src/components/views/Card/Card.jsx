@@ -8,13 +8,13 @@ import { ColorButton } from "../../style/LoginStyle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import WordList from "./WordList";
+import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 export default function Card() {
   const [wordlist, setWordlist] = useState([]);
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
   const { contents } = useParams();
   const [setId, setSetId] = useState("");
-  const [state, setstate] = useState(false);
 
   useEffect(() => {
     axios
@@ -29,9 +29,11 @@ export default function Card() {
       .catch((error) => {
         console.log(error);
       });
-  }, [setId]);
+  }, []);
+  console.log("setId", setId);
 
   useEffect(() => {
+    console.log("sf", setId);
     axios
       .delete(`http://52.78.37.13/api/words/${setId}`, {
         headers: {
@@ -40,17 +42,13 @@ export default function Card() {
       })
       .then((response) => {
         console.log(response);
-        setSetId(0);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [setId]);
+        setSetId("");
+      }, []);
 
-  if (state) {
-    console.log("hi");
-    return <div>sefewf</div>;
-  }
+    // .catch((error) => {
+    //   console.log("err", error);
+    // });
+  }, [setId]);
 
   return (
     <Container>
