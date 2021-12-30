@@ -7,7 +7,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import styled from "styled-components";
 import axios from "axios";
 import { useEffect } from "react";
-
+import PersonIcon from "@mui/icons-material/Person";
 // 로그인한 유저만 들어올 수 있음
 export default function Home() {
   const [cards, setCards] = useState([]);
@@ -31,7 +31,10 @@ export default function Home() {
   }, []);
 
   const CardList = cards.map((card, index) => (
-    <Link to={`/card/${card.contents}`}>
+    <Link
+      to={`/card/${card.contents}`}
+      style={{ textDecoration: "none", color: "black" }}
+    >
       <Card key={index}>{card.contents}</Card>
     </Link>
   ));
@@ -50,10 +53,12 @@ export default function Home() {
       >
         <Logo>wordcheck</Logo>
         <Link to="/mypage" style={{ textDecoration: "none" }}>
-          <ColorButton>마이페이지</ColorButton>
+          <ColorButton>
+            <PersonIcon />
+          </ColorButton>
         </Link>
       </div>
-      <div>안녕하세요 {CookieNickname} 님</div>
+
       <CardContainer>{CardList}</CardContainer>
       <BottomNavigation
         showLabels
