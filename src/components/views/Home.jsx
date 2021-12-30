@@ -13,26 +13,27 @@ export default function Home() {
   const [cards, setCards] = useState([]);
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
+  const CookieNickname = cookies.get("Nickname");
 
   useEffect(() => {
-    if (CookieToken) {
-      axios
-        .get("http://52.78.37.13/api/words/", {
-          headers: {
-            Authorization: CookieToken,
-          },
-        })
-        .then((response) => {
-          setCards(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    axios
+      .get("http://52.78.37.13/api/words/", {
+        headers: {
+          Authorization: CookieToken,
+        },
+      })
+      .then((response) => {
+        setCards(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const CardList = cards.map((card, index) => (
-    <Card key={index}>{card.contents}</Card>
+    <Link to={`/card/${card.contents}`}>
+      <Card key={index}>{card.contents}</Card>
+    </Link>
   ));
 
   if (!CookieToken) {
@@ -52,8 +53,8 @@ export default function Home() {
           <ColorButton>마이페이지</ColorButton>
         </Link>
       </div>
+      <div>안녕하세요 {CookieNickname} 님</div>
       <CardContainer>{CardList}</CardContainer>
-
       <BottomNavigation
         showLabels
         style={{
