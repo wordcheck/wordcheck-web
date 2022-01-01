@@ -5,24 +5,29 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 
 export default function WordList({ wordlist, CookieToken, setWordlist }) {
-  const [wordId, setwordId] = useState("");
+  const [wordId, setWordId] = useState("");
+
+  // function delay(wordid) {
+  //   console.log("delay", wordid);
+  //   setWordId(wordid);
+  //   console.log("delay2", wordId);
+  // }
 
   const onClickDeleteWord = (wordid) => {
-    setwordId(wordid);
-    console.log("wordidcheck", wordId);
+    // await delay(wordid);
+    console.log("useState", wordId);
+    console.log("props", wordid);
     axios
-      .delete(`http://52.78.37.13/api/words/${wordId}`, {
+      .delete(`http://52.78.37.13/api/words/${wordid}`, {
         headers: {
           Authorization: CookieToken,
         },
       })
       .then((response) => {
-        console.log(response.data);
-        setwordId(null);
-        console.log(wordId);
+        return setWordlist(wordlist);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("err===>", error);
       });
   };
 
@@ -38,7 +43,17 @@ export default function WordList({ wordlist, CookieToken, setWordlist }) {
             </div>
             <div>
               <EditIcon />
-              <DeleteIcon onClick={() => onClickDeleteWord(word.id)} />
+              <DeleteIcon
+                onClick={() => {
+                  // delay(word.id);
+                  console.log("onclickwordid", word.id);
+                  setWordId(word.id);
+                  console.log("onclickwordId", wordId);
+                  onClickDeleteWord(word.id);
+                  onClickDeleteWord;
+                  console.log("onclick", word.id);
+                }}
+              />
             </div>
           </CardDiv2>
         </Carddiv>

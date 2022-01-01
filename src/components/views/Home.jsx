@@ -13,7 +13,6 @@ export default function Home() {
   const [cards, setCards] = useState([]);
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
-  const CookieNickname = cookies.get("Nickname");
 
   useEffect(() => {
     axios
