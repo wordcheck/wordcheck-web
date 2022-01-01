@@ -14,7 +14,6 @@ export default function Card() {
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
   const { contents } = useParams();
-  const [setId, setSetId] = useState("");
 
   useEffect(() => {
     axios
@@ -30,25 +29,6 @@ export default function Card() {
         console.log(error);
       });
   }, []);
-  console.log("setId", setId);
-
-  useEffect(() => {
-    console.log("sf", setId);
-    axios
-      .delete(`http://52.78.37.13/api/words/${setId}`, {
-        headers: {
-          Authorization: CookieToken,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setSetId("");
-      }, []);
-
-    // .catch((error) => {
-    //   console.log("err", error);
-    // });
-  }, [setId]);
 
   return (
     <Container>
@@ -56,7 +36,11 @@ export default function Card() {
         <div>{wordlist[0]?.contents}</div>
         <ColorButton>시험보기</ColorButton>
       </HeaderDiv>
-      <WordList wordlist={wordlist} setSetId={setSetId} />
+      <WordList
+        wordlist={wordlist}
+        CookieToken={CookieToken}
+        setWordlist={setWordlist}
+      />
     </Container>
   );
 }
