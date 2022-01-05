@@ -50,7 +50,6 @@ export default function WordList({ wordlist, CookieToken, setWordlist }) {
                   setWordId(word.id);
                   console.log("onclickwordId", wordId);
                   onClickDeleteWord(word.id);
-                  onClickDeleteWord;
                   console.log("onclick", word.id);
                 }}
               />

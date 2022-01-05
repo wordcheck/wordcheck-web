@@ -8,7 +8,7 @@ import { ColorButton } from "../../style/LoginStyle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import WordList from "./WordList";
-import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
+
 export default function Card() {
   const [wordlist, setWordlist] = useState([]);
   const cookies = new Cookies();
