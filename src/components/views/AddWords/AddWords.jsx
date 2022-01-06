@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import Input from "@mui/material/Input";
 import NativeSelect from "@mui/material/NativeSelect";
@@ -8,20 +8,34 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 export default function AddWords() {
+  const [contents, setContents] = useState("");
+  const [spelling, setSpelling] = useState("");
+  const [meaning, setMeaning] = useState("");
+  const [category, setCategory] = useState("n");
   const cookies = new Cookies();
   const cookieToken = cookies.get("Token");
 
-  const contentsRef = useRef(null);
-  const spellingRef = useRef(null);
-  const meaningRef = useRef(null);
-  const categoryRef = useRef(null);
+  const onClickContentHandler = (event) => {
+    setContents(event.target.value);
+  };
+
+  const onClickSpellingHandler = (event) => {
+    setSpelling(event.target.value);
+  };
+
+  const onClickMeaningHandler = (event) => {
+    setMeaning(event.target.value);
+  };
+
+  const onClickCategoryHandler = (event) => {
+    setCategory(event.target.value);
+  };
 
   // console.log("out", category);
 
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
-  console.log("qk", contentsRef.current.value);
+
   const onClickSubmitWords = () => {
-    console.log(contentsRef.current.value);
     // const formData = new FormData();
     // formData.append("contents", contentsRef.current.value);
     // formData.append("spelling", spellingRef.current.value);
@@ -31,12 +45,10 @@ export default function AddWords() {
     // for (let key of formData.keys()) {
     //   console.log(key);
     // }
-
     // // FormData의 value 확인
     // for (let value of formData.values()) {
     //   console.log(value);
     // }
-
     // axios
     //   .post("http://52.78.37.13/api/words/", formData, {
     //     headers: {
@@ -51,7 +63,12 @@ export default function AddWords() {
   return (
     <Container>
       <div>
-        <CssTextField ref={contentsRef} label="title" variant="standard" />
+        <CssTextField
+          value={contents}
+          onChange={onClickContentHandler}
+          label="title"
+          variant="standard"
+        />
         <ColorButton
           onClick={() => {
             onClickSubmitWords();
@@ -63,15 +80,15 @@ export default function AddWords() {
       <CardContainer>
         <div>
           <label>단어</label>
-          <Input ref={spellingRef} />
+          <Input value={spelling} onChange={onClickSpellingHandler} />
         </div>
         <div>
           <label>뜻</label>
-          <Input ref={meaningRef} />
+          <Input value={meaning} onChange={onClickMeaningHandler} />
         </div>
         <div>
           <label>품사</label>
-          <NativeSelect ref={categoryRef}>
+          <NativeSelect value={category} onChange={onClickCategoryHandler}>
             {categoryList.map((category, index) => (
               <option key={index} value={category}>
                 {category}
