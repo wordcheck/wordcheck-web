@@ -12,27 +12,53 @@ import { useNavigate } from "react-router-dom";
 export default function AddWords() {
   const navigate = useNavigate();
 
-  const [contents, setContents] = useState("");
-  const [spelling, setSpelling] = useState("");
-  const [meaning, setMeaning] = useState("");
-  const [category, setCategory] = useState("n");
+  const [inputs, setInputs] = useState({
+    contents: "",
+    spelling: "",
+    meaning: "",
+    category: "",
+  });
+  const { contents, spelling, meaning, category } = inputs;
+
+  // const [contents, setContents] = useState("");
+  // const [spelling, setSpelling] = useState("");
+  // const [meaning, setMeaning] = useState("");
+  // const [category, setCategory] = useState("n");
+
   const cookies = new Cookies();
   const cookieToken = cookies.get("Token");
 
-  const onClickContentHandler = (event) => {
-    setContents(event.target.value);
+  const onClickContentHandler = (e) => {
+    console.log(e.target);
+    const { value, contents } = e.target;
+    setInputs({
+      ...inputs,
+      [contents]: value,
+    });
   };
 
-  const onClickSpellingHandler = (event) => {
-    setSpelling(event.target.value);
+  const onClickSpellingHandler = (e) => {
+    const { value, spelling } = e.target;
+    setInputs({
+      ...inputs,
+      [spelling]: value,
+    });
   };
 
-  const onClickMeaningHandler = (event) => {
-    setMeaning(event.target.value);
+  const onClickMeaningHandler = (e) => {
+    const { value, meaning } = e.target;
+    setInputs({
+      ...inputs,
+      [meaning]: value,
+    });
   };
 
-  const onClickCategoryHandler = (event) => {
-    setCategory(event.target.value);
+  const onClickCategoryHandler = (e) => {
+    const { value, category } = e.target;
+    setInputs({
+      ...inputs,
+      [category]: value,
+    });
   };
 
   // console.log("out", category);
@@ -71,8 +97,9 @@ export default function AddWords() {
     <Container>
       <div>
         <CssTextField
-          value={contents}
+          name="contents"
           onChange={onClickContentHandler}
+          value={contents}
           label="title"
           variant="standard"
         />
@@ -87,15 +114,27 @@ export default function AddWords() {
       <CardContainer>
         <div>
           <label>단어</label>
-          <Input value={spelling} onChange={onClickSpellingHandler} />
+          <Input
+            name="spelling"
+            value={spelling}
+            onChange={onClickSpellingHandler}
+          />
         </div>
         <div>
           <label>뜻</label>
-          <Input value={meaning} onChange={onClickMeaningHandler} />
+          <Input
+            name="meaning"
+            value={meaning}
+            onChange={onClickMeaningHandler}
+          />
         </div>
         <div>
           <label>품사</label>
-          <NativeSelect value={category} onChange={onClickCategoryHandler}>
+          <NativeSelect
+            name="category"
+            value={category}
+            onChange={onClickCategoryHandler}
+          >
             {categoryList.map((category, index) => (
               <option key={index} value={category}>
                 {category}
