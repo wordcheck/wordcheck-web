@@ -8,6 +8,9 @@ import styled from "styled-components";
 import axios from "axios";
 import { useEffect } from "react";
 import PersonIcon from "@mui/icons-material/Person";
+import QuizIcon from "@mui/icons-material/Quiz";
+import AddIcon from "@mui/icons-material/Add";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 // 로그인한 유저만 들어올 수 있음
 export default function Home() {
   const [cards, setCards] = useState([]);
@@ -66,14 +69,18 @@ export default function Home() {
           position: "fixed",
           bottom: "0",
           width: "100%",
-          height: "10vh",
         }}
       >
-        <BottomNavigationAction label="전체 시험보기 " />
-        <Link to="addwords">
-          <BottomNavigationAction icon={<div>+</div>} />
-        </Link>
-        <BottomNavigationAction label="오답노트" />
+        <BottomNavigationAction label="test all" icon={<QuizIcon />} />
+        <BottomNavigationAction
+          label="add words"
+          icon={
+            <Link to="addwords">
+              <AddIcon />
+            </Link>
+          }
+        />
+        <BottomNavigationAction label=" review" icon={<MenuBookIcon />} />
       </BottomNavigation>
     </Container>
   );

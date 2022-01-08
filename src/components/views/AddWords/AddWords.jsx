@@ -6,8 +6,12 @@ import styled from "styled-components";
 import AddWordsForm from "./AddWordsForm";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import Home from "../Home";
+import { useNavigate } from "react-router-dom";
 
 export default function AddWords() {
+  const navigate = useNavigate();
+
   const [contents, setContents] = useState("");
   const [spelling, setSpelling] = useState("");
   const [meaning, setMeaning] = useState("");
@@ -36,28 +40,31 @@ export default function AddWords() {
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
   const onClickSubmitWords = () => {
-    // const formData = new FormData();
-    // formData.append("contents", contentsRef.current.value);
-    // formData.append("spelling", spellingRef.current.value);
-    // formData.append("category", categoryRef.current.value);
-    // formData.append("meaning", meaningRef.current.value);
-    // // FormData의 key 확인
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // // FormData의 value 확인
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
-    // axios
-    //   .post("http://52.78.37.13/api/words/", formData, {
-    //     headers: {
-    //       Authorization: cookieToken,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
+    const formData = new FormData();
+    formData.append("contents", contents);
+    formData.append("spelling", spelling);
+    formData.append("category", category);
+    formData.append("meaning", meaning);
+    // FormData의 key 확인
+
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+    axios
+      .post("http://52.78.37.13/api/words/", formData, {
+        headers: {
+          Authorization: cookieToken,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        alert("단어가 성공적으로 추가되었습니다!");
+        navigate(-1);
+      });
   };
 
   return (
@@ -108,8 +115,6 @@ const CardContainer = styled.div`
   width: 35vh;
   border-radius: 1.5vh;
 `;
-
-const CardInfo = styled.div``;
 
 export const Container = styled.div`
   width: 100%;
