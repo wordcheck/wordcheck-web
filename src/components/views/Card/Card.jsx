@@ -5,12 +5,13 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import { ColorButton } from "../../style/LoginStyle";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+// import DeleteIcon from "@mui/icons-material/Delete";
+// import EditIcon from "@mui/icons-material/Edit";
 import WordList from "./WordList";
 
 export default function Card() {
   const [wordlist, setWordlist] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
   const { contents } = useParams();
@@ -28,7 +29,7 @@ export default function Card() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isDeleted]);
 
   return (
     <Container>
@@ -40,6 +41,7 @@ export default function Card() {
         wordlist={wordlist}
         CookieToken={CookieToken}
         setWordlist={setWordlist}
+        setIsDeleted={setIsDeleted}
       />
     </Container>
   );

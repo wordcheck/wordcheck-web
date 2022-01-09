@@ -1,22 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 
-export default function WordList({ wordlist, CookieToken, setWordlist }) {
-  const [wordId, setWordId] = useState("");
-
-  // function delay(wordid) {
-  //   console.log("delay", wordid);
-  //   setWordId(wordid);
-  //   console.log("delay2", wordId);
-  // }
-
+export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
   const onClickDeleteWord = (wordid) => {
-    // await delay(wordid);
-    console.log("useState", wordId);
-    console.log("props", wordid);
     axios
       .delete(`http://52.78.37.13/api/words/${wordid}`, {
         headers: {
@@ -24,11 +13,14 @@ export default function WordList({ wordlist, CookieToken, setWordlist }) {
         },
       })
       .then((response) => {
-        return setWordlist(wordlist);
+        console.log("res", response);
+        setIsDeleted(true);
       })
       .catch((error) => {
         console.log("err===>", error);
       });
+
+    setIsDeleted(false);
   };
 
   return (
@@ -45,12 +37,7 @@ export default function WordList({ wordlist, CookieToken, setWordlist }) {
               <EditIcon />
               <DeleteIcon
                 onClick={() => {
-                  // delay(word.id);
-                  console.log("onclickwordid", word.id);
-                  setWordId(word.id);
-                  console.log("onclickwordId", wordId);
                   onClickDeleteWord(word.id);
-                  console.log("onclick", word.id);
                 }}
               />
             </div>
