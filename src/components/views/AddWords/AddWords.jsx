@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function AddWords() {
+  const [countList, setCountList] = useState([0]);
   const [inputs, setInputs] = useState([
     {
       contents: "",
@@ -19,10 +20,8 @@ export default function AddWords() {
       category: "",
     },
   ]);
-
   const { contents, spelling, meaning, category } = inputs;
   const navigate = useNavigate();
-
   const cookies = new Cookies();
   const cookieToken = cookies.get("Token");
 
@@ -33,6 +32,7 @@ export default function AddWords() {
       [name]: value,
     });
   };
+
   const onClickSubmitWords = () => {
     const formData = new FormData();
     formData.append("contents", contents);
@@ -62,7 +62,13 @@ export default function AddWords() {
   };
 
   const onClickCardAddHandler = () => {
-    console.log("he");
+    let countArr = [...countList];
+    let counter = countArr.slice(-1)[0];
+    counter += 1;
+    countArr.push(counter); // index 사용 X
+    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
+    setCountList(countArr);
+    console.log(countList);
   };
   return (
     <Container>
@@ -82,9 +88,11 @@ export default function AddWords() {
           만들기
         </ColorButton>
       </div>
+
       <AddWordsForm
         inputs={inputs}
         onChangeInputHandler={onChangeInputHandler}
+        countList={countList}
       />
       <CardAddContainer onClick={onClickCardAddHandler}>
         <AddIcon /> add Card
