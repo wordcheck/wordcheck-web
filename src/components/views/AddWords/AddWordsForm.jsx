@@ -5,17 +5,18 @@ import NativeSelect from "@mui/material/NativeSelect";
 export default function AddWordsForm({
   inputs,
   onChangeInputHandler,
-  countList,
+  wordList,
 }) {
   const { spelling, meaning, category } = inputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
+  console.log("wordList", wordList);
   return (
     <>
-      {countList &&
-        countList.map((item, index) => (
-          <CardContainer>
-            <div key={index}>
+      {wordList &&
+        wordList.map((item, index) => (
+          <CardContainer key={index}>
+            <div>
               <div>
                 <label>단어</label>
                 <Input

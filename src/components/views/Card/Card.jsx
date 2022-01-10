@@ -12,6 +12,7 @@ import WordList from "./WordList";
 export default function Card() {
   const [wordlist, setWordlist] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
   const { contents } = useParams();

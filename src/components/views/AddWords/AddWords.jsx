@@ -11,19 +11,29 @@ import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function AddWords() {
-  const [countList, setCountList] = useState([0]);
-  const [inputs, setInputs] = useState([
+  const [contents, setContents] = useState("");
+  const [wordList, setWordList] = useState([
     {
-      contents: "",
       spelling: "",
       meaning: "",
       category: "",
     },
   ]);
-  const { contents, spelling, meaning, category } = inputs;
+  const [inputs, setInputs] = useState([
+    {
+      spelling: "",
+      meaning: "",
+      category: "",
+    },
+  ]);
+
+  const { spelling, meaning, category } = inputs;
   const navigate = useNavigate();
   const cookies = new Cookies();
   const cookieToken = cookies.get("Token");
+  const onChangeContentsHandler = (e) => {
+    setContents(e.target.value);
+  };
 
   const onChangeInputHandler = (e) => {
     const { value, name } = e.target;
@@ -34,48 +44,52 @@ export default function AddWords() {
   };
 
   const onClickSubmitWords = () => {
-    const formData = new FormData();
-    formData.append("contents", contents);
-    formData.append("spelling", spelling);
-    formData.append("category", category);
-    formData.append("meaning", meaning);
-    // FormData의 key 확인
+    // const formData = new FormData();
+    // formData.append("contents", contents);
+    // formData.append("spelling", spelling);
+    // formData.append("category", category);
+    // formData.append("meaning", meaning);
+    // // FormData의 key 확인
 
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-    axios
-      .post("http://52.78.37.13/api/words/", formData, {
-        headers: {
-          Authorization: cookieToken,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        alert("단어가 성공적으로 추가되었습니다!");
-        navigate(-1);
-      });
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
+    // // FormData의 value 확인
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+    // axios
+    //   .post("http://52.78.37.13/api/words/", formData, {
+    //     headers: {
+    //       Authorization: cookieToken,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     alert("단어가 성공적으로 추가되었습니다!");
+    //     navigate(-1);
+    //   });
+    console.log("submit");
+  };
+
+  const inputData = {
+    spelling: "",
+    meaning: "",
+    category: "",
   };
 
   const onClickCardAddHandler = () => {
-    let countArr = [...countList];
-    let counter = countArr.slice(-1)[0];
-    counter += 1;
-    countArr.push(counter); // index 사용 X
-    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용
-    setCountList(countArr);
-    console.log(countList);
+    let countArr = [...wordList];
+    let counter = inputData;
+    countArr.push(counter);
+    setWordList(countArr);
   };
   return (
     <Container>
       <div>
         <CssTextField
           name="contents"
-          onChange={onChangeInputHandler}
+          onChange={onChangeContentsHandler}
           value={contents}
           label="title"
           variant="standard"
@@ -92,7 +106,7 @@ export default function AddWords() {
       <AddWordsForm
         inputs={inputs}
         onChangeInputHandler={onChangeInputHandler}
-        countList={countList}
+        wordList={wordList}
       />
       <CardAddContainer onClick={onClickCardAddHandler}>
         <AddIcon /> add Card
