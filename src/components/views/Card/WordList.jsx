@@ -8,10 +8,60 @@ import Input from "@mui/material/Input";
 import { NativeSelect } from "@mui/material";
 
 export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
-  const [isEdited, setIsEdited] = useState(false); // 수정모드
+  // const [isEdited, setIsEdited] = useState(false); // 수정모드
   const [editId, setEditId] = useState("");
+  const editIndex = wordlist.findIndex((i) => i.id === editId);
+  const [editedInputs, setEditedInputs] = useState([
+    {
+      spelling: wordlist[editIndex]?.spelling || "",
+      meaning: wordlist[editIndex]?.meaning || "",
+      category: wordlist[editIndex]?.spelling || "",
+    },
+  ]);
+  console.log(editedInputs);
+  const { spelling, meaning, category } = editedInputs;
+  const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
+
+  const onChangeEditedInputHandler = (e) => {
+    const { value, name } = e.target;
+    setEditedInputs({
+      ...editedInputs,
+      [name]: value,
+    });
+  };
+
+  const onClickEditWord = (wordid) => {
+    console.log("edited");
+    setEditId("");
+    // const formData = new FormData();
+    // formData.append("contents", wordlist.contents);
+    // formData.append("spelling", spelling);
+    // formData.append("category", category);
+    // formData.append("meaning", meaning);
+    // // FormData의 key 확인
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
+    // // FormData의 value 확인
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+    // axios
+    //   .patch(`http://52.78.37.13/api/words/${wordid}`, {
+    //     headers: {
+    //       Authorization: CookieToken,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log("response", response);
+    //   })
+    //   .catch((error) => {
+    //     console.log("err===>", error);
+    //   });
+  };
+
   const onClickDeleteWord = (wordid) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm(" 정말 삭제하시겠습니까?")) {
       axios
         .delete(`http://52.78.37.13/api/words/${wordid}`, {
           headers: {
@@ -29,39 +79,26 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
     setIsDeleted(false);
   };
 
-  console.log(
-    "예",
-    wordlist.findIndex((i) => i.id == editId)
-  );
-
-  console.log("ffwedfw", wordlist[0]);
-  const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
-
-  const onClickEditWord = (id) => {
-    console.log(id);
-    setIsEdited(true);
-    // newArr[id] = true;
-    // console.log(newArr)
-    // setIsEdited(true);
-  };
-  // let newArr = Array(wordlist.length).fill(false);
-  // console.log(wordlist);
-  // console.log(newArr);
-  // const checkwordlist = wordlist.concat(false);
-  // console.log("ff", checkwordlist);
   return (
     <div>
       {wordlist.map((word) => (
         <Carddiv key={word.id}>
-          {word.id == editId ? (
+          {word.id === editId ? (
             <>
               <Spellingdiv>
-                <Input color="secondary" defaultValue={word.spelling}></Input>
+                <Input
+                  name="spelling"
+                  value={spelling}
+                  onChange={onChangeEditedInputHandler}
+                  color="secondary"
+                  defaultValue={word.spelling}
+                ></Input>
               </Spellingdiv>
               <NativeSelect
                 name="category"
-                defaultvalue={word.category}
-                // onChange={onChangeInputHandler}
+                value={category}
+                defaultValue={word.category}
+                onChange={onChangeEditedInputHandler}
               >
                 {categoryList.map((category, index) => (
                   <option key={index} value={category}>
@@ -69,12 +106,13 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
                   </option>
                 ))}
               </NativeSelect>
-              <Input defaultValue={word.meaning}></Input>
-              <CheckIcon
-                onClick={() => {
-                  setEditId("");
-                }}
-              />
+              <Input
+                name="meaning"
+                value={meaning}
+                defaultValue={word.meaning}
+                onChange={onChangeEditedInputHandler}
+              ></Input>
+              <CheckIcon onClick={onClickEditWord} />
             </>
           ) : (
             <>
@@ -87,7 +125,6 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
                 <div>
                   <EditIcon
                     onClick={() => {
-                      onClickEditWord(word.id);
                       setEditId(word.id);
                     }}
                   />

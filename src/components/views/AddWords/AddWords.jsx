@@ -44,31 +44,31 @@ export default function AddWords() {
   };
 
   const onClickSubmitWords = () => {
-    // const formData = new FormData();
-    // formData.append("contents", contents);
-    // formData.append("spelling", spelling);
-    // formData.append("category", category);
-    // formData.append("meaning", meaning);
-    // // FormData의 key 확인
+    const formData = new FormData();
+    formData.append("contents", contents);
+    formData.append("spelling", spelling);
+    formData.append("category", category);
+    formData.append("meaning", meaning);
+    // FormData의 key 확인
 
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // // FormData의 value 확인
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
-    // axios
-    //   .post("http://52.78.37.13/api/words/", formData, {
-    //     headers: {
-    //       Authorization: cookieToken,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     alert("단어가 성공적으로 추가되었습니다!");
-    //     navigate(-1);
-    //   });
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+    axios
+      .post("http://52.78.37.13/api/words/", formData, {
+        headers: {
+          Authorization: cookieToken,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        alert("단어가 성공적으로 추가되었습니다!");
+        navigate(-1);
+      });
     console.log("submit");
   };
 

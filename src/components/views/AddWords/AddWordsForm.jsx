@@ -8,7 +8,7 @@ export default function AddWordsForm({
   wordList,
 }) {
   const { spelling, meaning, category } = inputs;
-  const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
+const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
   console.log("wordList", wordList);
   return (
