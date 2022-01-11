@@ -6,6 +6,7 @@ import LoginPage from "./components/views/LoginPage/LoginPage";
 import Mypage from "./components/views/MyPage/Mypage";
 import NotFound from "./components/views/NotFound/NotFound";
 import SignUpPage from "./components/views/SignUpPage/SignUpPage";
+import Test from "./components/views/Test/Test";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/login/signup" element={<SignUpPage />} />
             <Route path="/addwords" element={<AddWords />} />
             <Route path="/card/:contents" element={<Card />} />
+            <Route path="/test/:contents" element={<Test />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="*" element={<NotFound />} />
           </>

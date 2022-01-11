@@ -35,14 +35,6 @@ export default function AddWords() {
     setContents(e.target.value);
   };
 
-  const onChangeInputHandler = (e) => {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-
   const onClickSubmitWords = () => {
     const formData = new FormData();
     formData.append("contents", contents);
@@ -78,12 +70,29 @@ export default function AddWords() {
     category: "",
   };
 
-  const onClickCardAddHandler = () => {
-    let countArr = [...wordList];
-    let counter = inputData;
-    countArr.push(counter);
-    setWordList(countArr);
+  const onChangeInputHandler = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
+
+  console.log(wordList);
+  console.log("sefsef", inputs);
+
+  const onClickCardAddHandler = () => {
+    let WordInputs = [...wordList];
+    let nextWordInputs = inputData;
+    WordInputs.push(nextWordInputs);
+    setWordList(WordInputs);
+
+    let WordInputs2 = [...inputs];
+    let nextInputs2 = inputData;
+    WordInputs2.push(nextInputs2);
+    setInputs(WordInputs2);
+  };
+
   return (
     <Container>
       <div>
@@ -105,8 +114,9 @@ export default function AddWords() {
 
       <AddWordsForm
         inputs={inputs}
-        onChangeInputHandler={onChangeInputHandler}
         wordList={wordList}
+        setWordList={setWordList}
+        onChangeInputHandler={onChangeInputHandler}
       />
       <CardAddContainer onClick={onClickCardAddHandler}>
         <AddIcon /> add Card

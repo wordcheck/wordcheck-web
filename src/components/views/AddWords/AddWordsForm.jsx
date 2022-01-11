@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "@mui/material/Input";
 import styled from "styled-components";
 import NativeSelect from "@mui/material/NativeSelect";
 export default function AddWordsForm({
   inputs,
-  onChangeInputHandler,
   wordList,
+  onChangeInputHandler,
 }) {
+  // const [onChangevalue, setOnChangeValue] = useState("");
   const { spelling, meaning, category } = inputs;
-const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
+  const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
-  console.log("wordList", wordList);
+  // const onChangeInputHandler2 = (e) => {
+  //   setOnChangeValue(e.target.value);
+  // };
+  // console.log("Ff", onChangevalue);
+  // console.log("wordList", wordList);
+  // console.log("inputs", inputs);
   return (
     <>
       {wordList &&
@@ -19,11 +25,7 @@ const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
             <div>
               <div>
                 <label>단어</label>
-                <Input
-                  name="spelling"
-                  value={spelling}
-                  onChange={onChangeInputHandler}
-                />
+                <Input value={spelling} onChange={onChangeInputHandler} />
               </div>
               <div>
                 <label>뜻</label>

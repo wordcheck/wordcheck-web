@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import { ColorButton } from "../../style/LoginStyle";
@@ -12,7 +12,8 @@ import WordList from "./WordList";
 export default function Card() {
   const [wordlist, setWordlist] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
-
+  const [isEdited, setIsEdited] = useState(false);
+  const [editId, setEditId] = useState("");
   const cookies = new Cookies();
   const CookieToken = cookies.get("Token");
   const { contents } = useParams();
@@ -30,19 +31,24 @@ export default function Card() {
       .catch((error) => {
         console.log(error);
       });
-  }, [isDeleted]);
+  }, [isDeleted, setEditId, editId]);
 
   return (
     <Container>
       <HeaderDiv>
         <div>{wordlist[0]?.contents}</div>
-        <ColorButton>시험보기</ColorButton>
+        <Link to={`/test/${wordlist[0]?.contents}`}>
+          <ColorButton>시험보기</ColorButton>
+        </Link>
       </HeaderDiv>
       <WordList
         wordlist={wordlist}
         CookieToken={CookieToken}
         setWordlist={setWordlist}
         setIsDeleted={setIsDeleted}
+        editId={editId}
+        setEditId={setEditId}
+        setIsEdited={setIsEdited}
       />
     </Container>
   );

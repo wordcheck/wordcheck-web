@@ -6,10 +6,17 @@ import axios from "axios";
 import CheckIcon from "@mui/icons-material/Check";
 import Input from "@mui/material/Input";
 import { NativeSelect } from "@mui/material";
+import Cookies from "universal-cookie";
 
-export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
+export default function WordList({
+  wordlist,
+  CookieToken,
+  setIsDeleted,
+  editId,
+  setEditId,
+  setIsEdited,
+}) {
   // const [isEdited, setIsEdited] = useState(false); // 수정모드
-  const [editId, setEditId] = useState("");
   const editIndex = wordlist.findIndex((i) => i.id === editId);
   const [editedInputs, setEditedInputs] = useState([
     {
@@ -18,7 +25,7 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
       category: wordlist[editIndex]?.spelling || "",
     },
   ]);
-  console.log(editedInputs);
+  console.log(editIndex);
   const { spelling, meaning, category } = editedInputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
@@ -29,35 +36,32 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
       [name]: value,
     });
   };
+  const onClickEditWord = () => {
+    if (!editedInputs.spelling) {
+      editedInputs.spelling = "";
+    } else if (!editedInputs.meaning) {
+      editedInputs.meaning = "";
+    } else if (!editedInputs.category) {
+      editedInputs.category = "";
+    }
 
-  const onClickEditWord = (wordid) => {
-    console.log("edited");
-    setEditId("");
-    // const formData = new FormData();
-    // formData.append("contents", wordlist.contents);
-    // formData.append("spelling", spelling);
-    // formData.append("category", category);
-    // formData.append("meaning", meaning);
-    // // FormData의 key 확인
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // // FormData의 value 확인
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
-    // axios
-    //   .patch(`http://52.78.37.13/api/words/${wordid}`, {
-    //     headers: {
-    //       Authorization: CookieToken,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log("response", response);
-    //   })
-    //   .catch((error) => {
-    //     console.log("err===>", error);
-    //   });
+    axios
+      .patch(
+        `http://52.78.37.13/api/words/${editId}/?spelling=${editedInputs.spelling}&meaning=${editedInputs.meaning}&category=${editedInputs.category}`,
+        {},
+        {
+          headers: {
+            Authorization: CookieToken,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("response", response);
+        setEditId("");
+      })
+      .catch((error) => {
+        console.log("err===>", error);
+      });
   };
 
   const onClickDeleteWord = (wordid) => {
@@ -97,7 +101,7 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
               <NativeSelect
                 name="category"
                 value={category}
-                defaultValue={word.category}
+                // defaultValue={word.category}
                 onChange={onChangeEditedInputHandler}
               >
                 {categoryList.map((category, index) => (
@@ -119,7 +123,6 @@ export default function WordList({ wordlist, CookieToken, setIsDeleted }) {
               <Spellingdiv>{word.spelling}</Spellingdiv>
               <CardDiv2>
                 <div>
-                  {word.id}
                   {word.category}.{word.meaning}
                 </div>
                 <div>
