@@ -6,7 +6,12 @@ import axios from "axios";
 import CheckIcon from "@mui/icons-material/Check";
 import Input from "@mui/material/Input";
 import { NativeSelect } from "@mui/material";
-import Cookies from "universal-cookie";
+import {
+  Container,
+  Carddiv,
+  CardDiv2,
+  Spellingdiv,
+} from "../../style/WordStyle";
 
 export default function WordList({
   wordlist,
@@ -14,18 +19,15 @@ export default function WordList({
   setIsDeleted,
   editId,
   setEditId,
-  setIsEdited,
 }) {
-  // const [isEdited, setIsEdited] = useState(false); // 수정모드
-  const editIndex = wordlist.findIndex((i) => i.id === editId);
   const [editedInputs, setEditedInputs] = useState([
     {
-      spelling: wordlist[editIndex]?.spelling || "",
-      meaning: wordlist[editIndex]?.meaning || "",
-      category: wordlist[editIndex]?.spelling || "",
+      spelling: "",
+      meaning: "",
+      category: "",
     },
   ]);
-  console.log(editIndex);
+
   const { spelling, meaning, category } = editedInputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
@@ -36,18 +38,22 @@ export default function WordList({
       [name]: value,
     });
   };
-  const onClickEditWord = () => {
-    if (!editedInputs.spelling) {
-      editedInputs.spelling = "";
-    } else if (!editedInputs.meaning) {
-      editedInputs.meaning = "";
-    } else if (!editedInputs.category) {
-      editedInputs.category = "";
+  const onClickModificatedButtonHandler = () => {
+    let spelling = editedInputs.spelling;
+    let meaning = editedInputs.meaning;
+    let category = editedInputs.category;
+
+    if (spelling == "undefined") {
+      spelling = "";
+    } else if (!meaning) {
+      meaning = "";
+    } else if (!category) {
+      category = "";
     }
 
     axios
       .patch(
-        `http://52.78.37.13/api/words/${editId}/?spelling=${editedInputs.spelling}&meaning=${editedInputs.meaning}&category=${editedInputs.category}`,
+        `http://52.78.37.13/api/words/${editId}/?spelling=${spelling}&meaning=${meaning}&category=${category}`,
         {},
         {
           headers: {
@@ -63,9 +69,18 @@ export default function WordList({
         console.log("err===>", error);
       });
   };
+  const onClickEditButtonHandler = (id) => {
+    const editIndex = wordlist.findIndex((i) => i.id === editId);
+    setEditId(id);
+    setEditedInputs({
+      spelling: wordlist[editIndex]?.spelling,
+      meaning: wordlist[editIndex]?.meaning,
+      category: wordlist[editIndex]?.spelling,
+    });
+  };
 
-  const onClickDeleteWord = (wordid) => {
-    if (window.confirm(" 정말 삭제하시겠습니까?")) {
+  const onClickDeleteButtonHandler = (wordid) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
       axios
         .delete(`http://52.78.37.13/api/words/${wordid}`, {
           headers: {
@@ -84,7 +99,7 @@ export default function WordList({
   };
 
   return (
-    <div>
+    <Container>
       {wordlist.map((word) => (
         <Carddiv key={word.id}>
           {word.id === editId ? (
@@ -98,42 +113,42 @@ export default function WordList({
                   defaultValue={word.spelling}
                 ></Input>
               </Spellingdiv>
-              <NativeSelect
-                name="category"
-                value={category}
-                // defaultValue={word.category}
-                onChange={onChangeEditedInputHandler}
-              >
-                {categoryList.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </NativeSelect>
-              <Input
-                name="meaning"
-                value={meaning}
-                defaultValue={word.meaning}
-                onChange={onChangeEditedInputHandler}
-              ></Input>
-              <CheckIcon onClick={onClickEditWord} />
+              <CardDiv2>
+                <div>
+                  <NativeSelect
+                    name="category"
+                    value={category}
+                    defaultValue={word.category}
+                    onChange={onChangeEditedInputHandler}
+                  >
+                    {categoryList.map((category, index) => (
+                      <option key={index} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </NativeSelect>{" "}
+                  <Input
+                    name="meaning"
+                    value={meaning}
+                    defaultValue={word.meaning}
+                    onChange={onChangeEditedInputHandler}
+                  ></Input>
+                </div>
+                <CheckIcon onClick={onClickModificatedButtonHandler} />
+              </CardDiv2>
             </>
           ) : (
             <>
               <Spellingdiv>{word.spelling}</Spellingdiv>
               <CardDiv2>
                 <div>
-                  {word.category}.{word.meaning}
+                  {word.category} . {word.meaning}
                 </div>
                 <div>
-                  <EditIcon
-                    onClick={() => {
-                      setEditId(word.id);
-                    }}
-                  />
+                  <EditIcon onClick={() => onClickEditButtonHandler(word.id)} />
                   <DeleteIcon
                     onClick={() => {
-                      onClickDeleteWord(word.id);
+                      onClickDeleteButtonHandler(word.id);
                     }}
                   />
                 </div>
@@ -142,23 +157,6 @@ export default function WordList({
           )}
         </Carddiv>
       ))}
-    </div>
+    </Container>
   );
 }
-
-const Carddiv = styled.div`
-  background-color: lightgray;
-  padding: 1.5vh;
-  margin: 1.2vh;
-  border-radius: 1vh;
-  display: flex;
-`;
-
-const Spellingdiv = styled.div`
-  width: 11vh;
-`;
-const CardDiv2 = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;

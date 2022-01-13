@@ -2,21 +2,16 @@ import React, { useState } from "react";
 import Input from "@mui/material/Input";
 import styled from "styled-components";
 import NativeSelect from "@mui/material/NativeSelect";
+
 export default function AddWordsForm({
   inputs,
   wordList,
   onChangeInputHandler,
 }) {
-  // const [onChangevalue, setOnChangeValue] = useState("");
-  const { spelling, meaning, category } = inputs;
+  const { spelling, meaning, category } = wordList;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
-  // const onChangeInputHandler2 = (e) => {
-  //   setOnChangeValue(e.target.value);
-  // };
-  // console.log("Ff", onChangevalue);
-  // console.log("wordList", wordList);
-  // console.log("inputs", inputs);
+  console.log("wordList", wordList);
   return (
     <>
       {wordList &&
@@ -25,14 +20,18 @@ export default function AddWordsForm({
             <div>
               <div>
                 <label>단어</label>
-                <Input value={spelling} onChange={onChangeInputHandler} />
+                <Input
+                  name="spelling"
+                  value={spelling}
+                  onChange={(e) => onChangeInputHandler(e, index)}
+                />
               </div>
               <div>
                 <label>뜻</label>
                 <Input
                   name="meaning"
                   value={meaning}
-                  onChange={onChangeInputHandler}
+                  onChange={(e) => onChangeInputHandler(e, index)}
                 />
               </div>
               <div>
@@ -40,7 +39,7 @@ export default function AddWordsForm({
                 <NativeSelect
                   name="category"
                   value={category}
-                  onChange={onChangeInputHandler}
+                  onChange={(e) => onChangeInputHandler(e, index)}
                 >
                   {categoryList.map((category, index) => (
                     <option key={index} value={category}>

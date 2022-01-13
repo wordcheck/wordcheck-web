@@ -9,6 +9,7 @@ import Cookies from "universal-cookie";
 import Home from "../Home";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
+import WordList from "../Card/WordList";
 
 export default function AddWords() {
   const [contents, setContents] = useState("");
@@ -19,15 +20,7 @@ export default function AddWords() {
       category: "",
     },
   ]);
-  const [inputs, setInputs] = useState([
-    {
-      spelling: "",
-      meaning: "",
-      category: "",
-    },
-  ]);
 
-  const { spelling, meaning, category } = inputs;
   const navigate = useNavigate();
   const cookies = new Cookies();
   const cookieToken = cookies.get("Token");
@@ -36,31 +29,31 @@ export default function AddWords() {
   };
 
   const onClickSubmitWords = () => {
-    const formData = new FormData();
-    formData.append("contents", contents);
-    formData.append("spelling", spelling);
-    formData.append("category", category);
-    formData.append("meaning", meaning);
-    // FormData의 key 확인
+    // const formData = new FormData();
+    // formData.append("contents", contents);
+    // formData.append("spelling", spelling);
+    // formData.append("category", category);
+    // formData.append("meaning", meaning);
+    // // FormData의 key 확인
 
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-    axios
-      .post("http://52.78.37.13/api/words/", formData, {
-        headers: {
-          Authorization: cookieToken,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        alert("단어가 성공적으로 추가되었습니다!");
-        navigate(-1);
-      });
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
+    // // FormData의 value 확인
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+    // axios
+    //   .post("http://52.78.37.13/api/words/", formData, {
+    //     headers: {
+    //       Authorization: cookieToken,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     alert("단어가 성공적으로 추가되었습니다!");
+    //     navigate(-1);
+    //   });
     console.log("submit");
   };
 
@@ -70,27 +63,21 @@ export default function AddWords() {
     category: "",
   };
 
-  const onChangeInputHandler = (e) => {
+  const onChangeInputHandler = (e, index) => {
     const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+    setWordList(
+      wordList.map((item, i) => {
+        if (i === index) return { ...item, [name]: value };
+        else return item;
+      })
+    );
   };
-
-  console.log(wordList);
-  console.log("sefsef", inputs);
 
   const onClickCardAddHandler = () => {
     let WordInputs = [...wordList];
     let nextWordInputs = inputData;
     WordInputs.push(nextWordInputs);
     setWordList(WordInputs);
-
-    let WordInputs2 = [...inputs];
-    let nextInputs2 = inputData;
-    WordInputs2.push(nextInputs2);
-    setInputs(WordInputs2);
   };
 
   return (
@@ -113,7 +100,6 @@ export default function AddWords() {
       </div>
 
       <AddWordsForm
-        inputs={inputs}
         wordList={wordList}
         setWordList={setWordList}
         onChangeInputHandler={onChangeInputHandler}
