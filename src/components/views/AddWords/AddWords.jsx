@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import Input from "@mui/material/Input";
 import NativeSelect from "@mui/material/NativeSelect";
@@ -10,11 +10,13 @@ import Home from "../Home";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import WordList from "../Card/WordList";
+import { SliderValueLabelUnstyled } from "@mui/material";
 
 export default function AddWords() {
   const [contents, setContents] = useState("");
   const [wordList, setWordList] = useState([
     {
+      contents: "",
       spelling: "",
       meaning: "",
       category: "",
@@ -24,17 +26,59 @@ export default function AddWords() {
   const navigate = useNavigate();
   const cookies = new Cookies();
   const cookieToken = cookies.get("Token");
+
   const onChangeContentsHandler = (e) => {
     setContents(e.target.value);
+    setWordList(
+      wordList.map((words) => {
+        return { ...words, contents: contents };
+      })
+    );
   };
+  console.log("wordList", wordList);
 
   const onClickSubmitWords = () => {
+    wordList.forEach((wordList, index) => {
+      formData.append("contents", wordList.contents);
+      formData.append("spelling", wordList.spelling);
+      formData.append("category", wordList.category);
+      formData.append("meaning", wordList.meaning);
+    });
+
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
+    // // FormData의 value 확인
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+    if (window.confirm("추가하시겠습니까?")) {
+      Promise.all(
+        wordList.map(() => {
+          return axios
+            .post("http://52.78.37.13/api/words/", formData, {
+              headers: {
+                Authorization: cookieToken,
+              },
+            })
+            .then((res) => {
+              console.log(res);
+              alert("단어가 성공적으로 추가되었습니다!");
+              // navigate(-1);
+            })
+            .catch((error) => {
+              console.log("err==>", error);
+            });
+        })
+      );
+    }
+
     // const formData = new FormData();
     // formData.append("contents", contents);
     // formData.append("spelling", spelling);
     // formData.append("category", category);
     // formData.append("meaning", meaning);
-    // // FormData의 key 확인
+    // FormData의 key 확인
 
     // for (let key of formData.keys()) {
     //   console.log(key);
@@ -67,8 +111,8 @@ export default function AddWords() {
     const { value, name } = e.target;
     setWordList(
       wordList.map((item, i) => {
-        if (i === index) return { ...item, [name]: value };
-        else return item;
+        if (i === index) return { ...item, [name]: value, contents: contents };
+        else return { ...item, contents: contents };
       })
     );
   };

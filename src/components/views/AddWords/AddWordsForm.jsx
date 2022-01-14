@@ -11,7 +11,6 @@ export default function AddWordsForm({
   const { spelling, meaning, category } = wordList;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
 
-  console.log("wordList", wordList);
   return (
     <>
       {wordList &&
