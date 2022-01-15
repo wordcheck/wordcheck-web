@@ -35,25 +35,17 @@ export default function AddWords() {
       })
     );
   };
-  const formData = new FormData();
-  const onClickSubmitWords = () => {
-    wordList.forEach((wordList, index) => {
-      formData.append("contents", wordList.contents);
-      formData.append("spelling", wordList.spelling);
-      formData.append("category", wordList.category);
-      formData.append("meaning", wordList.meaning);
-    });
 
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // // FormData의 value 확인
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
+  const onClickSubmitWords = () => {
+    const formData = new FormData();
     if (window.confirm("추가하시겠습니까?")) {
       Promise.all(
-        wordList.map(() => {
+        wordList.map((wordList) => {
+          formData.append("contents", wordList.contents);
+          formData.append("spelling", wordList.spelling);
+          formData.append("category", wordList.category);
+          formData.append("meaning", wordList.meaning);
+
           return axios
             .post("http://52.78.37.13/api/words/", formData, {
               headers: {
@@ -62,42 +54,20 @@ export default function AddWords() {
             })
             .then((res) => {
               console.log(res);
-              alert("단어가 성공적으로 추가되었습니다!");
-              // navigate(-1);
             })
             .catch((error) => {
               console.log("err==>", error);
             });
         })
-      );
+      )
+        .then(() => {
+          navigate(-1);
+          alert("단어가 성공적으로 추가되었습니다");
+        })
+        .catch((err) => {
+          alert("단어를 저장시키지 못했습니다. 다시 시도해주세요");
+        });
     }
-
-    // const formData = new FormData();
-    // formData.append("contents", contents);
-    // formData.append("spelling", spelling);
-    // formData.append("category", category);
-    // formData.append("meaning", meaning);
-    // FormData의 key 확인
-
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // // FormData의 value 확인
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
-    // axios
-    //   .post("http://52.78.37.13/api/words/", formData, {
-    //     headers: {
-    //       Authorization: cookieToken,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     alert("단어가 성공적으로 추가되었습니다!");
-    //     navigate(-1);
-    //   });
-    console.log("submit");
   };
 
   const inputData = {
