@@ -35,8 +35,7 @@ export default function AddWords() {
       })
     );
   };
-  console.log("wordList", wordList);
-
+  const formData = new FormData();
   const onClickSubmitWords = () => {
     wordList.forEach((wordList, index) => {
       formData.append("contents", wordList.contents);
