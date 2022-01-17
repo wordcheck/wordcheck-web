@@ -1,10 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ColorButton, Container, CssTextField } from "../../style/LoginStyle";
+import {
+  AnswerDiv,
+  BackButton,
+  MultipleChoiceDiv,
+  QuestionDiv,
+  TopNav,
+} from "../../style/WordStyle";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function Test(props) {
   const location = useLocation();
   const [testWords, setTestWords] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -25,8 +35,30 @@ export default function Test(props) {
 
   return (
     <>
-      <div>시험화면</div>
-      <div></div>
+      <Container>
+        <TopNav>
+          <BackButton onClick={() => navigate(-1)}>
+            <ArrowBackIosIcon />
+          </BackButton>
+          <div className="wordscount">1 of 1</div>
+        </TopNav>
+        <QuestionDiv>단어</QuestionDiv>
+        {/* <AnswerDiv>
+          <CssTextField
+            sx={{ m: 1, width: "65vw" }}
+            id="standard-basic"
+            label="정답을 입력해주세요"
+            // variant="standard"
+          />
+          <ColorButton>제출</ColorButton>
+        </AnswerDiv> */}
+        <MultipleChoiceDiv>
+          <ColorButton className="colorbutton">answer1</ColorButton>
+          <ColorButton className="colorbutton">answer2</ColorButton>
+          <ColorButton className="colorbutton">answer3</ColorButton>
+          <ColorButton className="colorbutton">answer4</ColorButton>
+        </MultipleChoiceDiv>
+      </Container>
     </>
   );
 }

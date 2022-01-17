@@ -39,17 +39,7 @@ export default function WordList({
     });
   };
   const onClickModificatedButtonHandler = () => {
-    // let spelling = editedInputs.spelling;
-    // let meaning = editedInputs.meaning;
-    // let category = editedInputs.category;
     console.log(editedInputs);
-    // if (spelling == "undefined") {
-    //   spelling = "";
-    // } else if (meaning == "undefined") {
-    //   meaning = "";
-    // } else if (category == "undefinded") {
-    //   category = "";
-    // }
     axios
       .patch(
         `http://52.78.37.13/api/words/${editId}/?spelling=${spelling}&meaning=${meaning}&category=${category}`,
