@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ColorButton } from "../../style/LoginStyle";
 import { ContentDiv, HeaderDiv } from "../../style/WordStyle";
@@ -35,14 +35,7 @@ export default function Card({ cookies }) {
     <Container>
       <HeaderDiv>
         <ContentDiv>{wordlist[0]?.contents}</ContentDiv>
-        <Link
-          to={{
-            pathname: `/test/${wordlist[0]?.contents}`,
-            state: {
-              wordlist: wordlist,
-            },
-          }}
-        >
+        <Link to={`/test/${wordlist[0]?.contents}`} state={{ wordlist }}>
           <ColorButton>시험보기</ColorButton>
         </Link>
       </HeaderDiv>

@@ -10,29 +10,51 @@ import {
   TopNav,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import TestEnd from "./TestEnd";
 
 export default function Test(props) {
+  const [currentNo, setCurrentNo] = useState(0);
   const location = useLocation();
-  const [testWords, setTestWords] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`http://52.78.37.13/api/words/search/?target=word`, {
-        headers: {
-          Authorization: props.cookies.token,
-        },
-      })
-      .then((response) => {
-        setTestWords(response.data);
-      })
-      .catch((error) => {
-        console.log("error->>>", error);
-      });
-  }, []);
-  console.log("testWord", testWords);
-  console.log("location", location);
+  // Link에서 가져온 wordList
+  const wordList = location.state.wordlist;
 
+  // currentNo index를 제거한 리스트를 생성
+  let unshuffledfiltered = wordList.filter((element, i) => i !== currentNo);
+
+  // currentNo index를 제거한 리스트 무작위화
+  let filtered = unshuffledfiltered
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value);
+
+  // 보여질 단어보기 리스트(안섞인)
+  let unshuffledProblemList = [
+    wordList[currentNo],
+    filtered[1],
+    filtered[2],
+    filtered[3],
+  ];
+  // 보여질 단어보기 리스트(섞인)
+  let problemList = unshuffledProblemList
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value);
+
+  const onClickMultipleChoiceButtonHandler = (answer) => {
+    if (answer == wordList[currentNo].meaning) {
+      console.log("correct");
+      setCurrentNo(currentNo + 1);
+    } else {
+      console.log("not correct");
+      setCurrentNo(currentNo + 1);
+    }
+  };
+  console.log(currentNo, wordList.length);
+  if (currentNo == wordList.length) {
+    return <TestEnd />;
+  }
   return (
     <>
       <Container>
@@ -40,9 +62,11 @@ export default function Test(props) {
           <BackButton onClick={() => navigate(-1)}>
             <ArrowBackIosIcon />
           </BackButton>
-          <div className="wordscount">1 of 1</div>
+          <div className="wordscount">
+            {currentNo + 1}of {wordList.length}
+          </div>
         </TopNav>
-        <QuestionDiv>단어</QuestionDiv>
+        <QuestionDiv>{wordList[currentNo].spelling}</QuestionDiv>
         {/* <AnswerDiv>
           <CssTextField
             sx={{ m: 1, width: "65vw" }}
@@ -53,10 +77,19 @@ export default function Test(props) {
           <ColorButton>제출</ColorButton>
         </AnswerDiv> */}
         <MultipleChoiceDiv>
-          <ColorButton className="colorbutton">answer1</ColorButton>
-          <ColorButton className="colorbutton">answer2</ColorButton>
-          <ColorButton className="colorbutton">answer3</ColorButton>
-          <ColorButton className="colorbutton">answer4</ColorButton>
+          {problemList?.map((answer) => (
+            <ColorButton
+              value={answer.meaning}
+              className="colorbutton"
+              onClick={() => onClickMultipleChoiceButtonHandler(answer.meaning)}
+            >
+              {answer.meaning}
+            </ColorButton>
+          ))}
+          {/* <ColorButton className="colorbutton">{problemList[0]}</ColorButton>
+          <ColorButton className="colorbutton">{problemList[1]}</ColorButton>
+          <ColorButton className="colorbutton">{problemList[2]}</ColorButton>
+          <ColorButton className="colorbutton">{problemList[3]}</ColorButton> */}
         </MultipleChoiceDiv>
       </Container>
     </>

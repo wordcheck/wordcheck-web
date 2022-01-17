@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Input from "@mui/material/Input";
 import styled from "styled-components";
 import NativeSelect from "@mui/material/NativeSelect";
+import {
+  CardContainer,
+  InputContainer,
+  InputInfo,
+  Label,
+} from "../../style/WordStyle";
 
 export default function AddWordsForm({
   inputs,
@@ -16,25 +22,25 @@ export default function AddWordsForm({
       {wordList &&
         wordList.map((item, index) => (
           <CardContainer key={index}>
-            <div>
-              <div>
-                <label>단어</label>
+            <InputInfo>
+              <InputContainer>
+                <Label>단어</Label>
                 <Input
                   name="spelling"
                   value={spelling}
                   onChange={(e) => onChangeInputHandler(e, index)}
                 />
-              </div>
-              <div>
-                <label>뜻</label>
+              </InputContainer>
+              <InputContainer>
+                <Label>뜻</Label>
                 <Input
                   name="meaning"
                   value={meaning}
                   onChange={(e) => onChangeInputHandler(e, index)}
                 />
-              </div>
-              <div>
-                <label>품사</label>
+              </InputContainer>
+              <InputContainer>
+                <Label>품사</Label>
                 <NativeSelect
                   name="category"
                   value={category}
@@ -46,17 +52,10 @@ export default function AddWordsForm({
                     </option>
                   ))}
                 </NativeSelect>
-              </div>
-            </div>
+              </InputContainer>
+            </InputInfo>
           </CardContainer>
         ))}
     </>
   );
 }
-const CardContainer = styled.div`
-  background-color: lightgray;
-  padding: 2vh;
-  margin: 2vh;
-  width: 35vh;
-  border-radius: 1.5vh;
-`;

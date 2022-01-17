@@ -1,7 +1,7 @@
 import styled from "styled-components";
 //
 
-//? card.jsx
+// card.jsx
 
 export const ContentDiv = styled.div`
   font-size: 6vw;
@@ -14,16 +14,21 @@ export const HeaderDiv = styled.div`
 
 //? wordList.jsx
 export const Container = styled.div`
-  font-size: 4vw;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2em;
 `;
 
 export const Carddiv = styled.div`
+  width: 80vw;
   background-color: lightgray;
   padding: 1.5vh;
   margin: 1.2vh;
   border-radius: 1vh;
+  font-size: 0.7em;
   display: flex;
 `;
 
@@ -81,5 +86,53 @@ export const MultipleChoiceDiv = styled.div`
     padding: 2vh;
     margin-bottom: 3vh;
     border-radius: 1.2vh;
+    text-transform: none;
   }
+`;
+
+//  Addword.jsx의 styledcomponent
+
+export const CardAddContainer = styled.div`
+  text-align: center;
+  background-color: pink;
+  padding: 2vh;
+  margin: 2vh;
+  width: 35vh;
+  border-radius: 1.5vh;
+`;
+export const TitleDiv = styled.div`
+  width: 80vw;
+  height: 5.5vh;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2.2vh;
+`;
+
+// AddWordForm.jsx 의 styled-container
+
+export const CardContainer = styled.div`
+  width: 80vw;
+  height: 15vh;
+  background-color: lightgray;
+  padding: 2vh;
+  margin: 2vh;
+  font-size: 0.7em;
+  border-radius: 1.5vh;
+`;
+
+export const Label = styled.div`
+  width: 15vw;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const InputInfo = styled.div`
+  width: 80vw;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

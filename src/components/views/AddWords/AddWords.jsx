@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import WordList from "../Card/WordList";
 import { SliderValueLabelUnstyled } from "@mui/material";
+import { CardAddContainer, Container, TitleDiv } from "../../style/WordStyle";
 
 export default function AddWords({ cookies }) {
   const [contents, setContents] = useState("");
@@ -92,7 +93,7 @@ export default function AddWords({ cookies }) {
 
   return (
     <Container>
-      <div>
+      <TitleDiv>
         <CssTextField
           name="contents"
           onChange={onChangeContentsHandler}
@@ -107,7 +108,7 @@ export default function AddWords({ cookies }) {
         >
           만들기
         </ColorButton>
-      </div>
+      </TitleDiv>
 
       <AddWordsForm
         wordList={wordList}
@@ -120,20 +121,3 @@ export default function AddWords({ cookies }) {
     </Container>
   );
 }
-
-const CardAddContainer = styled.div`
-  text-align: center;
-  background-color: pink;
-  padding: 2vh;
-  margin: 2vh;
-  width: 35vh;
-  border-radius: 1.5vh;
-`;
-
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
