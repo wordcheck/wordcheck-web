@@ -7,19 +7,31 @@ import Mypage from "./components/views/MyPage/Mypage";
 import NotFound from "./components/views/NotFound/NotFound";
 import SignUpPage from "./components/views/SignUpPage/SignUpPage";
 import Test from "./components/views/Test/Test";
+import { useCookies } from "react-cookie";
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+
   return (
     <div>
       <Router>
         <Routes>
           <>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<Home cookies={cookies} />} />
+            <Route
+              path="/login"
+              element={<LoginPage setCookie={setCookie} />}
+            />
             <Route path="/login/signup" element={<SignUpPage />} />
-            <Route path="/addwords" element={<AddWords />} />
-            <Route path="/card/:contents" element={<Card />} />
-            <Route path="/test/:contents" element={<Test />} />
+            <Route path="/addwords" element={<AddWords cookies={cookies} />} />
+            <Route
+              path="/card/:contents"
+              element={<Card cookies={cookies} />}
+            />
+            <Route
+              path="/test/:contents"
+              element={<Test cookies={cookies} />}
+            />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="*" element={<NotFound />} />
           </>

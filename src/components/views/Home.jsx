@@ -12,16 +12,14 @@ import QuizIcon from "@mui/icons-material/Quiz";
 import AddIcon from "@mui/icons-material/Add";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 // 로그인한 유저만 들어올 수 있음
-export default function Home() {
+export default function Home({ cookies }) {
   const [cards, setCards] = useState([]);
-  const cookies = new Cookies();
-  const CookieToken = cookies.get("Token");
-
+  const [wordEmpty, setWordEmpty] = useState(false);
   useEffect(() => {
     axios
       .get("http://52.78.37.13/api/words/", {
         headers: {
-          Authorization: CookieToken,
+          Authorization: cookies.token,
         },
       })
       .then((response) => {
@@ -29,6 +27,7 @@ export default function Home() {
       })
       .catch((error) => {
         console.log(error);
+        setWordEmpty(true);
       });
   }, []);
 
@@ -42,9 +41,10 @@ export default function Home() {
     </Link>
   ));
 
-  if (!CookieToken) {
+  if (!cookies) {
     return <Navigate to="/login" />;
   }
+
   return (
     <Container>
       <div
@@ -61,8 +61,12 @@ export default function Home() {
           </ColorButton>
         </Link>
       </div>
+      {wordEmpty ? (
+        <div>단어를 추가해 주세요 </div>
+      ) : (
+        <CardContainer>{CardList}</CardContainer>
+      )}
 
-      <CardContainer>{CardList}</CardContainer>
       <BottomNavigation
         showLabels
         style={{

@@ -5,11 +5,11 @@ import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { useCookies } from "react-cookie";
 // import Button from "@mui/material/Button";
 
-export default function LoginPage() {
+export default function LoginPage({ setCookie }) {
   const navigate = useNavigate();
-  const cookies = new Cookies();
 
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
@@ -31,8 +31,12 @@ export default function LoginPage() {
       .post("http://52.78.37.13/api/accounts/normal_login/", formData)
       .then((response) => {
         if (response.data) {
-          cookies.set("Token", response.data.account_token, { path: "/" });
-          cookies.set("Nickname", response.data.nickname, { path: "/" });
+          // 닉네임 필요시 사용
+          // cookiess.set("Nickname", response.data.nickname, { path: "/" });
+          setCookie("token", response.data.account_token, {
+            path: "/",
+            // expires: after1m,
+          });
           navigate("/");
         }
       })

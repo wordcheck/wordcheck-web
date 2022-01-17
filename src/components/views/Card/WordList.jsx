@@ -15,7 +15,7 @@ import {
 
 export default function WordList({
   wordlist,
-  CookieToken,
+  cookies,
   setIsDeleted,
   editId,
   setEditId,
@@ -39,25 +39,24 @@ export default function WordList({
     });
   };
   const onClickModificatedButtonHandler = () => {
-    let spelling = editedInputs.spelling;
-    let meaning = editedInputs.meaning;
-    let category = editedInputs.category;
-
-    if (spelling == "undefined") {
-      spelling = "";
-    } else if (!meaning) {
-      meaning = "";
-    } else if (!category) {
-      category = "";
-    }
-
+    // let spelling = editedInputs.spelling;
+    // let meaning = editedInputs.meaning;
+    // let category = editedInputs.category;
+    console.log(editedInputs);
+    // if (spelling == "undefined") {
+    //   spelling = "";
+    // } else if (meaning == "undefined") {
+    //   meaning = "";
+    // } else if (category == "undefinded") {
+    //   category = "";
+    // }
     axios
       .patch(
         `http://52.78.37.13/api/words/${editId}/?spelling=${spelling}&meaning=${meaning}&category=${category}`,
         {},
         {
           headers: {
-            Authorization: CookieToken,
+            Authorization: cookies.token,
           },
         }
       )
@@ -70,12 +69,12 @@ export default function WordList({
       });
   };
   const onClickEditButtonHandler = (id) => {
-    const editIndex = wordlist.findIndex((i) => i.id === editId);
     setEditId(id);
+    const editIndex = wordlist.findIndex((i) => i.id === id);
     setEditedInputs({
       spelling: wordlist[editIndex]?.spelling,
       meaning: wordlist[editIndex]?.meaning,
-      category: wordlist[editIndex]?.spelling,
+      category: wordlist[editIndex]?.category,
     });
   };
 
@@ -84,7 +83,7 @@ export default function WordList({
       axios
         .delete(`http://52.78.37.13/api/words/${wordid}`, {
           headers: {
-            Authorization: CookieToken,
+            Authorization: cookies.token,
           },
         })
         .then((response) => {
@@ -142,6 +141,7 @@ export default function WordList({
               <Spellingdiv>{word.spelling}</Spellingdiv>
               <CardDiv2>
                 <div>
+                  <div>{word.id}</div>
                   {word.category} . {word.meaning}
                 </div>
                 <div>

@@ -12,20 +12,18 @@ import AddIcon from "@mui/icons-material/Add";
 import WordList from "../Card/WordList";
 import { SliderValueLabelUnstyled } from "@mui/material";
 
-export default function AddWords() {
+export default function AddWords({ cookies }) {
   const [contents, setContents] = useState("");
   const [wordList, setWordList] = useState([
     {
       contents: "",
       spelling: "",
       meaning: "",
-      category: "",
+      category: "n",
     },
   ]);
-
   const navigate = useNavigate();
-  const cookies = new Cookies();
-  const cookieToken = cookies.get("Token");
+  console.log(cookies.token);
 
   const onChangeContentsHandler = (e) => {
     setContents(e.target.value);
@@ -45,11 +43,10 @@ export default function AddWords() {
           formData.append("spelling", wordList.spelling);
           formData.append("category", wordList.category);
           formData.append("meaning", wordList.meaning);
-
           return axios
             .post("http://52.78.37.13/api/words/", formData, {
               headers: {
-                Authorization: cookieToken,
+                Authorization: cookies.token,
               },
             })
             .then((res) => {
