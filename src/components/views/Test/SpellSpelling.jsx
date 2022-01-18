@@ -34,7 +34,7 @@ export default function SpellSpellingTest({ cookies }) {
       setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `http://52.78.37.13/api/words/${answer.id}/test/`,
+          `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/`,
           {},
           {
             headers: {
@@ -46,9 +46,9 @@ export default function SpellSpellingTest({ cookies }) {
           console.log(response);
           let lastWrongWords = [...wrongWords];
           let nextWrongWords = {
-            spelling: answer.spelling,
-            meaning: answer.meaning,
-            category: answer.category,
+            spelling: wordList[currentNo].spelling,
+            meaning: wordList[currentNo].meaning,
+            category: wordList[currentNo].category,
           };
           lastWrongWords.push(nextWrongWords);
           setWrongWords(lastWrongWords);

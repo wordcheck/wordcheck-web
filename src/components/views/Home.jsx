@@ -11,7 +11,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AddIcon from "@mui/icons-material/Add";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import { CookieSharp } from "@mui/icons-material";
 
 // 로그인한 유저만 들어올 수 있음
 export default function Home({ cookies }) {
@@ -43,7 +42,7 @@ export default function Home({ cookies }) {
       <Card key={index}>{card.contents}</Card>
     </Link>
   ));
-
+  console.log(cards);
   if (!cookies.token) {
     return <Navigate to="/login" />;
   }
@@ -78,7 +77,17 @@ export default function Home({ cookies }) {
           width: "100%",
         }}
       >
-        <BottomNavigationAction label="test all" icon={<QuizIcon />} />
+        <BottomNavigationAction
+          label="test all"
+          icon={
+            <Link
+              to="/testschoice"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <QuizIcon />
+            </Link>
+          }
+        />
         <BottomNavigationAction
           label="add words"
           icon={
@@ -87,7 +96,7 @@ export default function Home({ cookies }) {
             </Link>
           }
         />
-        <BottomNavigationAction label=" review" icon={<MenuBookIcon />} />
+        <BottomNavigationAction label="review" icon={<MenuBookIcon />} />
       </BottomNavigation>
     </Container>
   );

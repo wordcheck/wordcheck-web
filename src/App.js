@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 import TestsChoice from "./components/views/Test/TestsChoice";
 import MultipleChoice from "./components/views/Test/MultipleChoice";
 import SpellSpelling from "./components/views/Test/SpellSpelling";
+import AllTestsChoice from "./components/views/Test/AllTestsChoice";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
@@ -31,8 +32,12 @@ function App() {
               element={<Card cookies={cookies} />}
             />
             <Route
-              path="/testschoice/:contents"
+              path="/testschoice"
               element={<TestsChoice cookies={cookies} />}
+            />
+            <Route
+              path="/alltestchoice"
+              element={<AllTestsChoice cookies={cookies} />}
             />
             <Route
               path="/multiplechoice/:contents"

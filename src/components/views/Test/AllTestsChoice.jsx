@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
@@ -10,13 +10,29 @@ import {
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import axios from "axios";
+import WordList from "../Card/WordList";
 
-export default function TestsChoice({ cookies }) {
-  const location = useLocation();
+export default function AllTestsChoice({ cookies }) {
+  const [wordlist, setWordlist] = useState([]);
   const navigate = useNavigate();
   // Link에서 가져온 wordList
 
-  const wordlist = location?.state?.wordlist;
+  useEffect(() => {
+    axios
+      .get(`http://52.78.37.13/api/words/detail_list/`, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      })
+      .then((response) => {
+        setWordlist(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(wordlist);
 
   return (
     <Container>
