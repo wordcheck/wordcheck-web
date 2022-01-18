@@ -1,19 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+import { Container, NameDiv } from "../../style/WordStyle";
 
-export default function Mypage() {
+import { ColorButton } from "../../style/LoginStyle";
+import { pictureSRC } from "../../../utils/ ProfilePicture";
+
+export default function Mypage({ cookies, removeCookie }) {
   const navigate = useNavigate();
-  const cookies = new Cookies();
 
   const onClickLogoutHandler = () => {
-    cookies.remove("Token");
-    cookies.remove("Nickname");
-    navigate("/login");
+    if (window.confirm("정말 로그아웃하시겠습니까?")) {
+      removeCookie("token");
+      removeCookie("nickname");
+      navigate("/");
+    }
   };
+
   return (
-    <div>
-      mypage <button onClick={onClickLogoutHandler}>Sign out</button>
-    </div>
+    <Container>
+      <img src={pictureSRC} alt="profilePicture" width="70%" height="90%" />
+      <NameDiv>{cookies.nickname}님 </NameDiv>
+      <ColorButton onClick={() => onClickLogoutHandler()}>Sign out</ColorButton>
+    </Container>
   );
 }

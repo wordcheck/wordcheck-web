@@ -11,6 +11,8 @@ import {
   Carddiv,
   CardDiv2,
   Spellingdiv,
+  CategoryList,
+  CardDiv3,
 } from "../../style/WordStyle";
 
 export default function WordList({
@@ -39,7 +41,6 @@ export default function WordList({
     });
   };
   const onClickModificatedButtonHandler = () => {
-    console.log(editedInputs);
     axios
       .patch(
         `http://52.78.37.13/api/words/${editId}/?spelling=${spelling}&meaning=${meaning}&category=${category}`,
@@ -115,7 +116,7 @@ export default function WordList({
                         {category}
                       </option>
                     ))}
-                  </NativeSelect>{" "}
+                  </NativeSelect>
                   <Input
                     name="meaning"
                     value={meaning}
@@ -128,20 +129,24 @@ export default function WordList({
             </>
           ) : (
             <>
-              <Spellingdiv>{word.spelling}</Spellingdiv>
+              <Spellingdiv>
+                {word.wrong_count} {word.spelling}
+              </Spellingdiv>
               <CardDiv2>
-                <div>
-                  <div>{word.id}</div>
-                  {word.category} . {word.meaning}
-                </div>
-                <div>
-                  <EditIcon onClick={() => onClickEditButtonHandler(word.id)} />
-                  <DeleteIcon
-                    onClick={() => {
-                      onClickDeleteButtonHandler(word.id);
-                    }}
-                  />
-                </div>
+                <CategoryList>{word.category}</CategoryList>
+                <CardDiv3>
+                  <div> {word.meaning}</div>
+                  <div>
+                    <EditIcon
+                      onClick={() => onClickEditButtonHandler(word.id)}
+                    />
+                    <DeleteIcon
+                      onClick={() => {
+                        onClickDeleteButtonHandler(word.id);
+                      }}
+                    />
+                  </div>
+                </CardDiv3>
               </CardDiv2>
             </>
           )}

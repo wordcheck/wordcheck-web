@@ -116,7 +116,8 @@ export default function AddWords({ cookies }) {
         onChangeInputHandler={onChangeInputHandler}
       />
       <CardAddContainer onClick={onClickCardAddHandler}>
-        <AddIcon /> add Card
+        <AddIcon />
+        <span>단어카드 추가하기</span>
       </CardAddContainer>
     </Container>
   );

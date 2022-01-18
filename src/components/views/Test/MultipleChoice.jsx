@@ -1,19 +1,6 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ColorButton, Container, CssTextField } from "../../style/LoginStyle";
-import {
-  AnswerDiv,
-  BackButton,
-  MultipleChoiceDiv,
-  QuestionDiv,
-  TopNav,
-} from "../../style/WordStyle";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import TestEnd from "./TestEnd";
-import BeforeTest from "./TestsChoice";
+import React from "react";
 
-export default function Test({ cookies }) {
+export default function MultipleChoice() {
   const [currentNo, setCurrentNo] = useState(0);
   const [wrongWords, setWrongWords] = useState([]);
   const [problemType, setProblemType] = useState({ choice: "" });
@@ -79,11 +66,11 @@ export default function Test({ cookies }) {
     }
   };
 
-  // if (!problemType) {
-  //   return (
-  //     <BeforeTest setProblemType={setProblemType} problemType={problemType} />
-  //   );
-  // }
+  if (!problemType) {
+    return (
+      <BeforeTest setProblemType={setProblemType} problemType={problemType} />
+    );
+  }
   // 문제를 다 풀었을 때
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
@@ -101,14 +88,14 @@ export default function Test({ cookies }) {
         </TopNav>
         <QuestionDiv>{wordList[currentNo].spelling}</QuestionDiv>
         {/* <AnswerDiv>
-          <CssTextField
-            sx={{ m: 1, width: "65vw" }}
-            id="standard-basic"
-            label="정답을 입력해주세요"
-            // variant="standard"
-          />
-          <ColorButton>제출</ColorButton>
-        </AnswerDiv> */}
+            <CssTextField
+              sx={{ m: 1, width: "65vw" }}
+              id="standard-basic"
+              label="정답을 입력해주세요"
+              // variant="standard"
+            />
+            <ColorButton>제출</ColorButton>
+          </AnswerDiv> */}
         <MultipleChoiceDiv>
           {problemList?.map((answer) => (
             <ColorButton
@@ -119,10 +106,6 @@ export default function Test({ cookies }) {
               {answer.meaning}
             </ColorButton>
           ))}
-          {/* <ColorButton className="colorbutton">{problemList[0]}</ColorButton>
-          <ColorButton className="colorbutton">{problemList[1]}</ColorButton>
-          <ColorButton className="colorbutton">{problemList[2]}</ColorButton>
-          <ColorButton className="colorbutton">{problemList[3]}</ColorButton> */}
         </MultipleChoiceDiv>
       </Container>
     </>

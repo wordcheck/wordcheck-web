@@ -31,11 +31,11 @@ export default function LoginPage({ setCookie }) {
       .post("http://52.78.37.13/api/accounts/normal_login/", formData)
       .then((response) => {
         if (response.data) {
-          // 닉네임 필요시 사용
-          // cookiess.set("Nickname", response.data.nickname, { path: "/" });
           setCookie("token", response.data.account_token, {
             path: "/",
-            // expires: after1m,
+          });
+          setCookie("nickname", response.data.nickname, {
+            path: "/",
           });
           navigate("/");
         }

@@ -14,8 +14,8 @@ export const HeaderDiv = styled.div`
 
 //? wordList.jsx
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ export const Carddiv = styled.div`
   width: 80vw;
   background-color: lightgray;
   padding: 1.5vh;
-  margin: 1.2vh;
+  margin-top: 1.8vh;
   border-radius: 1vh;
   font-size: 0.7em;
   display: flex;
@@ -35,10 +35,20 @@ export const Carddiv = styled.div`
 export const Spellingdiv = styled.div`
   width: 40vw;
 `;
+export const CategoryList = styled.div`
+  width: 11vw;
+`;
 export const CardDiv2 = styled.div`
   width: 100%;
   display: flex;
+  /* justify-content: space-between; */
+`;
+export const CardDiv3 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: space-between;
 `;
 
 // test.jsx의 styled components
@@ -93,15 +103,21 @@ export const MultipleChoiceDiv = styled.div`
 //  Addword.jsx의 styledcomponent
 
 export const CardAddContainer = styled.div`
+  width: 80vw;
+  height: 4vh;
   text-align: center;
-  background-color: pink;
+  font-size: 0.7em;
+  background-color: #ffdb4d;
   padding: 2vh;
-  margin: 2vh;
+  margin-top: 2vw;
   width: 35vh;
   border-radius: 1.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const TitleDiv = styled.div`
-  width: 80vw;
+  width: 84vw;
   height: 5.5vh;
   display: flex;
   justify-content: space-between;
@@ -115,7 +131,7 @@ export const CardContainer = styled.div`
   height: 15vh;
   background-color: lightgray;
   padding: 2vh;
-  margin: 2vh;
+  margin-top: 2vh;
   font-size: 0.7em;
   border-radius: 1.5vh;
 `;
@@ -135,4 +151,69 @@ export const InputInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
+
+// TestEnd.jsx
+
+export const WrongWordsContainer = styled.div`
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  font-size: 0.9em;
+  margin-top: 2vh;
+`;
+export const InfoDiv = styled.div`
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+`;
+
+export const LinkButtonDiv = styled.div`
+  width: 60vw;
+  margin-bottom: 10vh;
+  display: flex;
+  justify-content: space-between;
+`;
+
+//Mypage.jsx
+export const NameDiv = styled.div`
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+`;
+
+// BeforeTest.jsx
+
+export const TestContentDiv = styled.div`
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.64em;
+  /* border: 1px solid gray; */
+  padding: 1vh;
+  padding-left: 10vw;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  .buttons {
+    width: 30vh;
+    padding-top: "1vh";
+    padding-bottom: "1vh";
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    .contentInfo {
+      width: 40vh;
+      color: gray;
+      :hover {
+        color: green;
+      }
+      &.something {
+        background: orange;
+      }
+    }
+  }
 `;

@@ -6,11 +6,11 @@ import LoginPage from "./components/views/LoginPage/LoginPage";
 import Mypage from "./components/views/MyPage/Mypage";
 import NotFound from "./components/views/NotFound/NotFound";
 import SignUpPage from "./components/views/SignUpPage/SignUpPage";
-import Test from "./components/views/Test/Test";
 import { useCookies } from "react-cookie";
+import TestsChoice from "./components/views/Test/TestsChoice";
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
 
   return (
     <div>
@@ -29,10 +29,13 @@ function App() {
               element={<Card cookies={cookies} />}
             />
             <Route
-              path="/test/:contents"
-              element={<Test cookies={cookies} />}
+              path="/testschoice/:contents"
+              element={<TestsChoice cookies={cookies} />}
             />
-            <Route path="/mypage" element={<Mypage />} />
+            <Route
+              path="/mypage"
+              element={<Mypage cookies={cookies} removeCookie={removeCookie} />}
+            />
             <Route path="*" element={<NotFound />} />
           </>
         </Routes>

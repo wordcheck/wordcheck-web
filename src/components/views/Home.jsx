@@ -11,10 +11,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AddIcon from "@mui/icons-material/Add";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import { CookieSharp } from "@mui/icons-material";
+
 // 로그인한 유저만 들어올 수 있음
 export default function Home({ cookies }) {
   const [cards, setCards] = useState([]);
   const [wordEmpty, setWordEmpty] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://52.78.37.13/api/words/", {
@@ -29,7 +32,7 @@ export default function Home({ cookies }) {
         console.log(error);
         setWordEmpty(true);
       });
-  }, []);
+  }, [cookies]);
 
   const CardList = cards.map((card, index) => (
     <Link
@@ -41,7 +44,7 @@ export default function Home({ cookies }) {
     </Link>
   ));
 
-  if (!cookies) {
+  if (!cookies.token) {
     return <Navigate to="/login" />;
   }
 

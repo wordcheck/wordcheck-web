@@ -35,7 +35,8 @@ export default function Card({ cookies }) {
     <Container>
       <HeaderDiv>
         <ContentDiv>{wordlist[0]?.contents}</ContentDiv>
-        <Link to={`/test/${wordlist[0]?.contents}`} state={{ wordlist }}>
+
+        <Link to={`/testshoice/${wordlist[0]?.contents}`} state={{ wordlist }}>
           <ColorButton>시험보기</ColorButton>
         </Link>
       </HeaderDiv>
