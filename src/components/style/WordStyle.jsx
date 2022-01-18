@@ -14,8 +14,8 @@ export const HeaderDiv = styled.div`
 
 //? wordList.jsx
 export const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,7 +183,7 @@ export const NameDiv = styled.div`
 // BeforeTest.jsx
 
 export const TestContentDiv = styled.div`
-  width: 100vw;
+  width: 91vw;
   height: 10vh;
   display: flex;
   justify-content: space-between;
@@ -191,7 +191,7 @@ export const TestContentDiv = styled.div`
   font-size: 0.64em;
   /* border: 1px solid gray; */
   padding: 1vh;
-  padding-left: 10vw;
+  padding-left: 5vw;
 `;
 
 export const ButtonContainer = styled.div`

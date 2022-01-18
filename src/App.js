@@ -8,6 +8,8 @@ import NotFound from "./components/views/NotFound/NotFound";
 import SignUpPage from "./components/views/SignUpPage/SignUpPage";
 import { useCookies } from "react-cookie";
 import TestsChoice from "./components/views/Test/TestsChoice";
+import MultipleChoice from "./components/views/Test/MultipleChoice";
+import SpellSpelling from "./components/views/Test/SpellSpelling";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
@@ -31,6 +33,14 @@ function App() {
             <Route
               path="/testschoice/:contents"
               element={<TestsChoice cookies={cookies} />}
+            />
+            <Route
+              path="/multiplechoice/:contents"
+              element={<MultipleChoice cookies={cookies} />}
+            />
+            <Route
+              path="/spellspelling/:contents"
+              element={<SpellSpelling cookies={cookies} />}
             />
             <Route
               path="/mypage"

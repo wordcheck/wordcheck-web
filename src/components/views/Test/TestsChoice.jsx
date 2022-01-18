@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { ColorButton } from "../../style/LoginStyle";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import {
   BackButton,
   ButtonContainer,
@@ -11,8 +11,11 @@ import {
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-export default function TestsChoice() {
+export default function TestsChoice({ cookies }) {
+  const location = useLocation();
   const navigate = useNavigate();
+  // Link에서 가져온 wordList
+  const wordlist = location.state.wordlist;
 
   return (
     <Container>
@@ -21,23 +24,34 @@ export default function TestsChoice() {
       </BackButton>
       <TopNav>Test</TopNav>
       <TestContentDiv>
-        <ButtonContainer>
-          <div className="buttons">
-            <span>사지선다</span>
-            <div className="contentInfo">
-              문제를 읽고 올바른 정답을 선택하세요.
+        <Link
+          to={`/multiplechoice/${wordlist[0]?.contents}`}
+          state={{ wordlist }}
+        >
+          <ButtonContainer>
+            <div className="buttons">
+              <span>사지선다</span>
+              <div className="contentInfo">
+                문제를 읽고 올바른 정답을 선택하세요.
+              </div>
             </div>
-          </div>
-        </ButtonContainer>
+          </ButtonContainer>
+        </Link>
         <ArrowForwardIosIcon />
       </TestContentDiv>
+
       <TestContentDiv>
-        <ButtonContainer>
-          <div className="buttons">
-            <span>철자맞히기 </span>
-            <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
-          </div>
-        </ButtonContainer>
+        <Link
+          to={`/spellspelling/${wordlist[0]?.contents}`}
+          state={{ wordlist }}
+        >
+          <ButtonContainer>
+            <div className="buttons">
+              <span>철자맞히기 </span>
+              <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
+            </div>
+          </ButtonContainer>
+        </Link>
         <ArrowForwardIosIcon />
       </TestContentDiv>
     </Container>

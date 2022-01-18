@@ -1,15 +1,26 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ColorButton, Container, CssTextField } from "../../style/LoginStyle";
+import {
+  AnswerDiv,
+  BackButton,
+  MultipleChoiceDiv,
+  QuestionDiv,
+  TopNav,
+} from "../../style/WordStyle";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import TestEnd from "./TestEnd";
 
-export default function MultipleChoice() {
+export default function MultipleChoice({ cookies }) {
   const [currentNo, setCurrentNo] = useState(0);
   const [wrongWords, setWrongWords] = useState([]);
-  const [problemType, setProblemType] = useState({ choice: "" });
   const location = useLocation();
   const navigate = useNavigate();
 
   // Link에서 가져온 wordList
   const wordList = location.state.wordlist;
-
+  console.log("dd", wordList);
   // currentNo index를 제거한 리스트를 생성
   let unshuffledfiltered = wordList.filter((element, i) => i !== currentNo);
 
@@ -66,11 +77,6 @@ export default function MultipleChoice() {
     }
   };
 
-  if (!problemType) {
-    return (
-      <BeforeTest setProblemType={setProblemType} problemType={problemType} />
-    );
-  }
   // 문제를 다 풀었을 때
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
@@ -79,7 +85,7 @@ export default function MultipleChoice() {
     <>
       <Container>
         <TopNav>
-          <BackButton onClick={() => navigate(-1)}>
+          <BackButton onClick={() => navigate(-2)}>
             <ArrowBackIosIcon />
           </BackButton>
           <div className="wordscount">
@@ -99,11 +105,11 @@ export default function MultipleChoice() {
         <MultipleChoiceDiv>
           {problemList?.map((answer) => (
             <ColorButton
-              value={answer.meaning}
+              value={answer?.meaning}
               className="colorbutton"
               onClick={() => onClickMultipleChoiceButtonHandler(answer)}
             >
-              {answer.meaning}
+              {answer?.meaning}
             </ColorButton>
           ))}
         </MultipleChoiceDiv>
