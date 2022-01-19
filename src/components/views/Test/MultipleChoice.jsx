@@ -93,18 +93,11 @@ export default function MultipleChoice({ cookies }) {
           </div>
         </TopNav>
         <QuestionDiv>{wordList[currentNo].spelling}</QuestionDiv>
-        {/* <AnswerDiv>
-            <CssTextField
-              sx={{ m: 1, width: "65vw" }}
-              id="standard-basic"
-              label="정답을 입력해주세요"
-              // variant="standard"
-            />
-            <ColorButton>제출</ColorButton>
-          </AnswerDiv> */}
+
         <MultipleChoiceDiv>
           {problemList?.map((answer) => (
             <ColorButton
+              key={answer.id}
               value={answer?.meaning}
               className="colorbutton"
               onClick={() => onClickMultipleChoiceButtonHandler(answer)}

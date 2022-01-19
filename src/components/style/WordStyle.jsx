@@ -5,11 +5,15 @@ import styled from "styled-components";
 
 export const ContentDiv = styled.div`
   font-size: 6vw;
+  padding: 1vw;
+  padding-top: 0.8vh;
 `;
 export const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1vh;
+  padding: 1.2vh;
+  padding-right: 1.6vh;
+  padding-left: 1.6vh;
 `;
 
 //? wordList.jsx
@@ -34,8 +38,13 @@ export const Carddiv = styled.div`
 
 export const Spellingdiv = styled.div`
   width: 40vw;
+  display: flex;
+  .wrongIcon {
+    padding-right: 2vw;
+  }
 `;
 export const CategoryList = styled.div`
+  padding-left: 2vw;
   width: 11vw;
 `;
 export const CardDiv2 = styled.div`

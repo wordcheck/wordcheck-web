@@ -50,7 +50,7 @@ export default function TestsChoice({ cookies }) {
           <ButtonContainer>
             <div className="buttons">
               <span>철자맞히기 </span>
-              <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
+              <div className="contentInfo">단어의 철자를 직접 선택하세요.</div>
             </div>
           </ButtonContainer>
         </Link>

@@ -13,7 +13,7 @@ export default function TestEnd({ wrongWords }) {
   return (
     <>
       <Container>
-        <InfoDiv>수고했어요!</InfoDiv>
+        <InfoDiv>👏수고했어요!👏</InfoDiv>
         <LinkButtonDiv>
           <ColorButton onClick={() => navigation(-1)}>
             재시험 보러가기

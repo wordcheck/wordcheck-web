@@ -14,7 +14,12 @@ import {
   CategoryList,
   CardDiv3,
 } from "../../style/WordStyle";
-
+import CircleIcon from "@mui/icons-material/Circle";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
+import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import { red, yellow } from "@mui/material/colors";
 export default function WordList({
   wordlist,
   cookies,
@@ -40,6 +45,7 @@ export default function WordList({
       [name]: value,
     });
   };
+
   const onClickModificatedButtonHandler = () => {
     axios
       .patch(
@@ -88,6 +94,17 @@ export default function WordList({
     setIsDeleted(false);
   };
 
+  const WrongCountIcon = (wrong) => {
+    console.log(wrong);
+    if (wrong === 0) {
+      return <CircleIcon color="success" />;
+    } else if ((wrong >= 1) & (wrong <= 3)) {
+      return <CircleIcon sx={{ color: yellow[600] }} />;
+    } else if (wrong > 3) {
+      return <CircleIcon sx={{ color: red[500] }} />;
+    }
+  };
+
   return (
     <Container>
       {wordlist.map((word) => (
@@ -130,7 +147,10 @@ export default function WordList({
           ) : (
             <>
               <Spellingdiv>
-                {word.wrong_count} {word.spelling}
+                <span className="wrongIcon">
+                  {WrongCountIcon(word.wrong_count)}
+                </span>
+                {word.spelling}
               </Spellingdiv>
               <CardDiv2>
                 <CategoryList>{word.category}</CategoryList>

@@ -51,13 +51,19 @@ export default function Home({ cookies }) {
     <Container>
       <div
         style={{
+          height: "6vh",
+          width: "90vw",
           display: "flex",
           justifyContent: "space-between",
-          padding: "1.5vh",
+          padding: "2.3vh",
+          paddingBottom: "1vh",
         }}
       >
         <Logo>wordcheck</Logo>
-        <Link to="/mypage" style={{ textDecoration: "none" }}>
+        <Link
+          to="/mypage"
+          style={{ textDecoration: "none", display: "flex", height: "5vh" }}
+        >
           <ColorButton>
             <PersonIcon />
           </ColorButton>

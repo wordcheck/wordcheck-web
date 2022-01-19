@@ -1,3 +1,5 @@
+//
+
 import axios from "axios";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,7 +13,6 @@ import {
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import TestEnd from "./TestEnd";
-import BeforeTest from "./TestsChoice";
 
 export default function SpellSpellingTest({ cookies }) {
   const [currentNo, setCurrentNo] = useState(0);
@@ -26,15 +27,26 @@ export default function SpellSpellingTest({ cookies }) {
 
   const onClickMultipleChoiceButtonHandler = () => {
     if (wordList[currentNo].spelling == answer) {
+      axios
+        .patch(
+          `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=correct`,
+          {},
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        )
+        .then((response) => console.log(response));
       console.log("correct");
+
       setCurrentNo(currentNo + 1);
       setAnswer("");
     } else {
-      console.log("not correct");
       setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/`,
+          `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=wrong`,
           {},
           {
             headers: {
