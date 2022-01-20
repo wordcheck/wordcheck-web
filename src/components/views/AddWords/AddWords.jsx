@@ -24,7 +24,6 @@ export default function AddWords({ cookies }) {
     },
   ]);
   const navigate = useNavigate();
-  console.log(cookies.token);
 
   const onChangeContentsHandler = (e) => {
     setContents(e.target.value);
@@ -37,6 +36,7 @@ export default function AddWords({ cookies }) {
 
   const onClickSubmitWords = () => {
     const formData = new FormData();
+
     if (window.confirm("추가하시겠습니까?")) {
       Promise.all(
         wordList.map((wordList) => {

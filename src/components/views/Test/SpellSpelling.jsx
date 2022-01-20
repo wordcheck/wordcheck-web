@@ -74,6 +74,7 @@ export default function SpellSpellingTest({ cookies }) {
 
   // Link에서 가져온 wordList
   const wordList = location.state.wordlist;
+
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
   }
@@ -95,6 +96,7 @@ export default function SpellSpellingTest({ cookies }) {
           sx={{ m: 1, width: "65vw" }}
           id="standard-basic"
           label="정답을 입력해주세요"
+          autoComplete="off"
           // variant="standard"
         />
         <ColorButton onClick={() => onClickMultipleChoiceButtonHandler()}>

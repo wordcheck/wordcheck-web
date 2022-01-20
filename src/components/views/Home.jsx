@@ -11,6 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AddIcon from "@mui/icons-material/Add";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import StarIcon from "@mui/icons-material/Star";
 
 // 로그인한 유저만 들어올 수 있음
 export default function Home({ cookies }) {
@@ -102,7 +103,7 @@ export default function Home({ cookies }) {
             </Link>
           }
         />
-        <BottomNavigationAction label="review" icon={<MenuBookIcon />} />
+        <BottomNavigationAction label="Favorites" icon={<StarIcon />} />
       </BottomNavigation>
     </Container>
   );

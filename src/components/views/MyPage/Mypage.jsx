@@ -5,6 +5,7 @@ import { BackButton, Container, NameDiv } from "../../style/WordStyle";
 import { ColorButton } from "../../style/LoginStyle";
 import axios from "axios";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ProfileLottie from "../../../utils/ProfileLottie";
 
 export default function Mypage({ cookies, removeCookie }) {
   const [profile, setProfile] = useState("");
@@ -39,13 +40,7 @@ export default function Mypage({ cookies, removeCookie }) {
       navigate("/");
     }
   };
-  if (loading)
-    return (
-      <div>ff</div>
-      // <LottieDiv>
-      //   <LotttieDog />
-      // </LottieDiv>
-    );
+  if (loading) return <ProfileLottie />;
 
   return (
     <Container>
