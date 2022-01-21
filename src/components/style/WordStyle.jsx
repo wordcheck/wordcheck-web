@@ -23,7 +23,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 2em;
+  font-size: 1.7em;
 `;
 
 export const Carddiv = styled.div`
@@ -36,13 +36,17 @@ export const Carddiv = styled.div`
   display: flex;
 `;
 
-export const Spellingdiv = styled.div`
-  width: 40vw;
+export const IconDiv = styled.div`
+  width: 20vw;
   display: flex;
   .wrongIcon {
-    padding-right: 2vw;
   }
 `;
+export const SpellingDiv = styled.div`
+  width: 30vw;
+  padding-left: 3vw;
+`;
+
 export const CategoryList = styled.div`
   padding-left: 2vw;
   width: 11vw;

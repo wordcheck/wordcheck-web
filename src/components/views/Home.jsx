@@ -47,6 +47,9 @@ export default function Home({ cookies }) {
   if (!cookies.token) {
     return <Navigate to="/login" />;
   }
+  // const Hello() => {
+
+  // }
 
   return (
     <Container>
@@ -98,12 +101,25 @@ export default function Home({ cookies }) {
         <BottomNavigationAction
           label="add words"
           icon={
-            <Link to="addwords">
+            <Link
+              to="/addwords"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               <AddIcon />
             </Link>
           }
         />
-        <BottomNavigationAction label="Favorites" icon={<StarIcon />} />
+        <BottomNavigationAction
+          label="marks"
+          icon={
+            <Link
+              to="/marks"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <StarIcon />
+            </Link>
+          }
+        />
       </BottomNavigation>
     </Container>
   );

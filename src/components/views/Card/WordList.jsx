@@ -13,13 +13,18 @@ import {
   Spellingdiv,
   CategoryList,
   CardDiv3,
+  IconDiv,
+  SpellingDiv,
 } from "../../style/WordStyle";
 import CircleIcon from "@mui/icons-material/Circle";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import { red, yellow } from "@mui/material/colors";
+import StarIcon from "@mui/icons-material/Star";
+import { grey, red, yellow } from "@mui/material/colors";
+import { useEffect } from "react";
+
 export default function WordList({
   wordlist,
   cookies,
@@ -34,6 +39,9 @@ export default function WordList({
       category: "",
     },
   ]);
+  const [marksId, setMarksId] = useState(
+    JSON.parse(localStorage.getItem("marks")) || ""
+  );
 
   const { spelling, meaning, category } = editedInputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
@@ -94,6 +102,17 @@ export default function WordList({
     setIsDeleted(false);
   };
 
+  const onClickMarkButtonHandler = (id) => {
+    let beforeId = [...marksId];
+    beforeId.push(id);
+    console.log(beforeId);
+    setMarksId(beforeId);
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem("marks", JSON.stringify(marksId));
+  }, [marksId]);
+
   const WrongCountIcon = (wrong) => {
     console.log(wrong);
     if (wrong === 0) {
@@ -111,7 +130,7 @@ export default function WordList({
         <Carddiv key={word.id}>
           {word.id === editId ? (
             <>
-              <Spellingdiv>
+              <IconDiv>
                 <Input
                   name="spelling"
                   value={spelling}
@@ -119,7 +138,7 @@ export default function WordList({
                   color="secondary"
                   defaultValue={word.spelling}
                 ></Input>
-              </Spellingdiv>
+              </IconDiv>
               <CardDiv2>
                 <div>
                   <NativeSelect
@@ -146,12 +165,24 @@ export default function WordList({
             </>
           ) : (
             <>
-              <Spellingdiv>
+              <IconDiv>
                 <span className="wrongIcon">
+                  {word.id ? (
+                    <StarIcon
+                      onClick={() => onClickMarkButtonHandler(word)}
+                      sx={{ color: yellow[600] }}
+                    />
+                  ) : (
+                    <StarIcon
+                      onClick={() => onClickMarkButtonHandler(word)}
+                      sx={{ color: grey[500] }}
+                    />
+                  )}
+
                   {WrongCountIcon(word.wrong_count)}
                 </span>
-                {word.spelling}
-              </Spellingdiv>
+              </IconDiv>
+              <SpellingDiv>{word.spelling}</SpellingDiv>
               <CardDiv2>
                 <CategoryList>{word.category}</CategoryList>
                 <CardDiv3>

@@ -11,6 +11,7 @@ import TestsChoice from "./components/views/Test/TestsChoice";
 import MultipleChoice from "./components/views/Test/MultipleChoice";
 import SpellSpelling from "./components/views/Test/SpellSpelling";
 import AllTestsChoice from "./components/views/Test/AllTestsChoice";
+import Marks from "./components/views/Marks/Marks";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
@@ -27,6 +28,7 @@ function App() {
             />
             <Route path="/login/signup" element={<SignUpPage />} />
             <Route path="/addwords" element={<AddWords cookies={cookies} />} />
+            <Route path="/marks" element={<Marks cookies={cookies} />} />
             <Route
               path="/card/:contents"
               element={<Card cookies={cookies} />}
