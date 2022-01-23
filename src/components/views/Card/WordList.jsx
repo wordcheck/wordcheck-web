@@ -15,6 +15,7 @@ import {
   CardDiv3,
   IconDiv,
   SpellingDiv,
+  WrongCountDiv,
 } from "../../style/WordStyle";
 import CircleIcon from "@mui/icons-material/Circle";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
@@ -117,15 +118,26 @@ export default function WordList({
     window.localStorage.setItem("marks", JSON.stringify(marks));
   }, [marks]);
 
-  console.log("marks", marks);
   const WrongCountIcon = (wrong) => {
     console.log(wrong);
     if (wrong === 0) {
-      return <CircleIcon color="success" />;
+      return (
+        <WrongCountDiv style={{ backgroundColor: "#00b300" }}>
+          {wrong}
+        </WrongCountDiv>
+      );
     } else if ((wrong >= 1) & (wrong <= 3)) {
-      return <CircleIcon sx={{ color: yellow[600] }} />;
+      return (
+        <WrongCountDiv style={{ backgroundColor: "#ffc61a" }}>
+          {wrong}
+        </WrongCountDiv>
+      );
     } else if (wrong > 3) {
-      return <CircleIcon sx={{ color: red[500] }} />;
+      return (
+        <WrongCountDiv style={{ backgroundColor: "#ff471a" }}>
+          {wrong}
+        </WrongCountDiv>
+      );
     }
   };
 
@@ -171,21 +183,20 @@ export default function WordList({
           ) : (
             <>
               <IconDiv>
-                <span className="wrongIcon">
-                  {JSON.stringify(marks)?.includes(JSON.stringify(word)) ? (
-                    <StarIcon
-                      onClick={() => onClickMarkButtonHandler(word)}
-                      sx={{ color: yellow[600] }}
-                    />
-                  ) : (
-                    <StarIcon
-                      onClick={() => onClickMarkButtonHandler(word)}
-                      sx={{ color: grey[500] }}
-                    />
-                  )}
+                {JSON.stringify(marks)?.includes(JSON.stringify(word)) ? (
+                  <StarIcon
+                    onClick={() => onClickMarkButtonHandler(word)}
+                    sx={{ color: yellow[600] }}
+                  />
+                ) : (
+                  <StarIcon
+                    onClick={() => onClickMarkButtonHandler(word)}
+                    sx={{ color: grey[500] }}
+                  />
+                )}
+                {/* <WrongCountDiv> {word.wrong_count}</WrongCountDiv> */}
 
-                  {WrongCountIcon(word.wrong_count)}
-                </span>
+                {WrongCountIcon(word.wrong_count)}
               </IconDiv>
               <SpellingDiv>{word.spelling}</SpellingDiv>
               <CardDiv2>

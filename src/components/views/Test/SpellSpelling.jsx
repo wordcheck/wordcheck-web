@@ -74,6 +74,12 @@ export default function SpellSpellingTest({ cookies }) {
 
   // Link에서 가져온 wordList
   const wordList = location.state.wordlist;
+  function enterkey() {
+    if (window.event.keyCode == 13) {
+      // 엔터키가 눌렸을 때 실행할 내용
+      onClickMultipleChoiceButtonHandler();
+    }
+  }
 
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
@@ -91,6 +97,7 @@ export default function SpellSpellingTest({ cookies }) {
       <QuestionDiv>{wordList[currentNo].meaning}</QuestionDiv>
       <AnswerDiv>
         <CssTextField
+          onKeyUp={enterkey}
           value={answer}
           onChange={(e) => OnChangeInputHandler(e)}
           sx={{ m: 1, width: "65vw" }}

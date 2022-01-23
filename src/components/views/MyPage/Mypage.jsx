@@ -22,6 +22,7 @@ import { Button, IconButton, Input } from "@mui/material";
 export default function Mypage({ cookies, removeCookie }) {
   const [profile, setProfile] = useState("");
   const [loading, setLoading] = useState(true);
+  const [imgsubmit, setImgsubmit] = useState(false);
   const navigate = useNavigate();
   const profileImgInput = useRef();
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function Mypage({ cookies, removeCookie }) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [imgsubmit]);
 
   const onClickLogoutHandler = () => {
     if (window.confirm("정말 로그아웃하시겠습니까?")) {
@@ -61,11 +62,18 @@ export default function Mypage({ cookies, removeCookie }) {
     const formData = new FormData();
     console.log(e.target.files[0]);
     formData.append("profile_image", e.target.files[0]);
-    axios.patch("http://52.78.37.13/api/accounts/profile/", formData, {
-      headers: {
-        Authorization: cookies.token,
-      },
-    });
+    axios
+      .patch("http://52.78.37.13/api/accounts/profile/", formData, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      })
+      .then((res) => {
+        setImgsubmit(true);
+
+        alert("프로필 사진을 성공적으로 바꿨어요.");
+      })
+      .catch((err) => console.log(err));
   };
 
   if (loading) return <ProfileLottie />;
@@ -75,7 +83,7 @@ export default function Mypage({ cookies, removeCookie }) {
       <BackButton onClick={() => navigate(-1)}>
         <ArrowBackIosIcon />
       </BackButton>
-      <TopNav>{profile.nickname}'s page</TopNav>
+      <TopNav>설정</TopNav>
       <ImgDiv>
         <img
           className="profile"

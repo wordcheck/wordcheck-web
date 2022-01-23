@@ -43,6 +43,8 @@ export const ColorButton = muiStyled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(green[500]),
   textTransform: "none",
   backgroundColor: green[500],
+  boxShadow: "0.5vw 0.5vw 2vw lightgray",
+
   "&:hover": {
     backgroundColor: green[700],
   },

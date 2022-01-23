@@ -4,7 +4,9 @@ import styled from "styled-components";
 // card.jsx
 
 export const ContentDiv = styled.div`
-  font-size: 6vw;
+  @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 2em;
   padding: 1vw;
   padding-top: 0.8vh;
 `;
@@ -14,10 +16,14 @@ export const HeaderDiv = styled.div`
   padding: 1.2vh;
   padding-right: 1.6vh;
   padding-left: 1.6vh;
+  padding-bottom: 2vh;
+  padding-top: 3vh;
 `;
 
 //? wordList.jsx
 export const Container = styled.div`
+  @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
+  font-family: "Nanum Gothic", sans-serif;
   width: 100%;
   height: 100%;
   display: flex;
@@ -36,12 +42,19 @@ export const Carddiv = styled.div`
   display: flex;
   box-shadow: 1vw 1vw 3vw gray;
 `;
+export const WrongCountDiv = styled.div`
+  width: 5.5vw;
+  border-radius: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const IconDiv = styled.div`
   width: 20vw;
   display: flex;
-  .wrongIcon {
-  }
+  flex-direction: row;
+  justify-content: space-between;
 `;
 export const SpellingDiv = styled.div`
   width: 30vw;
@@ -72,6 +85,8 @@ export const TopNav = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.9em;
+  border-bottom: 1px solid lightgray;
   .wordscount {
     font-size: 0.8em;
   }
@@ -121,14 +136,18 @@ export const CardAddContainer = styled.div`
   height: 4vh;
   text-align: center;
   font-size: 0.7em;
-  background-color: #ffdb4d;
+  background-color: #4caf50;
   padding: 2vh;
-  margin-top: 2vw;
-  width: 35vh;
+  margin-top: 2vh;
   border-radius: 1.5vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 1.2vw 1.1vw 3.2vw gray;
+
+  :active {
+    background-color: #adebad;
+  }
 `;
 export const TitleDiv = styled.div`
   width: 84vw;
@@ -148,6 +167,7 @@ export const CardContainer = styled.div`
   margin-top: 2vh;
   font-size: 0.7em;
   border-radius: 1.5vh;
+  box-shadow: 1vw 1vw 3.2vw gray;
 `;
 
 export const Label = styled.div`
@@ -199,6 +219,8 @@ export const ImgDiv = styled.div`
   height: 20vh;
   border-radius: 70%;
   overflow: hidden;
+  margin-top: 3vh;
+  box-shadow: 1vw 1vw 3.2vw gray;
   .profile {
     width: 100%;
     height: 100%;
@@ -298,4 +320,46 @@ export const ButtonContainer = styled.div`
       }
     }
   }
+`;
+
+// home.jsx
+
+export const HomeImgDiv = styled.div`
+  width: 30vw;
+  height: 15vh;
+  border-radius: 70%;
+  overflow: hidden;
+  margin-top: 3vh;
+  box-shadow: 1.2vw 1.1vw 3.2vw gray;
+  .profile {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const UserInfoDiv = styled.div`
+  width: 100vw;
+  height: 15vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-bottom: 1px solid lightgray;
+
+  .username {
+    height: 7vh;
+    font-size: 1.3em;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 1vh;
+  }
+`;
+
+export const CategoryInfo = styled.div`
+  width: 100vw;
+  height: 2vh;
+  font-size: 1.2em;
+  padding-top: 6vw;
+  padding-left: 5vw;
 `;

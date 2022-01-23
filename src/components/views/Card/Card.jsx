@@ -12,10 +12,11 @@ import WordList from "./WordList";
 
 export default function Card({ cookies }) {
   const [wordlist, setWordlist] = useState([]);
+
   const [isDeleted, setIsDeleted] = useState(false);
   const [editId, setEditId] = useState("");
   const { contents } = useParams();
-  console.log("contents", contents);
+
   useEffect(() => {
     axios
       .get(`http://52.78.37.13/api/words/detail_list/?contents=${contents}`, {
@@ -35,15 +36,17 @@ export default function Card({ cookies }) {
     <Container>
       <HeaderDiv>
         <ContentDiv>{wordlist[0]?.contents}</ContentDiv>
-
         <Link
           to={`/testschoice`}
           state={{ wordlist }}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          <ColorButton>시험보기</ColorButton>
+          <ColorButton style={{ height: "100%", width: "18vw" }}>
+            시험보기
+          </ColorButton>
         </Link>
       </HeaderDiv>
+
       <WordList
         wordlist={wordlist}
         cookies={cookies}

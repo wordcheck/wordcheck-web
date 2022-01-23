@@ -36,15 +36,18 @@ export default function AllTestsChoice({ cookies }) {
           }
         )
         .then((res) => {
-          // wordlist.concat(res.data);
-          setWordlist(...wordlist);
+          let indata = res.data;
+          for (var i = 0; i < indata.length; i++) {
+            wordlist.push(indata[i]);
+            setWordlist(wordlist);
+          }
+          console.log("ff", wordlist);
         })
         .catch((error) => {
           console.log("err==>", error);
         });
     });
   }, []);
-  console.log("wordlist", wordlist);
 
   return (
     <Container>
@@ -60,7 +63,7 @@ export default function AllTestsChoice({ cookies }) {
         >
           <ButtonContainer>
             <div className="buttons">
-              <span>사지선다</span>
+              <span style={{ paddingBottom: "1vh" }}>사지선다</span>
               <div className="contentInfo">
                 문제를 읽고 올바른 정답을 선택하세요.
               </div>
@@ -77,7 +80,7 @@ export default function AllTestsChoice({ cookies }) {
         >
           <ButtonContainer>
             <div className="buttons">
-              <span>철자맞히기 </span>
+              <span style={{ paddingBottom: "1vh" }}>철자맞히기 </span>
               <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
             </div>
           </ButtonContainer>

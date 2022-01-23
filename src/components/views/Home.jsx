@@ -12,12 +12,12 @@ import QuizIcon from "@mui/icons-material/Quiz";
 import AddIcon from "@mui/icons-material/Add";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import StarIcon from "@mui/icons-material/Star";
+import { CategoryInfo, HomeImgDiv, UserInfoDiv } from "../style/WordStyle";
 
 // 로그인한 유저만 들어올 수 있음
 export default function Home({ cookies }) {
   const [cards, setCards] = useState([]);
-  const [wordEmpty, setWordEmpty] = useState(false);
-
+  const [profile, setProfile] = useState([]);
   useEffect(() => {
     axios
       .get("http://52.78.37.13/api/words/", {
@@ -27,12 +27,32 @@ export default function Home({ cookies }) {
       })
       .then((response) => {
         setCards(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
-        setWordEmpty(true);
       });
-  }, [cookies]);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .patch(
+        "http://52.78.37.13/api/accounts/profile/",
+        {},
+        {
+          headers: {
+            Authorization: cookies.token,
+          },
+        }
+      )
+      .then((response) => {
+        setProfile(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const CardList = cards.map((card, index) => (
     <Link
@@ -53,11 +73,14 @@ export default function Home({ cookies }) {
       <div
         style={{
           height: "6vh",
-          width: "90vw",
+          width: "100%",
           display: "flex",
           justifyContent: "space-between",
-          padding: "2.3vh",
-          paddingBottom: "1vh",
+          padding: "2.3vw",
+          paddingBottom: "2vh",
+          paddingTop: "2vh",
+          borderBottom: "1px solid lightgray",
+          boxShadow: "1vw 1vw 2vw lightgray",
         }}
       >
         <Logo>wordcheck</Logo>
@@ -70,8 +93,32 @@ export default function Home({ cookies }) {
           </ColorButton>
         </Link>
       </div>
-      {wordEmpty ? (
-        <div>단어를 추가해 주세요 </div>
+      <UserInfoDiv>
+        <HomeImgDiv>
+          <img
+            className="profile"
+            src={profile.profile_image}
+            alt="profilePicture"
+          />
+        </HomeImgDiv>
+        <div className="username">
+          안녕하세요
+          <span
+            style={{
+              fontWeight: 600,
+              paddingLeft: "1vw",
+              paddingRight: "1vw",
+              fontSize: "1.2em",
+            }}
+          >
+            {profile.nickname}
+          </span>
+          님
+        </div>
+      </UserInfoDiv>
+      <CategoryInfo>목록 확인하기</CategoryInfo>
+      {cards.length === 0 ? (
+        <EmptyWordDiv>단어를 추가해주세요 </EmptyWordDiv>
       ) : (
         <CardContainer>{CardList}</CardContainer>
       )}
@@ -82,6 +129,7 @@ export default function Home({ cookies }) {
           position: "fixed",
           bottom: "0",
           width: "100%",
+          borderTop: "1px solid lightgray",
         }}
       >
         <BottomNavigationAction
@@ -124,8 +172,10 @@ export default function Home({ cookies }) {
 }
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
+  font-family: "Nanum Gothic", sans-serif;
+  width: 100%;
+  height: 100%;
 `;
 const Logo = styled.div`
   font-size: 5vh;
@@ -133,15 +183,25 @@ const Logo = styled.div`
 `;
 
 const CardContainer = styled.div`
+  width: 100vw;
   display: flex;
   flex-direction: column;
   margin: 1vh;
 `;
 
 const Card = styled.div`
-  background-color: lightgray;
+  background-color: #85adad;
   padding: 2vh;
   margin: 1vh;
   border-radius: 1vh;
-  box-shadow: 1.2vw 1.2vw 3vw gray;
+  box-shadow: 1.2vw 1.1vw 3.2vw gray;
+`;
+const EmptyWordDiv = styled.div`
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  color: gray;
 `;

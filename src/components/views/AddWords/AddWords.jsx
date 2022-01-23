@@ -71,7 +71,7 @@ export default function AddWords({ cookies }) {
   const inputData = {
     spelling: "",
     meaning: "",
-    category: "",
+    category: "n",
   };
 
   const onChangeInputHandler = (e, index) => {
@@ -100,6 +100,7 @@ export default function AddWords({ cookies }) {
           value={contents}
           label="title"
           variant="standard"
+          style={{ width: "66vw" }}
         />
         <ColorButton
           onClick={() => {
