@@ -1,5 +1,12 @@
 import React from "react";
-import { Container } from "../../style/WordStyle";
+import {
+  Container,
+  Carddiv,
+  SpellingDiv,
+  CardDiv3,
+  CategoryList,
+  TitleDiv,
+} from "../../style/WordStyle";
 
 export default function Marks() {
   let marksList = JSON.parse(localStorage.getItem("marks"));
@@ -8,13 +15,15 @@ export default function Marks() {
 
   return (
     <Container>
+      <TitleDiv>Mark book</TitleDiv>
       {marksList.map((mark) => (
-        <div key={mark.id}>
-          {mark.contents}
-          {mark.spelling}
-          {mark.category}
+        <Carddiv key={mark.id}>
+          {/* {mark.contents} */}
+          <SpellingDiv> {mark.spelling}</SpellingDiv>
+          <CategoryList> {mark.category}</CategoryList>
+
           {mark.meaning}
-        </div>
+        </Carddiv>
       ))}
     </Container>
   );

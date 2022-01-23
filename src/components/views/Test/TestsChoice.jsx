@@ -32,7 +32,7 @@ export default function TestsChoice({ cookies }) {
         >
           <ButtonContainer>
             <div className="buttons">
-              <span>사지선다</span>
+              <span style={{ paddingBottom: "1vh" }}>사지선다</span>
               <div className="contentInfo">
                 문제를 읽고 올바른 정답을 선택하세요.
               </div>
@@ -49,8 +49,8 @@ export default function TestsChoice({ cookies }) {
         >
           <ButtonContainer>
             <div className="buttons">
-              <span>철자맞히기 </span>
-              <div className="contentInfo">단어의 철자를 직접 선택하세요.</div>
+              <span style={{ paddingBottom: "1vh" }}>철자맞히기 </span>
+              <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
             </div>
           </ButtonContainer>
         </Link>

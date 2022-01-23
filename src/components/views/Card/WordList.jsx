@@ -39,7 +39,7 @@ export default function WordList({
       category: "",
     },
   ]);
-  const [marksId, setMarksId] = useState(
+  const [marks, setMarks] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
 
@@ -102,17 +102,22 @@ export default function WordList({
     setIsDeleted(false);
   };
 
-  const onClickMarkButtonHandler = (id) => {
-    let beforeId = [...marksId];
-    beforeId.push(id);
-    console.log(beforeId);
-    setMarksId(beforeId);
+  const onClickMarkButtonHandler = (info) => {
+    let beforeInfo = [...marks];
+    if (JSON.stringify(marks).includes(JSON.stringify(info))) {
+      const idx = beforeInfo.indexOf(info);
+      beforeInfo.splice(idx, 1);
+    } else {
+      beforeInfo.push(info);
+    }
+    setMarks(beforeInfo);
   };
 
   useEffect(() => {
-    window.localStorage.setItem("marks", JSON.stringify(marksId));
-  }, [marksId]);
+    window.localStorage.setItem("marks", JSON.stringify(marks));
+  }, [marks]);
 
+  console.log("marks", marks);
   const WrongCountIcon = (wrong) => {
     console.log(wrong);
     if (wrong === 0) {
@@ -167,7 +172,7 @@ export default function WordList({
             <>
               <IconDiv>
                 <span className="wrongIcon">
-                  {word.id ? (
+                  {JSON.stringify(marks)?.includes(JSON.stringify(word)) ? (
                     <StarIcon
                       onClick={() => onClickMarkButtonHandler(word)}
                       sx={{ color: yellow[600] }}

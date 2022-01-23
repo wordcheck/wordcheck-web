@@ -12,6 +12,7 @@ import MultipleChoice from "./components/views/Test/MultipleChoice";
 import SpellSpelling from "./components/views/Test/SpellSpelling";
 import AllTestsChoice from "./components/views/Test/AllTestsChoice";
 import Marks from "./components/views/Marks/Marks";
+import NicknameChange from "./components/views/MyPage/NicknameChange";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
@@ -52,6 +53,12 @@ function App() {
             <Route
               path="/mypage"
               element={<Mypage cookies={cookies} removeCookie={removeCookie} />}
+            />
+            <Route
+              path="/mypage/nicknamechange"
+              element={
+                <NicknameChange cookies={cookies} removeCookie={removeCookie} />
+              }
             />
             <Route path="*" element={<NotFound />} />
           </>

@@ -41,6 +41,7 @@ export const CssTextField = muiStyled(TextField)({
 
 export const ColorButton = muiStyled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(green[500]),
+  textTransform: "none",
   backgroundColor: green[500],
   "&:hover": {
     backgroundColor: green[700],

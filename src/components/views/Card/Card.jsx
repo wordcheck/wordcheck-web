@@ -15,7 +15,7 @@ export default function Card({ cookies }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [editId, setEditId] = useState("");
   const { contents } = useParams();
-
+  console.log("contents", contents);
   useEffect(() => {
     axios
       .get(`http://52.78.37.13/api/words/detail_list/?contents=${contents}`, {

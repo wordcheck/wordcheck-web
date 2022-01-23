@@ -18,8 +18,8 @@ export const HeaderDiv = styled.div`
 
 //? wordList.jsx
 export const Container = styled.div`
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,6 +34,7 @@ export const Carddiv = styled.div`
   border-radius: 1vh;
   font-size: 0.7em;
   display: flex;
+  box-shadow: 1vw 1vw 3vw gray;
 `;
 
 export const IconDiv = styled.div`
@@ -193,6 +194,71 @@ export const NameDiv = styled.div`
   margin-bottom: 2vh;
 `;
 
+export const ImgDiv = styled.div`
+  width: 40vw;
+  height: 20vh;
+  border-radius: 70%;
+  overflow: hidden;
+  .profile {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const UserDiv = styled.div`
+  width: 88vw;
+  height: 10vh;
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const AccountSettingDiv = styled.div`
+  width: 100vw;
+  .info {
+    padding-top: 5vh;
+    padding-left: 4vw;
+  }
+`;
+
+export const AccountSettingDiv2 = styled.div`
+  width: 100vw;
+  height: 6vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.64em;
+  border-bottom: 1px solid lightgray;
+  padding: 1vh;
+  padding-left: 5vw;
+  :active {
+    background-color: lightgray;
+  }
+`;
+
+export const FootDiv = styled.div`
+  position: absolute;
+  bottom: 2vh;
+  width: 100%;
+  text-align: center;
+  font-size: 0.7em;
+`;
+
+//NicknameChange.jsx
+export const NicknameChangeFormDiv = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+`;
+export const NicknameChangeInfo = styled.div`
+  width: 100vw;
+  margin-top: 4vh;
+  padding-left: 5vw;
+  padding-bottom: 1vh;
+  text-align: left;
+  font-size: 0.7em;
+`;
+
 // BeforeTest.jsx
 
 export const TestContentDiv = styled.div`
@@ -202,9 +268,12 @@ export const TestContentDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 0.64em;
-  /* border: 1px solid gray; */
+  border-bottom: 1px solid lightgray;
   padding: 1vh;
   padding-left: 5vw;
+  :active {
+    background-color: lightgray;
+  }
 `;
 
 export const ButtonContainer = styled.div`

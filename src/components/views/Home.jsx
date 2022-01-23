@@ -43,13 +43,10 @@ export default function Home({ cookies }) {
       <Card key={index}>{card.contents}</Card>
     </Link>
   ));
-  console.log(cards);
+
   if (!cookies.token) {
     return <Navigate to="/login" />;
   }
-  // const Hello() => {
-
-  // }
 
   return (
     <Container>
@@ -91,7 +88,8 @@ export default function Home({ cookies }) {
           label="test all"
           icon={
             <Link
-              to="/testschoice"
+              to="/alltestchoice"
+              state={{ cards }}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <QuizIcon />
@@ -142,7 +140,8 @@ const CardContainer = styled.div`
 
 const Card = styled.div`
   background-color: lightgray;
-  padding: 1vh;
+  padding: 2vh;
   margin: 1vh;
   border-radius: 1vh;
+  box-shadow: 1.2vw 1.2vw 3vw gray;
 `;

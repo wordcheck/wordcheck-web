@@ -15,24 +15,36 @@ import WordList from "../Card/WordList";
 
 export default function AllTestsChoice({ cookies }) {
   const [wordlist, setWordlist] = useState([]);
+  const location = useLocation();
   const navigate = useNavigate();
   // Link에서 가져온 wordList
+  const contents = location?.state?.cards;
+  let data = [];
 
   useEffect(() => {
-    axios
-      .get(`http://52.78.37.13/api/words/detail_list/`, {
-        headers: {
-          Authorization: cookies.token,
-        },
-      })
-      .then((response) => {
-        setWordlist(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    contents.map((contents) => {
+      // const formData = new FormData();
+      // formData.append("contents", contents);
+      console.log(contents.contents);
+      axios
+        .get(
+          `http://52.78.37.13/api/words/detail_list/?contents=${contents.contents}`,
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        )
+        .then((res) => {
+          // wordlist.concat(res.data);
+          setWordlist(...wordlist);
+        })
+        .catch((error) => {
+          console.log("err==>", error);
+        });
+    });
   }, []);
-  console.log(wordlist);
+  console.log("wordlist", wordlist);
 
   return (
     <Container>
