@@ -23,6 +23,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import StarIcon from "@mui/icons-material/Star";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import WordSearch from "./components/views/WordSearch/WordSearch";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
@@ -65,6 +66,12 @@ function App() {
             <Route
               path="/spellspelling/:contents"
               element={<SpellSpelling cookies={cookies} />}
+            />
+            <Route
+              path="/wordsearch"
+              element={
+                <WordSearch cookies={cookies} removeCookie={removeCookie} />
+              }
             />
             <Route
               path="/mypage"
@@ -126,7 +133,7 @@ function App() {
             // label="search"
             icon={
               <Link
-                to="/"
+                to="/wordsearch"
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 <SearchIcon />

@@ -199,7 +199,7 @@ export const MultipleChoiceDiv = styled.div`
 //  Addword.jsx의 styledcomponent
 
 export const CardAddContainer = styled.div`
-  width: 80vw;
+  width: 74vw;
   height: 4vh;
   text-align: center;
   font-size: 0.7em;
@@ -210,31 +210,30 @@ export const CardAddContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 1.2vw 1.1vw 3.2vw gray;
 
   :active {
     background-color: #adebad;
   }
 `;
 export const TitleDiv = styled.div`
-  width: 84vw;
+  width: 88vw;
   height: 5.5vh;
   display: flex;
   justify-content: space-between;
   padding-top: 2.2vh;
+  padding-bottom: 1vh;
 `;
 
 // AddWordForm.jsx 의 styled-container
 // add card
 export const CardContainer = styled.div`
-  width: 80vw;
+  width: 74vw;
   height: 15vh;
   background-color: lightgray;
   padding: 2vh;
   margin-top: 2vh;
   font-size: 0.7em;
   border-radius: 1.5vh;
-  box-shadow: 1vw 1vw 3.2vw gray;
 `;
 
 export const Label = styled.div`

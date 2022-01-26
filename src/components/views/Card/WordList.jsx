@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
@@ -21,7 +20,7 @@ import {
   WordCardRightDiv,
 } from "../../style/WordStyle";
 import StarIcon from "@mui/icons-material/Star";
-import { grey, red, yellow } from "@mui/material/colors";
+import { grey, yellow } from "@mui/material/colors";
 import { useEffect } from "react";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useSpeechSynthesis } from "react-speech-kit";
@@ -54,7 +53,6 @@ export default function WordList({
       [name]: value,
     });
   };
-  console.log("json", JSON.parse(localStorage.getItem("marks")));
 
   const onClickModificatedButtonHandler = () => {
     axios
