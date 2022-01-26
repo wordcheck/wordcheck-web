@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Card from "./components/views/Card/Card";
 import AddWords from "./components/views/AddWords/AddWords";
 import Home from "./components/views/Home";
@@ -13,16 +13,32 @@ import SpellSpelling from "./components/views/Test/SpellSpelling";
 import AllTestsChoice from "./components/views/Test/AllTestsChoice";
 import Marks from "./components/views/Marks/Marks";
 import NicknameChange from "./components/views/MyPage/NicknameChange";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
+import QuizIcon from "@mui/icons-material/Quiz";
+import AddIcon from "@mui/icons-material/Add";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import StarIcon from "@mui/icons-material/Star";
+import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
+  const [cards, setCards] = useState([]);
 
   return (
     <div>
       <Router>
         <Routes>
           <>
-            <Route path="/" element={<Home cookies={cookies} />} />
+            <Route
+              path="/"
+              element={
+                <Home cookies={cookies} cards={cards} setCards={setCards} />
+              }
+            />
             <Route
               path="/login"
               element={<LoginPage setCookie={setCookie} />}
@@ -63,6 +79,72 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </>
         </Routes>
+        <BottomNavigation
+          showLabels
+          style={{
+            position: "fixed",
+            bottom: "0",
+            width: "100%",
+            borderTop: "1px solid lightgray",
+          }}
+        >
+          <BottomNavigationAction
+            // label="test all"
+            icon={
+              <Link
+                to="/alltestchoice"
+                state={{ cards }}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <QuizIcon />
+              </Link>
+            }
+          />
+          <BottomNavigationAction
+            // label="add words"
+            icon={
+              <Link
+                to="/addwords"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <AddIcon />
+              </Link>
+            }
+          />
+          <BottomNavigationAction
+            // label="home"
+            icon={
+              <Link
+                to="/"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <HomeIcon />
+              </Link>
+            }
+          />
+          <BottomNavigationAction
+            // label="search"
+            icon={
+              <Link
+                to="/"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <SearchIcon />
+              </Link>
+            }
+          />
+          <BottomNavigationAction
+            // label="marks"
+            icon={
+              <Link
+                to="/marks"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <StarIcon />
+              </Link>
+            }
+          />
+        </BottomNavigation>
       </Router>
     </div>
   );

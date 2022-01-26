@@ -10,22 +10,21 @@ import {
   Container,
   Carddiv,
   CardDiv2,
-  Spellingdiv,
   CategoryList,
-  CardDiv3,
-  IconDiv,
+  MeaningDiv,
   SpellingDiv,
   WrongCountDiv,
+  StarIconDiv,
+  SpellingVolumeUpDiv,
+  CategoryMeaningDiv,
+  EditDeleteIconDiv,
+  WordCardRightDiv,
 } from "../../style/WordStyle";
-import CircleIcon from "@mui/icons-material/Circle";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
-import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import StarIcon from "@mui/icons-material/Star";
 import { grey, red, yellow } from "@mui/material/colors";
 import { useEffect } from "react";
-
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import { useSpeechSynthesis } from "react-speech-kit";
 export default function WordList({
   wordlist,
   cookies,
@@ -43,6 +42,7 @@ export default function WordList({
   const [marks, setMarks] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
+  const { speak } = useSpeechSynthesis();
 
   const { spelling, meaning, category } = editedInputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
@@ -54,6 +54,7 @@ export default function WordList({
       [name]: value,
     });
   };
+  console.log("json", JSON.parse(localStorage.getItem("marks")));
 
   const onClickModificatedButtonHandler = () => {
     axios
@@ -118,36 +119,13 @@ export default function WordList({
     window.localStorage.setItem("marks", JSON.stringify(marks));
   }, [marks]);
 
-  const WrongCountIcon = (wrong) => {
-    console.log(wrong);
-    if (wrong === 0) {
-      return (
-        <WrongCountDiv style={{ backgroundColor: "#00b300" }}>
-          {wrong}
-        </WrongCountDiv>
-      );
-    } else if ((wrong >= 1) & (wrong <= 3)) {
-      return (
-        <WrongCountDiv style={{ backgroundColor: "#ffc61a" }}>
-          {wrong}
-        </WrongCountDiv>
-      );
-    } else if (wrong > 3) {
-      return (
-        <WrongCountDiv style={{ backgroundColor: "#ff471a" }}>
-          {wrong}
-        </WrongCountDiv>
-      );
-    }
-  };
-
   return (
     <Container>
       {wordlist.map((word) => (
         <Carddiv key={word.id}>
           {word.id === editId ? (
             <>
-              <IconDiv>
+              <div>
                 <Input
                   name="spelling"
                   value={spelling}
@@ -155,7 +133,7 @@ export default function WordList({
                   color="secondary"
                   defaultValue={word.spelling}
                 ></Input>
-              </IconDiv>
+              </div>
               <CardDiv2>
                 <div>
                   <NativeSelect
@@ -182,39 +160,44 @@ export default function WordList({
             </>
           ) : (
             <>
-              <IconDiv>
-                {JSON.stringify(marks)?.includes(JSON.stringify(word)) ? (
-                  <StarIcon
-                    onClick={() => onClickMarkButtonHandler(word)}
-                    sx={{ color: yellow[600] }}
-                  />
-                ) : (
-                  <StarIcon
-                    onClick={() => onClickMarkButtonHandler(word)}
-                    sx={{ color: grey[500] }}
-                  />
-                )}
-                {/* <WrongCountDiv> {word.wrong_count}</WrongCountDiv> */}
+              <div>
+                <WrongCountDiv>틀린횟수 :{word.wrong_count}</WrongCountDiv>
+                <SpellingVolumeUpDiv>
+                  <SpellingDiv>{word.spelling}</SpellingDiv>
 
-                {WrongCountIcon(word.wrong_count)}
-              </IconDiv>
-              <SpellingDiv>{word.spelling}</SpellingDiv>
-              <CardDiv2>
-                <CategoryList>{word.category}</CategoryList>
-                <CardDiv3>
-                  <div> {word.meaning}</div>
-                  <div>
-                    <EditIcon
-                      onClick={() => onClickEditButtonHandler(word.id)}
+                  <VolumeUpIcon
+                    sx={{ height: "2.5vh" }}
+                    onClick={() => speak({ text: word.spelling })}
+                  />
+                </SpellingVolumeUpDiv>
+                <CategoryMeaningDiv>
+                  <CategoryList>{word.category}.</CategoryList>
+                  <MeaningDiv> {word.meaning}</MeaningDiv>
+                </CategoryMeaningDiv>
+              </div>
+              <WordCardRightDiv>
+                <StarIconDiv>
+                  {JSON.stringify(marks)?.includes(JSON.stringify(word)) ? (
+                    <StarIcon
+                      onClick={() => onClickMarkButtonHandler(word)}
+                      sx={{ color: yellow[600] }}
                     />
-                    <DeleteIcon
-                      onClick={() => {
-                        onClickDeleteButtonHandler(word.id);
-                      }}
+                  ) : (
+                    <StarIcon
+                      onClick={() => onClickMarkButtonHandler(word)}
+                      sx={{ color: grey[500] }}
                     />
-                  </div>
-                </CardDiv3>
-              </CardDiv2>
+                  )}
+                </StarIconDiv>
+                <EditDeleteIconDiv>
+                  <EditIcon onClick={() => onClickEditButtonHandler(word.id)} />
+                  <DeleteIcon
+                    onClick={() => {
+                      onClickDeleteButtonHandler(word.id);
+                    }}
+                  />
+                </EditDeleteIconDiv>
+              </WordCardRightDiv>
             </>
           )}
         </Carddiv>

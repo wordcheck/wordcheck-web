@@ -1,5 +1,48 @@
 import styled from "styled-components";
-//
+
+//home.jsx
+export const WordListContainer = styled.div`
+  width: 85vw;
+`;
+
+export const WordListDiv = styled.div`
+  background-color: #e6e6e6;
+  /* border: 2px solid lightgray; */
+  border-radius: 1vh;
+  padding: 1.7vh;
+  margin-bottom: 2vh;
+  font-size: 0.6em;
+`;
+
+export const TopLogoMypageContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2.5vh;
+  padding-bottom: 4vh;
+`;
+
+export const Logo = styled.div`
+  font-size: 5vh;
+  font-weight: bolder;
+`;
+
+// 단어 리스트가 없을 때
+export const EmptyWordDiv = styled.div`
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+`;
+export const CategoryInfo = styled.div`
+  width: 100vw;
+  height: 2vh;
+  font-size: 1.2em;
+  padding-top: 6vw;
+  padding-left: 5vw;
+`;
 
 // card.jsx
 
@@ -33,50 +76,74 @@ export const Container = styled.div`
 `;
 
 export const Carddiv = styled.div`
-  width: 80vw;
+  width: 75vw;
+  height: 10vh;
   background-color: lightgray;
   padding: 1.5vh;
   margin-top: 1.8vh;
   border-radius: 1vh;
   font-size: 0.7em;
   display: flex;
-  box-shadow: 1vw 1vw 3vw gray;
-`;
-export const WrongCountDiv = styled.div`
-  width: 5.5vw;
-  border-radius: 70%;
+  /* box-shadow: 0.5vw 0.5vw 2vw gray; */
+  /* border: 1px solid lightgray; */
   display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const IconDiv = styled.div`
-  width: 20vw;
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
+export const WrongCountDiv = styled.div`
+  font-size: 0.6em;
+  color: gray;
+`;
+export const SpellingVolumeUpDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 0.2vh;
+`;
+
+export const StarIconDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+`;
 export const SpellingDiv = styled.div`
-  width: 30vw;
-  padding-left: 3vw;
+  font-weight: 700;
+  display: flex;
+  font-size: 1.2em;
+  padding-right: 1vw;
+`;
+export const CategoryMeaningDiv = styled.div`
+  padding-top: 0.4vh;
+  padding-left: 1vw;
+  display: flex;
+  font-size: 0.9em;
+  color: gray;
 `;
 
 export const CategoryList = styled.div`
-  padding-left: 2vw;
-  width: 11vw;
+  padding-right: 0.8vw;
 `;
+export const MeaningDiv = styled.div``;
+
+// export const WordCardLeftDiv = styled.div`
+//   display: flex;
+//   width: 20vw;
+// `;
+export const WordCardRightDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+export const IconDiv = styled.div`
+  display: flex;
+  justify-content: row;
+  justify-items: right;
+`;
+
 export const CardDiv2 = styled.div`
   width: 100%;
   display: flex;
   /* justify-content: space-between; */
 `;
-export const CardDiv3 = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: space-between;
-`;
+export const EditDeleteIconDiv = styled.div``;
 
 // test.jsx의 styled components
 export const TopNav = styled.div`
@@ -158,7 +225,7 @@ export const TitleDiv = styled.div`
 `;
 
 // AddWordForm.jsx 의 styled-container
-
+// add card
 export const CardContainer = styled.div`
   width: 80vw;
   height: 15vh;
@@ -354,12 +421,4 @@ export const UserInfoDiv = styled.div`
     align-items: flex-end;
     padding-bottom: 1vh;
   }
-`;
-
-export const CategoryInfo = styled.div`
-  width: 100vw;
-  height: 2vh;
-  font-size: 1.2em;
-  padding-top: 6vw;
-  padding-left: 5vw;
 `;

@@ -41,8 +41,8 @@ export default function Card({ cookies }) {
           state={{ wordlist }}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          <ColorButton style={{ height: "100%", width: "18vw" }}>
-            시험보기
+          <ColorButton style={{ height: "100%", width: "28vw" }}>
+            그룹 테스트
           </ColorButton>
         </Link>
       </HeaderDiv>
