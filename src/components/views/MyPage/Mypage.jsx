@@ -9,6 +9,7 @@ import {
   ImgDiv,
   NameDiv,
   TopNav,
+  UserDataDiv,
   UserDiv,
 } from "../../style/WordStyle";
 
@@ -100,6 +101,12 @@ export default function Mypage({ cookies, removeCookie }) {
           Sign out
         </ColorButton>
       </UserDiv>
+      <UserDataDiv>
+        <div>지금까지 총 틀린 단어횟수는 5회입니다.</div>
+        <div>Tip:시험을 통해 틀린횟수를 줄여보세요!</div>
+        <div>제일 많이 틀린 단어 top 3 : word, hello, bye</div>
+      </UserDataDiv>
+
       <AccountSettingDiv>
         <div className="info">Account Settings</div>
         <Link

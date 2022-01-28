@@ -58,7 +58,7 @@ function App() {
             />
             <Route
               path="/alltestchoice"
-              element={<AllTestsChoice cookies={cookies} />}
+              element={<AllTestsChoice cookies={cookies} cards={cards} />}
             />
             <Route
               path="/multiplechoice/:contents"
@@ -70,9 +70,7 @@ function App() {
             />
             <Route
               path="/wordsearch"
-              element={
-                <WordSearch cookies={cookies} removeCookie={removeCookie} />
-              }
+              element={<WordSearch cookies={cookies} cards={cards} />}
             />
             <Route
               path="/mypage"

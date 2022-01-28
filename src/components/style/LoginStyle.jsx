@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { NoEncryptionTwoTone } from "@mui/icons-material";
 
 export const CssTextField = muiStyled(TextField)({
+  zIndex: "0",
   "& label.Mui-focused": {
     color: "green",
   },

@@ -13,8 +13,11 @@ import {
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import TestEnd from "./TestEnd";
+import Modal from "./Modal";
 
 export default function SpellSpellingTest({ cookies }) {
+  const [isTrueAnswer, setIsTrueAnswer] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [currentNo, setCurrentNo] = useState(0);
   const [wrongWords, setWrongWords] = useState([]);
   const [answer, setAnswer] = useState("");
@@ -39,7 +42,8 @@ export default function SpellSpellingTest({ cookies }) {
         )
         .then((response) => console.log(response));
       console.log("correct");
-
+      setModalOpen(true);
+      setIsTrueAnswer(true);
       setCurrentNo(currentNo + 1);
       setAnswer("");
     } else {
@@ -64,6 +68,7 @@ export default function SpellSpellingTest({ cookies }) {
           };
           lastWrongWords.push(nextWrongWords);
           setWrongWords(lastWrongWords);
+          setIsTrueAnswer(false);
         })
         .catch((error) => {
           console.log("err===>", error);
@@ -81,6 +86,7 @@ export default function SpellSpellingTest({ cookies }) {
     }
   }
 
+  console.log("modalOpen", modalOpen);
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
   }
@@ -106,10 +112,19 @@ export default function SpellSpellingTest({ cookies }) {
           autoComplete="off"
           // variant="standard"
         />
-        <ColorButton onClick={() => onClickMultipleChoiceButtonHandler()}>
+        <ColorButton
+          onClick={() => {
+            setModalOpen(true);
+            onClickMultipleChoiceButtonHandler();
+          }}
+        >
           제출
         </ColorButton>
       </AnswerDiv>
+      {/* <Modal /> */}
+      {modalOpen && (
+        <Modal setOpenModal={setModalOpen} isTrueAnswer={isTrueAnswer} />
+      )}
     </Container>
   );
 }

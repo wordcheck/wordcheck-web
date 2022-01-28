@@ -382,6 +382,9 @@ export const AccountSettingDiv2 = styled.div`
     background-color: lightgray;
   }
 `;
+export const UserDataDiv = styled.div`
+  font-size: 0.7em;
+`;
 
 export const FootDiv = styled.div`
   position: absolute;
@@ -393,7 +396,9 @@ export const FootDiv = styled.div`
 
 //NicknameChange.jsx
 export const NicknameChangeFormDiv = styled.div`
-  width: 100vw;
+  width: 90vw;
+  padding-top: 3vh;
+
   display: flex;
   justify-content: space-around;
 `;
@@ -491,4 +496,28 @@ export const EmptyMarkDiv = styled.div`
   justify-content: center;
   align-items: center;
   color: gray;
+`;
+// modal.jsx
+
+export const ModalBackground = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.5);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModalContainer = styled.div`
+  width: 75vw;
+  height: 40vh;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 4vw;
+  z-index: 3;
+  font-size: 0.7em;
 `;

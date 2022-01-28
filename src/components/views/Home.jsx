@@ -19,7 +19,7 @@ import {
 } from "../style/WordStyle";
 
 export default function Home({ cookies, setCards, cards }) {
-  const [profile, setProfile] = useState([]);
+  // const [profile, setProfile] = useState([]);
 
   useEffect(() => {
     axios
@@ -37,25 +37,26 @@ export default function Home({ cookies, setCards, cards }) {
       });
   }, []);
 
-  useEffect(() => {
-    axios
-      .patch(
-        "http://52.78.37.13/api/accounts/profile/",
-        {},
-        {
-          headers: {
-            Authorization: cookies.token,
-          },
-        }
-      )
-      .then((response) => {
-        setProfile(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .patch(
+  //       "http://52.78.37.13/api/accounts/profile/",
+  //       {},
+  //       {
+  //         headers: {
+  //           Authorization: cookies.token,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       setProfile(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  // console.log("profile", profile);
 
   const CardList = cards.map((card, index) => (
     <HomeCardLink

@@ -13,13 +13,13 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import WordList from "../Card/WordList";
 
-export default function AllTestsChoice({ cookies }) {
+export default function AllTestsChoice({ cookies, cards }) {
   const [wordlist, setWordlist] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
-  // Link에서 가져온 wordList
-  const contents = location?.state?.cards;
-  let data = [];
+  // Link에서 가져온 profile
+  const contents = cards;
+  console.log("cards", cards);
 
   useEffect(() => {
     contents.map((contents) => {
