@@ -24,6 +24,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import WordSearch from "./components/views/WordSearch/WordSearch";
+import { StyledBottomNavigation } from "./components/style/WordStyle";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
@@ -86,12 +87,11 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </>
         </Routes>
-        <BottomNavigation
+        <StyledBottomNavigation
           showLabels
           style={{
             position: "fixed",
             bottom: "0",
-            width: "100%",
             borderTop: "1px solid lightgray",
           }}
         >
@@ -151,7 +151,7 @@ function App() {
               </Link>
             }
           />
-        </BottomNavigation>
+        </StyledBottomNavigation>
       </Router>
     </div>
   );

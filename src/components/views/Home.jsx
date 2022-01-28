@@ -10,6 +10,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import {
   Container,
   EmptyWordDiv,
+  HomeCardLink,
+  HomeCardListContainer,
   Logo,
   TopLogoMypageContainer,
   WordListContainer,
@@ -56,13 +58,13 @@ export default function Home({ cookies, setCards, cards }) {
   }, []);
 
   const CardList = cards.map((card, index) => (
-    <Link
+    <HomeCardLink
       key={card.contents}
       to={`/card/${card.contents}`}
       style={{ textDecoration: "none", color: "black" }}
     >
       <WordListDiv key={index}>{card.contents}</WordListDiv>
-    </Link>
+    </HomeCardLink>
   ));
 
   if (!cookies.token) {
@@ -84,7 +86,7 @@ export default function Home({ cookies, setCards, cards }) {
       </TopLogoMypageContainer>
 
       {cards.length === 0 ? (
-        <EmptyWordDiv>단어를 추가해주세요 </EmptyWordDiv>
+        <EmptyWordDiv> 단어를 추가해주세요 </EmptyWordDiv>
       ) : (
         <WordListContainer>{CardList}</WordListContainer>
       )}

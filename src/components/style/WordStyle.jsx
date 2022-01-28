@@ -1,17 +1,48 @@
+import { BottomNavigation } from "@mui/material";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+//app.jsx
+export const StyledBottomNavigation = styled(BottomNavigation)`
+  width: 100%;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
+`;
 
 //home.jsx
 export const WordListContainer = styled.div`
   width: 85vw;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
+`;
+export const HomeCardListContainer = styled.div`
+  width: 85vw;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
+`;
+export const HomeCardLink = styled(Link)`
+  width: 85vw;
+  display: flex;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
 `;
 
 export const WordListDiv = styled.div`
+  position: relative;
+  width: 85vw;
   background-color: #e6e6e6;
   /* border: 2px solid lightgray; */
   border-radius: 1vh;
   padding: 1.7vh;
   margin-bottom: 2vh;
   font-size: 0.6em;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
 `;
 
 export const TopLogoMypageContainer = styled.div`
@@ -20,6 +51,9 @@ export const TopLogoMypageContainer = styled.div`
   justify-content: space-around;
   padding-top: 2.5vh;
   padding-bottom: 4vh;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
 `;
 
 export const Logo = styled.div`
@@ -35,6 +69,9 @@ export const EmptyWordDiv = styled.div`
   justify-content: center;
   align-items: center;
   color: gray;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
 `;
 export const CategoryInfo = styled.div`
   width: 100vw;
@@ -42,6 +79,9 @@ export const CategoryInfo = styled.div`
   font-size: 1.2em;
   padding-top: 6vw;
   padding-left: 5vw;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
 `;
 
 // card.jsx
@@ -49,30 +89,39 @@ export const CategoryInfo = styled.div`
 export const ContentDiv = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
   font-family: "Nanum Gothic", sans-serif;
-  font-size: 2em;
+  font-size: 1.2em;
   padding: 1vw;
   padding-top: 0.8vh;
 `;
 export const HeaderDiv = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 1.2vh;
   padding-right: 1.6vh;
   padding-left: 1.6vh;
   padding-bottom: 2vh;
   padding-top: 3vh;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
 `;
 
 //? wordList.jsx
 export const Container = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
   font-family: "Nanum Gothic", sans-serif;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 1.7em;
+
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+    font-size: 3vw;
+  }
 `;
 
 export const Carddiv = styled.div`
@@ -83,11 +132,14 @@ export const Carddiv = styled.div`
   margin-top: 1.8vh;
   border-radius: 1vh;
   font-size: 0.7em;
-  display: flex;
+
   /* box-shadow: 0.5vw 0.5vw 2vw gray; */
   /* border: 1px solid lightgray; */
   display: flex;
   justify-content: space-between;
+  @media only screen and (min-width: 750px) {
+    width: 562.5px;
+  }
 `;
 export const WrongCountDiv = styled.div`
   font-size: 0.6em;
@@ -142,6 +194,9 @@ export const CardDiv2 = styled.div`
   width: 100%;
   display: flex;
   /* justify-content: space-between; */
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
 `;
 export const EditDeleteIconDiv = styled.div``;
 
@@ -156,6 +211,9 @@ export const TopNav = styled.div`
   border-bottom: 1px solid lightgray;
   .wordscount {
     font-size: 0.8em;
+  }
+  @media only screen and (min-width: 750px) {
+    width: 750px;
   }
 `;
 export const BackButton = styled.div`
@@ -303,6 +361,7 @@ export const UserDiv = styled.div`
 `;
 export const AccountSettingDiv = styled.div`
   width: 100vw;
+
   .info {
     padding-top: 5vh;
     padding-left: 4vw;
@@ -339,7 +398,7 @@ export const NicknameChangeFormDiv = styled.div`
   justify-content: space-around;
 `;
 export const NicknameChangeInfo = styled.div`
-  width: 100vw;
+  width: 90vw;
   margin-top: 4vh;
   padding-left: 5vw;
   padding-bottom: 1vh;
@@ -420,4 +479,16 @@ export const UserInfoDiv = styled.div`
     align-items: flex-end;
     padding-bottom: 1vh;
   }
+`;
+// Marks.jsx
+
+export const EmptyMarkDiv = styled.div`
+  width: 80vw;
+  height: 70vh;
+  font-size: 0.7em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
 `;

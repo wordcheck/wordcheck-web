@@ -10,6 +10,8 @@ import {
   CategoryMeaningDiv,
   MeaningDiv,
   WordCardRightDiv,
+  EmptyWordDiv,
+  EmptyMarkDiv,
 } from "../../style/WordStyle";
 import StarIcon from "@mui/icons-material/Star";
 import { yellow } from "@mui/material/colors";
@@ -33,37 +35,48 @@ export default function Marks() {
     console.log("del", beforeMark);
     setMarksList(beforeMark);
   };
+  console.log(marksList.length == true);
 
   return (
     <Container>
       <TitleDiv>Mark book</TitleDiv>
-      {marksList?.map((mark) => (
-        <>
-          <Carddiv>
-            <div>
-              <WrongCountDiv>틀린횟수 :{mark.wrong_count}</WrongCountDiv>
-              <SpellingVolumeUpDiv>
-                <SpellingDiv>{mark.spelling}</SpellingDiv>
+      {marksList.length ? (
+        marksList?.map((mark) => (
+          <>
+            <Carddiv>
+              <div>
+                <WrongCountDiv>틀린횟수 :{mark.wrong_count}</WrongCountDiv>
+                <SpellingVolumeUpDiv>
+                  <SpellingDiv>{mark.spelling}</SpellingDiv>
 
-                <VolumeUpIcon
-                  sx={{ height: "2.5vh" }}
-                  onClick={() => speak({ text: mark.spelling })}
+                  <VolumeUpIcon
+                    sx={{ height: "2.5vh" }}
+                    onClick={() => speak({ text: mark.spelling })}
+                  />
+                </SpellingVolumeUpDiv>
+                <CategoryMeaningDiv>
+                  <CategoryList>{mark.category}.</CategoryList>
+                  <MeaningDiv> {mark.meaning}</MeaningDiv>
+                </CategoryMeaningDiv>
+              </div>
+              <WordCardRightDiv>
+                <StarIcon
+                  onClick={() => onClickMarkButtonHandler(mark)}
+                  sx={{ color: yellow[600] }}
                 />
-              </SpellingVolumeUpDiv>
-              <CategoryMeaningDiv>
-                <CategoryList>{mark.category}.</CategoryList>
-                <MeaningDiv> {mark.meaning}</MeaningDiv>
-              </CategoryMeaningDiv>
-            </div>
-            <WordCardRightDiv>
-              <StarIcon
-                onClick={() => onClickMarkButtonHandler(mark)}
-                sx={{ color: yellow[600] }}
-              />
-            </WordCardRightDiv>
-          </Carddiv>
-        </>
-      ))}
+              </WordCardRightDiv>
+            </Carddiv>
+          </>
+        ))
+      ) : (
+        <EmptyMarkDiv>
+          <div>마크를 표시한 단어가 없어요.</div>
+          <div>
+            <StarIcon sx={{ color: yellow[600], height: "0.7em" }} />
+            버튼을 눌러 마크북을 채워보세요!
+          </div>
+        </EmptyMarkDiv>
+      )}
     </Container>
   );
 }
