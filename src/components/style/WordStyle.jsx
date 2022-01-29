@@ -1,4 +1,4 @@
-import { BottomNavigation } from "@mui/material";
+import { BottomNavigation, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -116,8 +116,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.7em;
-
+  font-size: 1.5em;
   @media only screen and (min-width: 750px) {
     width: 750px;
     font-size: 3vw;
@@ -500,6 +499,8 @@ export const EmptyMarkDiv = styled.div`
 // modal.jsx
 
 export const ModalBackground = styled.div`
+  @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
+  font-family: "Nanum Gothic", sans-serif;
   width: 100vw;
   height: 100vh;
   background-color: rgba(200, 200, 200, 0.5);
@@ -507,17 +508,39 @@ export const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.9em;
 `;
 
 export const ModalContainer = styled.div`
-  width: 75vw;
-  height: 40vh;
+  width: 72vw;
+  height: 23vh;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  padding: 4vw;
+  align-items: center;
+  justify-content: ${(props) =>
+    props.isFalse ? "space-between" : "space-around"};
+  padding: 6vw;
   z-index: 3;
   font-size: 0.7em;
+`;
+// in Modal.jsx  //falseModal()
+
+export const ModalAnswer = styled(Button)`
+  width: 72vw;
+  text-transform: none;
+`;
+
+export const ModalInfoDiv = styled.div`
+  width: 72vw;
+  padding-top: 1.5vh;
+  padding-bottom: 0.7vh;
+`;
+
+export const FalseModalButtonDiv = styled.div`
+  width: 72vw;
+  display: flex;
+  justify-content: space-around;
 `;

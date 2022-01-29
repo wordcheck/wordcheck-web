@@ -21,6 +21,7 @@ export default function SpellSpellingTest({ cookies }) {
   const [currentNo, setCurrentNo] = useState(0);
   const [wrongWords, setWrongWords] = useState([]);
   const [answer, setAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -42,6 +43,7 @@ export default function SpellSpellingTest({ cookies }) {
         )
         .then((response) => console.log(response));
       console.log("correct");
+
       setModalOpen(true);
       setIsTrueAnswer(true);
       setCurrentNo(currentNo + 1);
@@ -68,12 +70,13 @@ export default function SpellSpellingTest({ cookies }) {
           };
           lastWrongWords.push(nextWrongWords);
           setWrongWords(lastWrongWords);
+          setCorrectAnswer(wordList[currentNo].spelling);
           setIsTrueAnswer(false);
         })
         .catch((error) => {
           console.log("err===>", error);
         });
-      setAnswer("");
+      // setAnswer("");
     }
   };
 
@@ -81,12 +84,11 @@ export default function SpellSpellingTest({ cookies }) {
   const wordList = location.state.wordlist;
   function enterkey() {
     if (window.event.keyCode == 13) {
-      // 엔터키가 눌렸을 때 실행할 내용
+      // 엔터키가 눌렸을 때 실행됨
       onClickMultipleChoiceButtonHandler();
     }
   }
 
-  console.log("modalOpen", modalOpen);
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
   }
@@ -121,9 +123,14 @@ export default function SpellSpellingTest({ cookies }) {
           제출
         </ColorButton>
       </AnswerDiv>
-      {/* <Modal /> */}
       {modalOpen && (
-        <Modal setOpenModal={setModalOpen} isTrueAnswer={isTrueAnswer} />
+        <Modal
+          setOpenModal={setModalOpen}
+          isTrueAnswer={isTrueAnswer}
+          answer={answer}
+          correctAnswer={correctAnswer}
+          setAnswer={setAnswer}
+        />
       )}
     </Container>
   );

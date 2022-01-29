@@ -13,22 +13,36 @@ import SpellSpelling from "./components/views/Test/SpellSpelling";
 import AllTestsChoice from "./components/views/Test/AllTestsChoice";
 import Marks from "./components/views/Marks/Marks";
 import NicknameChange from "./components/views/MyPage/NicknameChange";
-import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
-import PersonIcon from "@mui/icons-material/Person";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AddIcon from "@mui/icons-material/Add";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import StarIcon from "@mui/icons-material/Star";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import WordSearch from "./components/views/WordSearch/WordSearch";
 import { StyledBottomNavigation } from "./components/style/WordStyle";
-
+import axios from "axios";
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
+  const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://52.78.37.13/api/words/", {
+        headers: {
+          Authorization: cookies.token,
+        },
+      })
+      .then((response) => {
+        setCards(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div>
@@ -58,7 +72,13 @@ function App() {
             />
             <Route
               path="/alltestchoice"
-              element={<AllTestsChoice cookies={cookies} cards={cards} />}
+              element={
+                <AllTestsChoice
+                  wordlist={wordAll}
+                  cookies={cookies}
+                  wordAll={wordAll}
+                />
+              }
             />
             <Route
               path="/multiplechoice/:contents"

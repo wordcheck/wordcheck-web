@@ -39,6 +39,7 @@ export default function Test({ cookies }) {
     filtered[2],
     filtered[3],
   ];
+
   // 보여질 단어보기 리스트(섞인)
   let problemList = unshuffledProblemList
     .map((a) => ({ sort: Math.random(), value: a }))

@@ -11,43 +11,45 @@ import {
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
-import WordList from "../Card/WordList";
+import { connectAdvanced } from "react-redux";
+import { ContentCutOutlined } from "@mui/icons-material";
 
-export default function AllTestsChoice({ cookies, cards }) {
-  const [wordlist, setWordlist] = useState([]);
+export default function AllTestsChoice({ cookies, cards, wordlist }) {
+  // const [wordlist, setWordlist] = useState([]);
+  const [wordAll, setWordAll] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   // Link에서 가져온 profile
-  const contents = cards;
-  console.log("cards", cards);
 
   useEffect(() => {
-    contents.map((contents) => {
-      // const formData = new FormData();
-      // formData.append("contents", contents);
-      console.log(contents.contents);
-      axios
-        .get(
-          `http://52.78.37.13/api/words/detail_list/?contents=${contents.contents}`,
-          {
-            headers: {
-              Authorization: cookies.token,
-            },
-          }
-        )
-        .then((res) => {
-          let indata = res.data;
-          for (var i = 0; i < indata.length; i++) {
-            wordlist.push(indata[i]);
-            setWordlist(wordlist);
-          }
-          console.log("ff", wordlist);
-        })
-        .catch((error) => {
-          console.log("err==>", error);
-        });
-    });
+    const cardsPromises = cards?.map((contents) =>
+      axios.get(
+        `http://52.78.37.13/api/words/detail_list/?contents=${contents.contents}`,
+        {
+          headers: {
+            Authorization: cookies.token,
+          },
+        }
+      )
+    );
+
+    Promise.all(cardsPromises)
+      .then((resp) => {
+        //resp will be an array of resolved values
+        console.log("resp", resp);
+        setWordAll(resp);
+        console.log("wordAll1", wordAll);
+      })
+      .catch((error) => {
+        console.log("err==>", error);
+      });
   }, []);
+  console.log("wordAll", wordAll);
+  // const newWord = [].concat(wordAll.map((x) => x));
+  // console.log("newWord", newWord);
+
+  const newWord = wordAll.map((x) => x);
+  console.log("newWord", newWord);
 
   return (
     <Container>
