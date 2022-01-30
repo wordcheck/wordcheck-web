@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import axios from "axios";
 import React from "react";
 import { ColorButton } from "../../style/LoginStyle";
 import {
@@ -15,20 +16,54 @@ export default function Modal({
   answer,
   correctAnswer,
   setAnswer,
+  setCurrentNo,
+  currentNo,
+  cookies,
+  wordList,
+  wrongWords,
+  setWrongWords,
+  setWrongWordsInMul,
 }) {
-  function trueModal() {
+  const OnClickAnswerProcessingHandler = () => {
+    axios
+      .patch(
+        `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=correct`,
+        {},
+        {
+          headers: {
+            Authorization: cookies.token,
+          },
+        }
+      )
+      .then((response) => console.log(response));
+    console.log("fixorrect");
+    setWrongWords(wrongWords.filter((item) => item.spelling !== correctAnswer));
+    setWrongWordsInMul(
+      wrongWords.filter((item) => item.meaing !== correctAnswer)
+    );
+    setCurrentNo(currentNo + 1);
+    setAnswer("");
+    setOpenModal(false);
+  };
+
+  function TrueModal() {
     return (
       <>
         <ModalContainer>
           <div>정답입니다!😄</div>
-          <ColorButton onClick={() => setOpenModal(false)}>
+          <ColorButton
+            onClick={() => {
+              setOpenModal(false);
+              setCurrentNo(currentNo + 1);
+            }}
+          >
             계속하기
           </ColorButton>
         </ModalContainer>
       </>
     );
   }
-  function falseModal() {
+  function FalseModal() {
     return (
       <>
         <ModalContainer isFalse>
@@ -51,11 +86,18 @@ export default function Modal({
             </ModalAnswer>
           </div>
           <FalseModalButtonDiv>
-            <ColorButton>정답 처리하기</ColorButton>
+            <ColorButton
+              onClick={() => {
+                OnClickAnswerProcessingHandler();
+              }}
+            >
+              정답 처리하기
+            </ColorButton>
             <ColorButton
               onClick={() => {
                 setOpenModal(false);
                 setAnswer("");
+                setCurrentNo(currentNo + 1);
               }}
             >
               계속하기
@@ -68,7 +110,7 @@ export default function Modal({
   return (
     <>
       <ModalBackground>
-        {isTrueAnswer ? trueModal() : falseModal()}
+        {isTrueAnswer ? TrueModal() : FalseModal()}
       </ModalBackground>
     </>
   );

@@ -29,7 +29,7 @@ export default function SpellSpellingTest({ cookies }) {
     setAnswer(e.target.value);
   };
 
-  const onClickMultipleChoiceButtonHandler = () => {
+  const onClickSpellingInputHandler = () => {
     if (wordList[currentNo].spelling == answer) {
       axios
         .patch(
@@ -46,10 +46,10 @@ export default function SpellSpellingTest({ cookies }) {
 
       setModalOpen(true);
       setIsTrueAnswer(true);
-      setCurrentNo(currentNo + 1);
+      // setCurrentNo(currentNo + 1);
       setAnswer("");
     } else {
-      setCurrentNo(currentNo + 1);
+      // setCurrentNo(currentNo + 1);
       axios
         .patch(
           `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=wrong`,
@@ -85,9 +85,11 @@ export default function SpellSpellingTest({ cookies }) {
   function enterkey() {
     if (window.event.keyCode == 13) {
       // 엔터키가 눌렸을 때 실행됨
-      onClickMultipleChoiceButtonHandler();
+      setModalOpen(true);
+      onClickSpellingInputHandler();
     }
   }
+  console.log("wrongWords", wrongWords);
 
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
@@ -117,7 +119,7 @@ export default function SpellSpellingTest({ cookies }) {
         <ColorButton
           onClick={() => {
             setModalOpen(true);
-            onClickMultipleChoiceButtonHandler();
+            onClickSpellingInputHandler();
           }}
         >
           제출
@@ -130,6 +132,12 @@ export default function SpellSpellingTest({ cookies }) {
           answer={answer}
           correctAnswer={correctAnswer}
           setAnswer={setAnswer}
+          setCurrentNo={setCurrentNo}
+          currentNo={currentNo}
+          cookies={cookies}
+          wordList={wordList}
+          setWrongWords={setWrongWords}
+          wrongWords={wrongWords}
         />
       )}
     </Container>

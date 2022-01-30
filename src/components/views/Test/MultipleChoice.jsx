@@ -11,8 +11,13 @@ import {
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import TestEnd from "./TestEnd";
+import Modal from "./Modal";
 
 export default function MultipleChoice({ cookies }) {
+  const [isTrueAnswer, setIsTrueAnswer] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState("");
   const [currentNo, setCurrentNo] = useState(0);
   const [wrongWords, setWrongWords] = useState([]);
   const location = useLocation();
@@ -43,16 +48,19 @@ export default function MultipleChoice({ cookies }) {
     .sort((a, b) => a.sort - b.sort)
     .map((a) => a.value);
 
-  const onClickMultipleChoiceButtonHandler = (answer) => {
-    if (answer.meaning == wordList[currentNo].meaning) {
+  const onClickMultipleChoiceButtonHandler = (ans) => {
+    if (ans.meaning == wordList[currentNo].meaning) {
       console.log("correct");
-      setCurrentNo(currentNo + 1);
+      // setCurrentNo(currentNo + 1);
+
+      setModalOpen(true);
+      setIsTrueAnswer(true);
     } else {
       console.log("not correct");
-      setCurrentNo(currentNo + 1);
+      // setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `http://52.78.37.13/api/words/${answer.id}/test/`,
+          `http://52.78.37.13/api/words/${ans.id}/test/`,
           {},
           {
             headers: {
@@ -64,18 +72,23 @@ export default function MultipleChoice({ cookies }) {
           console.log(response);
           let lastWrongWords = [...wrongWords];
           let nextWrongWords = {
-            spelling: answer.spelling,
-            meaning: answer.meaning,
-            category: answer.category,
+            spelling: ans.spelling,
+            meaning: ans.meaning,
+            category: ans.category,
           };
           lastWrongWords.push(nextWrongWords);
           setWrongWords(lastWrongWords);
+          setCorrectAnswer(wordList[currentNo].meaning);
+          setAnswer(ans.meaning);
+          setIsTrueAnswer(false);
         })
         .catch((error) => {
           console.log("err===>", error);
         });
     }
   };
+
+  console.log("wrongWords", wrongWords);
 
   // 문제를 다 풀었을 때
   if (currentNo == wordList.length) {
@@ -100,12 +113,30 @@ export default function MultipleChoice({ cookies }) {
               key={answer.id}
               value={answer?.meaning}
               className="colorbutton"
-              onClick={() => onClickMultipleChoiceButtonHandler(answer)}
+              onClick={() => {
+                onClickMultipleChoiceButtonHandler(answer);
+                setModalOpen(true);
+              }}
             >
               {answer?.meaning}
             </ColorButton>
           ))}
         </MultipleChoiceDiv>
+        {modalOpen && (
+          <Modal
+            setOpenModal={setModalOpen}
+            isTrueAnswer={isTrueAnswer}
+            answer={answer}
+            correctAnswer={correctAnswer}
+            setAnswer={setAnswer}
+            setCurrentNo={setCurrentNo}
+            currentNo={currentNo}
+            cookies={cookies}
+            wordList={wordList}
+            setWrongWordsInMul={setWrongWords}
+            wrongWords={wrongWords}
+          />
+        )}
       </Container>
     </>
   );
