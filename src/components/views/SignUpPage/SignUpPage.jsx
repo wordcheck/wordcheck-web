@@ -37,7 +37,10 @@ export default function SignUpPage() {
     const nicknameformData = new FormData();
     nicknameformData.append("nickname", Nickname);
     axios
-      .post("http://52.78.37.13/api/accounts/nickname_check/", nicknameformData)
+      .post(
+        "http://wordcheck.sulrae.com/api/accounts/nickname_check/",
+        nicknameformData
+      )
       .then((response) => {
         if (response.data.msg === "success") {
           setCheckNickname(true);

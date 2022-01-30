@@ -6,6 +6,8 @@ import {
   InfoDiv,
   LinkButtonDiv,
   WrongWordsContainer,
+  WrongWordsOthersDiv,
+  WrongWordsSpellingDiv,
 } from "../../style/WordStyle";
 export default function TestEnd({ wrongWords }) {
   console.log(wrongWords);
@@ -23,12 +25,12 @@ export default function TestEnd({ wrongWords }) {
             카드 공부하러 가기
           </ColorButton>
         </LinkButtonDiv>
-        <div>틀린문제 {wrongWords.length}개</div>
+        <div>틀린문제는 총 {wrongWords.length}개에요</div>
         {wrongWords.map((word) => (
           <WrongWordsContainer>
-            <div>{word.spelling}</div>
-            <div>{word.category}.</div>
-            <div>{word.meaning}</div>
+            <WrongWordsSpellingDiv>{word.spelling} </WrongWordsSpellingDiv>
+            <WrongWordsOthersDiv>{word.category}.</WrongWordsOthersDiv>
+            <WrongWordsOthersDiv>{word.meaning}</WrongWordsOthersDiv>
           </WrongWordsContainer>
         ))}
       </Container>

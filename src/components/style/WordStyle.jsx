@@ -5,6 +5,7 @@ import styled from "styled-components";
 //app.jsx
 export const StyledBottomNavigation = styled(BottomNavigation)`
   width: 100%;
+  height: 5vh;
   @media only screen and (min-width: 750px) {
     width: 750px;
   }
@@ -97,11 +98,13 @@ export const HeaderDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
-  padding: 1.2vh;
-  padding-right: 1.6vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  /* padding: 1.2vh; */
+  /* padding-right: 1.6=vh;
   padding-left: 1.6vh;
   padding-bottom: 2vh;
-  padding-top: 3vh;
+  /* padding-top: 3vh; */
   @media only screen and (min-width: 750px) {
     width: 750px;
   }
@@ -112,11 +115,11 @@ export const Container = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
   font-family: "Nanum Gothic", sans-serif;
   width: 100vw;
-  height: 100vh;
+  height: ${(props) => (props.isInner ? "80vh" : "100vh")};
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.5em;
+  font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.7em")};
   @media only screen and (min-width: 750px) {
     width: 750px;
     font-size: 3vw;
@@ -126,7 +129,7 @@ export const Container = styled.div`
 export const Carddiv = styled.div`
   width: 75vw;
   height: 10vh;
-  background-color: lightgray;
+  background-color: #e6e6e6;
   padding: 1.5vh;
   margin-top: 1.8vh;
   border-radius: 1vh;
@@ -200,6 +203,11 @@ export const CardDiv2 = styled.div`
 export const EditDeleteIconDiv = styled.div``;
 
 // test.jsx의 styled components
+export const TopNavDivContainer = styled.div`
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+`;
+
 export const TopNav = styled.div`
   width: 100%;
   height: 8vh;
@@ -207,7 +215,7 @@ export const TopNav = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 0.9em;
-  border-bottom: 1px solid lightgray;
+
   .wordscount {
     font-size: 0.8em;
   }
@@ -286,7 +294,7 @@ export const TitleDiv = styled.div`
 export const CardContainer = styled.div`
   width: 74vw;
   height: 15vh;
-  background-color: lightgray;
+  background-color: #e6e6e6;
   padding: 2vh;
   margin-top: 2vh;
   font-size: 0.7em;
@@ -313,12 +321,23 @@ export const InputInfo = styled.div`
 // TestEnd.jsx
 
 export const WrongWordsContainer = styled.div`
-  width: 80vw;
+  width: 65vw;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   font-size: 0.9em;
   margin-top: 2vh;
+  background-color: lightgray;
+  padding: 1vh;
+  border-radius: 1vh;
 `;
+export const WrongWordsSpellingDiv = styled.div`
+  width: 32vw;
+`;
+export const WrongWordsOthersDiv = styled.div`
+  color: gray;
+  font-size: 0.9em;
+`;
+
 export const InfoDiv = styled.div`
   margin-top: 10vh;
   margin-bottom: 10vh;
@@ -342,7 +361,7 @@ export const ImgDiv = styled.div`
   height: 20vh;
   border-radius: 70%;
   overflow: hidden;
-  margin-top: 3vh;
+  margin-top: 2vh;
   box-shadow: 1vw 1vw 3.2vw gray;
   .profile {
     width: 100%;
@@ -353,7 +372,7 @@ export const ImgDiv = styled.div`
 export const UserDiv = styled.div`
   width: 88vw;
   height: 10vh;
-  margin-top: 4vh;
+  margin-top: 2vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -383,8 +402,41 @@ export const AccountSettingDiv2 = styled.div`
 `;
 export const UserDataDiv = styled.div`
   font-size: 0.7em;
+  height: 25vh;
+  background-color: #e6e6e6;
+  padding: 1vh;
+  border-radius: 1vh;
 `;
 
+export const DataInfoDiv = styled.div`
+  padding-bottom: 1.2vh;
+`;
+export const DataInfoTipDiv = styled.div`
+  color: #ff1a1a;
+  padding-bottom: 1vh;
+  font-size: 0.8em;
+  padding-left: 1vw;
+`;
+
+export const DataTop3Div = styled.div`
+  font-weight: 700;
+  padding-bottom: 0.7vh;
+`;
+export const DataTop3Li = styled.li`
+  width: 60vw;
+  /* background-color: #ffdb4d; */
+  padding: 0.5vh;
+  margin-bottom: 0.5vh;
+  border-radius: 1vh;
+`;
+export const DataTop3Span = styled.span`
+  font-size: 0.9em;
+  color: gray;
+`;
+
+export const DataTop3BoldSpan = styled.span`
+  font-weight: 700;
+`;
 export const FootDiv = styled.div`
   position: absolute;
   bottom: 2vh;
@@ -413,7 +465,7 @@ export const NicknameChangeInfo = styled.div`
 // BeforeTest.jsx
 
 export const TestContentDiv = styled.div`
-  width: 91vw;
+  width: 90vw;
   height: 10vh;
   display: flex;
   justify-content: space-between;
@@ -422,6 +474,7 @@ export const TestContentDiv = styled.div`
   border-bottom: 1px solid lightgray;
   padding: 1vh;
   padding-left: 5vw;
+  overflow: visible;
   :active {
     background-color: lightgray;
   }
@@ -543,4 +596,8 @@ export const FalseModalButtonDiv = styled.div`
   width: 72vw;
   display: flex;
   justify-content: space-around;
+`;
+export const BottomNavBoxContainer = styled.div`
+  width: 80vw;
+  height: 10vh;
 `;

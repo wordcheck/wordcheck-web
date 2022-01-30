@@ -23,7 +23,7 @@ export default function Home({ cookies, setCards, cards }) {
 
   useEffect(() => {
     axios
-      .get("http://52.78.37.13/api/words/", {
+      .get("https://wordcheck.sulrae.com/api/words/", {
         headers: {
           Authorization: cookies.token,
         },

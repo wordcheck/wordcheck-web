@@ -60,7 +60,7 @@ export default function MultipleChoice({ cookies }) {
       // setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `http://52.78.37.13/api/words/${ans.id}/test/`,
+          `https://wordcheck.sulrae.com/api/words/${ans.id}/test/`,
           {},
           {
             headers: {
@@ -133,7 +133,7 @@ export default function MultipleChoice({ cookies }) {
             currentNo={currentNo}
             cookies={cookies}
             wordList={wordList}
-            setWrongWordsInMul={setWrongWords}
+            setWrongWords={setWrongWords}
             wrongWords={wrongWords}
           />
         )}

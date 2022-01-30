@@ -28,22 +28,21 @@ function App() {
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("http://52.78.37.13/api/words/", {
-        headers: {
-          Authorization: cookies.token,
-        },
-      })
-      .then((response) => {
-        setCards(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+  // useEffect(() => {
+  //   axios
+  //     .get("http://52.78.37.13/api/words/", {
+  //       headers: {
+  //         Authorization: cookies.token,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setCards(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  // console.log("cards", cards);
   return (
     <div>
       <Router>

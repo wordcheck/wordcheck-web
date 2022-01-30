@@ -23,7 +23,7 @@ export default function TestsChoice({ cookies }) {
       <BackButton onClick={() => navigate(-1)}>
         <ArrowBackIosIcon />
       </BackButton>
-      <TopNav>Test</TopNav>
+      <TopNav>단어 테스트</TopNav>
       <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}

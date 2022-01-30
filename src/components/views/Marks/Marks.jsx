@@ -12,17 +12,23 @@ import {
   WordCardRightDiv,
   EmptyWordDiv,
   EmptyMarkDiv,
+  TopNavDivContainer,
+  BackButton,
+  TopNav,
 } from "../../style/WordStyle";
 import StarIcon from "@mui/icons-material/Star";
 import { yellow } from "@mui/material/colors";
 import { useSpeechSynthesis } from "react-speech-kit";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useNavigate } from "react-router-dom";
 export default function Marks() {
   const [marksList, setMarksList] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
   // let marksList = JSON.parse(localStorage.getItem("marks"));
   const { speak } = useSpeechSynthesis();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.localStorage.setItem("marks", JSON.stringify(marksList));
@@ -39,7 +45,12 @@ export default function Marks() {
 
   return (
     <Container>
-      <TitleDiv>Mark book</TitleDiv>
+      <TopNavDivContainer>
+        <BackButton onClick={() => navigate(-1)}>
+          <ArrowBackIosIcon />
+        </BackButton>
+        <TopNav>Mark Book</TopNav>
+      </TopNavDivContainer>
       {marksList.length ? (
         marksList?.map((mark) => (
           <>

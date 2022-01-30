@@ -22,12 +22,11 @@ export default function Modal({
   wordList,
   wrongWords,
   setWrongWords,
-  setWrongWordsInMul,
 }) {
   const OnClickAnswerProcessingHandler = () => {
     axios
       .patch(
-        `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=correct`,
+        `https://wordcheck.sulrae.com/api/words/${wordList[currentNo].id}/test/?state=correct`,
         {},
         {
           headers: {
@@ -37,10 +36,7 @@ export default function Modal({
       )
       .then((response) => console.log(response));
     console.log("fixorrect");
-    setWrongWords(wrongWords.filter((item) => item.spelling !== correctAnswer));
-    setWrongWordsInMul(
-      wrongWords.filter((item) => item.meaing !== correctAnswer)
-    );
+    setWrongWords(wrongWords.filter((item) => correctAnswer.id !== item.id));
     setCurrentNo(currentNo + 1);
     setAnswer("");
     setOpenModal(false);
@@ -50,7 +46,14 @@ export default function Modal({
     return (
       <>
         <ModalContainer>
-          <div>정답입니다!😄</div>
+          <div>정답입니다!</div>
+          {/* <ModalAnswer
+            variant="contained"
+            color="success"
+            sx={{ textTransform: "none" }}
+          >
+            {correctAnswer}
+          </ModalAnswer> */}
           <ColorButton
             onClick={() => {
               setOpenModal(false);

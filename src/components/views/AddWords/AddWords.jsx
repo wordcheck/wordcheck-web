@@ -11,8 +11,16 @@ import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import WordList from "../Card/WordList";
 import { SliderValueLabelUnstyled } from "@mui/material";
-import { CardAddContainer, Container, TitleDiv } from "../../style/WordStyle";
-
+import {
+  BackButton,
+  BottomNavBoxContainer,
+  CardAddContainer,
+  Container,
+  TitleDiv,
+  TopNav,
+  TopNavDivContainer,
+} from "../../style/WordStyle";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 export default function AddWords({ cookies }) {
   const [contents, setContents] = useState("");
   const [wordList, setWordList] = useState([
@@ -45,7 +53,7 @@ export default function AddWords({ cookies }) {
           formData.append("category", wordList.category);
           formData.append("meaning", wordList.meaning);
           return axios
-            .post("http://52.78.37.13/api/words/", formData, {
+            .post("http://wordcheck.sulrae.com/api/words/", formData, {
               headers: {
                 Authorization: cookies.token,
               },
@@ -92,34 +100,42 @@ export default function AddWords({ cookies }) {
   };
 
   return (
-    <Container>
-      <TitleDiv>
-        <CssTextField
-          name="contents"
-          onChange={onChangeContentsHandler}
-          value={contents}
-          label="title"
-          variant="standard"
-          style={{ width: "66vw" }}
+    <>
+      <Container>
+        <TopNavDivContainer>
+          <BackButton onClick={() => navigate(-1)}>
+            <ArrowBackIosIcon />
+          </BackButton>
+          <TopNav>단어 추가</TopNav>
+        </TopNavDivContainer>
+        <TitleDiv>
+          <CssTextField
+            name="contents"
+            onChange={onChangeContentsHandler}
+            value={contents}
+            label="title"
+            variant="standard"
+            style={{ width: "66vw" }}
+          />
+          <ColorButton
+            onClick={() => {
+              onClickSubmitWords();
+            }}
+          >
+            만들기
+          </ColorButton>
+        </TitleDiv>
+        <AddWordsForm
+          wordList={wordList}
+          setWordList={setWordList}
+          onChangeInputHandler={onChangeInputHandler}
         />
-        <ColorButton
-          onClick={() => {
-            onClickSubmitWords();
-          }}
-        >
-          만들기
-        </ColorButton>
-      </TitleDiv>
-
-      <AddWordsForm
-        wordList={wordList}
-        setWordList={setWordList}
-        onChangeInputHandler={onChangeInputHandler}
-      />
-      <CardAddContainer onClick={onClickCardAddHandler}>
-        <AddIcon />
-        <span>단어카드 추가하기</span>
-      </CardAddContainer>
-    </Container>
+        <CardAddContainer onClick={onClickCardAddHandler}>
+          <AddIcon />
+          <span>단어카드 추가하기</span>
+        </CardAddContainer>
+        <BottomNavBoxContainer></BottomNavBoxContainer>
+      </Container>
+    </>
   );
 }

@@ -5,10 +5,17 @@ import {
   AccountSettingDiv2,
   BackButton,
   Container,
+  DataInfoDiv,
+  DataInfoTipDiv,
+  DataTop3BoldSpan,
+  DataTop3Div,
+  DataTop3Li,
+  DataTop3Span,
   FootDiv,
   ImgDiv,
   NameDiv,
   TopNav,
+  TopNavDivContainer,
   UserDataDiv,
   UserDiv,
 } from "../../style/WordStyle";
@@ -24,12 +31,15 @@ export default function Mypage({ cookies, removeCookie }) {
   const [profile, setProfile] = useState("");
   const [loading, setLoading] = useState(true);
   const [imgsubmit, setImgsubmit] = useState(false);
+  const [wordAll, setWordAll] = useState([]);
+  const [cards, setCards] = useState([]);
   const navigate = useNavigate();
   const profileImgInput = useRef();
+
   useEffect(() => {
     axios
       .patch(
-        "http://52.78.37.13/api/accounts/profile/",
+        "https://wordcheck.sulrae.com/api/accounts/profile/",
         {},
         {
           headers: {
@@ -46,6 +56,47 @@ export default function Mypage({ cookies, removeCookie }) {
         console.log(error);
       });
   }, [imgsubmit]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: cards } = await axios.get(
+          "https://wordcheck.sulrae.com/api/words/",
+          {
+            headers: {
+              Authorization: cookies.token,
+            },
+          }
+        );
+        setCards(cards);
+
+        const cardsPromises = cards.map((contents) =>
+          axios.get(
+            `https://wordcheck.sulrae.com/api/words/detail_list/?contents=${contents.contents}`,
+            {
+              headers: {
+                Authorization: cookies.token,
+              },
+            }
+          )
+        );
+        const wordAllResponse = await Promise.all(cardsPromises);
+        const wordAll = wordAllResponse.map(({ data }) => data);
+        setWordAll(wordAll);
+      } catch (error) {
+        // handle any errors, rejected Promises, etc..
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+  const wordlist = wordAll.flat();
+  wordlist.sort(function (a, b) {
+    return b.wrong_count - a.wrong_count;
+  });
+  let WrongSum = 0;
+  wordlist.forEach((item) => (WrongSum += item.wrong_count));
+  console.log("reduce : ", WrongSum);
 
   const onClickLogoutHandler = () => {
     if (window.confirm("정말 로그아웃하시겠습니까?")) {
@@ -64,7 +115,7 @@ export default function Mypage({ cookies, removeCookie }) {
     console.log(e.target.files[0]);
     formData.append("profile_image", e.target.files[0]);
     axios
-      .patch("http://52.78.37.13/api/accounts/profile/", formData, {
+      .patch("http://wordcheck.sulrae.com/api/accounts/profile/", formData, {
         headers: {
           Authorization: cookies.token,
         },
@@ -81,10 +132,12 @@ export default function Mypage({ cookies, removeCookie }) {
 
   return (
     <Container>
-      <BackButton onClick={() => navigate(-1)}>
-        <ArrowBackIosIcon />
-      </BackButton>
-      <TopNav>설정</TopNav>
+      <TopNavDivContainer>
+        <BackButton onClick={() => navigate(-1)}>
+          <ArrowBackIosIcon />
+        </BackButton>
+        <TopNav>설정</TopNav>
+      </TopNavDivContainer>
       <ImgDiv>
         <img
           className="profile"
@@ -102,9 +155,37 @@ export default function Mypage({ cookies, removeCookie }) {
         </ColorButton>
       </UserDiv>
       <UserDataDiv>
-        <div>지금까지 총 틀린 단어횟수는 5회입니다.</div>
-        <div>Tip:시험을 통해 틀린횟수를 줄여보세요!</div>
-        <div>제일 많이 틀린 단어 top 3 : word, hello, bye</div>
+        <DataInfoDiv>
+          현재까지 등록된 단어는{" "}
+          <DataTop3BoldSpan>{wordlist.length}</DataTop3BoldSpan>개입니다.
+        </DataInfoDiv>
+        <DataInfoDiv>
+          현재까지 틀린 총 단어횟수는{" "}
+          <DataTop3BoldSpan>{WrongSum}</DataTop3BoldSpan>회입니다.
+        </DataInfoDiv>
+        <DataInfoTipDiv>Tip:시험을 통해 틀린횟수를 줄여보세요!</DataInfoTipDiv>
+
+        <DataTop3Div>가장 많이 틀린 단어 Top3</DataTop3Div>
+        <ul>
+          <DataTop3Li>
+            {wordlist[0]?.spelling}{" "}
+            <DataTop3Span>
+              {wordlist[0]?.category} {wordlist[0]?.meaning}
+            </DataTop3Span>
+          </DataTop3Li>
+          <DataTop3Li>
+            {wordlist[1]?.spelling}{" "}
+            <DataTop3Span>
+              {wordlist[1]?.category} {wordlist[1]?.meaning}
+            </DataTop3Span>
+          </DataTop3Li>
+          <DataTop3Li>
+            {wordlist[2]?.spelling}{" "}
+            <DataTop3Span>
+              {wordlist[2]?.category} {wordlist[2]?.meaning}
+            </DataTop3Span>
+          </DataTop3Li>
+        </ul>
       </UserDataDiv>
 
       <AccountSettingDiv>
@@ -130,7 +211,7 @@ export default function Mypage({ cookies, removeCookie }) {
 
         <AccountSettingDiv2> 회원탈퇴</AccountSettingDiv2>
       </AccountSettingDiv>
-      <FootDiv>버전정보 : 0.1.0v</FootDiv>
+      {/* <FootDiv>버전정보 : 0.1.0v</FootDiv> */}
     </Container>
   );
 }

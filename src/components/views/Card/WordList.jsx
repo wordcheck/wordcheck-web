@@ -57,7 +57,7 @@ export default function WordList({
   const onClickModificatedButtonHandler = () => {
     axios
       .patch(
-        `http://52.78.37.13/api/words/${editId}/?spelling=${spelling}&meaning=${meaning}&category=${category}`,
+        `https://wordcheck.sulrae.com/api/words/${editId}/?spelling=${spelling}&meaning=${meaning}&category=${category}`,
         {},
         {
           headers: {
@@ -86,7 +86,7 @@ export default function WordList({
   const onClickDeleteButtonHandler = (wordid) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       axios
-        .delete(`http://52.78.37.13/api/words/${wordid}`, {
+        .delete(`https://wordcheck.sulrae.com/api/words/${wordid}`, {
           headers: {
             Authorization: cookies.token,
           },
@@ -118,7 +118,7 @@ export default function WordList({
   }, [marks]);
 
   return (
-    <Container>
+    <Container isInnerFontSize>
       {wordlist.map((word) => (
         <Carddiv key={word.id}>
           {word.id === editId ? (

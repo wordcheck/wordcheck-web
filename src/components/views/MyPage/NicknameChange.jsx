@@ -24,7 +24,7 @@ export default function NicknameChange({ cookies }) {
     formData.append("nickname", changedNickname);
     console.log(changedNickname);
     axios
-      .patch("http://52.78.37.13/api/accounts/profile/", formData, {
+      .patch("http://wordcheck.sulrae.com/api/accounts/profile/", formData, {
         headers: {
           Authorization: cookies.token,
         },

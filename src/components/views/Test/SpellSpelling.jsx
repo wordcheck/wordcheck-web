@@ -33,7 +33,7 @@ export default function SpellSpellingTest({ cookies }) {
     if (wordList[currentNo].spelling == answer) {
       axios
         .patch(
-          `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=correct`,
+          `https://wordcheck.sulrae.com/api/words/${wordList[currentNo].id}/test/?state=correct`,
           {},
           {
             headers: {
@@ -52,7 +52,7 @@ export default function SpellSpellingTest({ cookies }) {
       // setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `http://52.78.37.13/api/words/${wordList[currentNo].id}/test/?state=wrong`,
+          `https://wordcheck.sulrae.com/api/words/${wordList[currentNo].id}/test/?state=wrong`,
           {},
           {
             headers: {

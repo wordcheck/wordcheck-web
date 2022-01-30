@@ -18,11 +18,14 @@ export default function Card({ cookies }) {
 
   useEffect(() => {
     axios
-      .get(`http://52.78.37.13/api/words/detail_list/?contents=${contents}`, {
-        headers: {
-          Authorization: cookies.token,
-        },
-      })
+      .get(
+        `https://wordcheck.sulrae.com/api/words/detail_list/?contents=${contents}`,
+        {
+          headers: {
+            Authorization: cookies.token,
+          },
+        }
+      )
       .then((response) => {
         setWordlist(response.data);
       })
@@ -40,12 +43,11 @@ export default function Card({ cookies }) {
           state={{ wordlist }}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          <ColorButton style={{ height: "100%", width: "28vw" }}>
+          <ColorButton style={{ height: "100%", width: "25vw" }}>
             그룹 테스트
           </ColorButton>
         </Link>
       </HeaderDiv>
-
       <WordList
         wordlist={wordlist}
         cookies={cookies}
