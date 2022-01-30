@@ -67,7 +67,7 @@ export default function AllTestsChoice({ cookies }) {
         <BackButton onClick={() => navigate(-1)}>
           <ArrowBackIosIcon />
         </BackButton>
-        <TopNav>모든 단어 테스트</TopNav>
+        <TopNav>모든단어 테스트</TopNav>
       </TopNavDivContainer>
       <TestContentDiv>
         <Link
@@ -101,6 +101,23 @@ export default function AllTestsChoice({ cookies }) {
         </Link>
         <ArrowForwardIosIcon />
       </TestContentDiv>
+      {/* <TestContentDiv>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          to={`/spellspelling/${wordlist[0]?.contents}`}
+          state={{ wordlist }}
+        >
+          <ButtonContainer>
+            <div className="buttons">
+              <span style={{ paddingBottom: "1vh" }}>플래시카드</span>
+              <div className="contentInfo">
+                단어 카드를 좌우로 스와이프하세요.
+              </div>
+            </div>
+          </ButtonContainer>
+        </Link>
+        <ArrowForwardIosIcon />
+      </TestContentDiv> */}
     </Container>
   );
 }

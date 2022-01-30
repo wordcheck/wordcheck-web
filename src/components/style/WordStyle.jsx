@@ -95,9 +95,9 @@ export const ContentDiv = styled.div`
   padding-top: 0.8vh;
 `;
 export const HeaderDiv = styled.div`
-  width: 100%;
+  width: 85%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 2vh;
   padding-bottom: 2vh;
   /* padding: 1.2vh; */
@@ -348,6 +348,7 @@ export const LinkButtonDiv = styled.div`
   margin-bottom: 10vh;
   display: flex;
   justify-content: space-between;
+  padding-top: 15vh;
 `;
 
 //Mypage.jsx
@@ -420,7 +421,8 @@ export const DataInfoTipDiv = styled.div`
 
 export const DataTop3Div = styled.div`
   font-weight: 700;
-  padding-bottom: 0.7vh;
+  padding-top: 0.7vh;
+  padding-bottom: 0.3vh;
 `;
 export const DataTop3Li = styled.li`
   width: 60vw;

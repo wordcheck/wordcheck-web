@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ColorButton } from "../../style/LoginStyle";
-import { Container, ContentDiv, HeaderDiv } from "../../style/WordStyle";
+import {
+  BottomNavBoxContainer,
+  Container,
+  ContentDiv,
+  HeaderDiv,
+} from "../../style/WordStyle";
 import Test from "../Test/Test";
 // import DeleteIcon from "@mui/icons-material/Delete";
 // import EditIcon from "@mui/icons-material/Edit";

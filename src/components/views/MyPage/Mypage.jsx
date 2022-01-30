@@ -160,8 +160,11 @@ export default function Mypage({ cookies, removeCookie }) {
           <DataTop3BoldSpan>{wordlist.length}</DataTop3BoldSpan>개입니다.
         </DataInfoDiv>
         <DataInfoDiv>
-          현재까지 틀린 총 단어횟수는{" "}
-          <DataTop3BoldSpan>{WrongSum}</DataTop3BoldSpan>회입니다.
+          한 단어당 평균 틀린횟수는
+          <DataTop3BoldSpan>
+            {(WrongSum / wordlist.length).toFixed(2)}
+          </DataTop3BoldSpan>
+          회입니다.
         </DataInfoDiv>
         <DataInfoTipDiv>Tip:시험을 통해 틀린횟수를 줄여보세요!</DataInfoTipDiv>
 
