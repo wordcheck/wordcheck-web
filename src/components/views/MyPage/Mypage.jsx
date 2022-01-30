@@ -115,7 +115,7 @@ export default function Mypage({ cookies, removeCookie }) {
     console.log(e.target.files[0]);
     formData.append("profile_image", e.target.files[0]);
     axios
-      .patch("http://wordcheck.sulrae.com/api/accounts/profile/", formData, {
+      .patch("https://wordcheck.sulrae.com/api/accounts/profile/", formData, {
         headers: {
           Authorization: cookies.token,
         },

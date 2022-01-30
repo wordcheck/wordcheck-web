@@ -38,7 +38,7 @@ export default function SignUpPage() {
     nicknameformData.append("nickname", Nickname);
     axios
       .post(
-        "http://wordcheck.sulrae.com/api/accounts/nickname_check/",
+        "https://wordcheck.sulrae.com/api/accounts/nickname_check/",
         nicknameformData
       )
       .then((response) => {

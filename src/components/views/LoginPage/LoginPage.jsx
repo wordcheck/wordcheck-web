@@ -28,7 +28,7 @@ export default function LoginPage({ setCookie }) {
     formData.append("nickname", Nickname);
     formData.append("password", Password);
     axios
-      .post("http://wordcheck.sulrae.com/api/accounts/normal_login/", formData)
+      .post("https://wordcheck.sulrae.com/api/accounts/normal_login/", formData)
       .then((response) => {
         if (response.data) {
           setCookie("token", response.data.account_token, {
