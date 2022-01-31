@@ -350,17 +350,17 @@ export const WrongWordsOthersDiv = styled.div`
   font-size: 0.9em;
 `;
 
-export const InfoDiv = styled.div`
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+export const TestEndInfoDiv = styled.div`
+  margin-top: 60px;
+  margin-bottom: 60px;
 `;
 
 export const LinkButtonDiv = styled.div`
   width: 60vw;
-  margin-bottom: 10vh;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  padding-top: 15vh;
+  padding-top: 10px;
 `;
 
 //Mypage.jsx
@@ -642,6 +642,9 @@ export const WordSearchInputDiv = styled.div`
   padding: 3vh;
   display: flex;
   justify-content: space-between;
+  @media only screen and (min-width: 750px) {
+    width: 600px;
+  }
 `;
 
 export const WordSearchCardDiv = styled.div`

@@ -96,7 +96,7 @@ export default function WordSearch({ cookies }) {
       </TopNavDivContainer>
       <WordSearchInputDiv>
         <CssTextField
-          style={{ width: "60vw" }}
+          style={{ width: "470px", paddingRight: "10px" }}
           onChange={(e) => {
             setSearchWord(e.target.value);
           }}

@@ -1,6 +1,6 @@
 {
   "name": "wordcheck",
-  "homepage": "//wordcheck.github.io/wordcheck/wordcheck-web",
+
   "version": "0.1.0",
   "private": true,
   "dependencies": {
