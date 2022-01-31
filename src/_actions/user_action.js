@@ -6,7 +6,7 @@
 //   formData.append("nickname", dataToSubmit?.nickname);
 //   formData.append("password", dataToSubmit?.password);
 //   const request = await axios
-//     .post("https://wordcheck.sulrae.com/api/accounts/normal_login/", formData)
+//     .post("${process.env.REACT_APP_API}accounts/normal_login/", formData)
 //     .then((response) => response.data)
 //     .catch((err) => {
 //       console.log("==>", err);
@@ -24,7 +24,7 @@
 //   formData.append("password", dataToSubmit?.password);
 //   formData.append("secret_code", dataToSubmit?.secret_code);
 //   const request = axios
-//     .post("https://wordcheck.sulrae.com/api/accounts/normal_signup/", formData)
+//     .post("${process.env.REACT_APP_API}accounts/normal_signup/", formData)
 //     .then((response) => response.data)
 //     .catch((err) => {
 //       console.log("==>", err);
