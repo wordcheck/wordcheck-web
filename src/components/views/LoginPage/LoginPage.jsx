@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import styled from "styled-components";
@@ -6,13 +6,17 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import { useCookies } from "react-cookie";
+import { Container } from "../../style/WordStyle";
 // import Button from "@mui/material/Button";
 
-export default function LoginPage({ setCookie }) {
+export default function LoginPage({ setCookie, setShowBottomNav }) {
   const navigate = useNavigate();
-
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
+
+  useEffect(() => {
+    setShowBottomNav(false);
+  }, []);
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);
@@ -28,7 +32,7 @@ export default function LoginPage({ setCookie }) {
     formData.append("nickname", Nickname);
     formData.append("password", Password);
     axios
-      .post("https://wordcheck.sulrae.com/api/accounts/normal_login/", formData)
+      .post(`${process.env.REACT_APP_API}accounts/normal_login/`, formData)
       .then((response) => {
         if (response.data) {
           setCookie("token", response.data.account_token, {
@@ -62,14 +66,7 @@ export default function LoginPage({ setCookie }) {
   };
 
   return (
-    <Container
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignContent: "center",
-      }}
-    >
+    <Container>
       <Logo>WordCheck</Logo>
       <form
         onSubmit={onSubmitHandler}
@@ -102,21 +99,12 @@ export default function LoginPage({ setCookie }) {
         to="signup"
         style={{ textDecoration: "none", color: "black", paddingTop: "1vh" }}
       >
-        <div>Sign up</div>
+        <div style={{ fontSize: "0.5em", marginTop: "2vh" }}>Sign up</div>
       </Link>
       <ToastContainer />
     </Container>
   );
 }
-
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const Logo = styled.div`
   font-size: 5vh;

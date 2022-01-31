@@ -18,12 +18,13 @@ import {
   WordListDiv,
 } from "../style/WordStyle";
 
-export default function Home({ cookies, setCards, cards }) {
+export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   // const [profile, setProfile] = useState([]);
 
   useEffect(() => {
+    setShowBottomNav(true);
     axios
-      .get("https://wordcheck.sulrae.com/api/words/", {
+      .get(`${process.env.REACT_APP_API}words/`, {
         headers: {
           Authorization: cookies.token,
         },
@@ -55,6 +56,7 @@ export default function Home({ cookies, setCards, cards }) {
     <Container>
       <TopLogoMypageContainer>
         <Logo>wordcheck</Logo>
+
         <Link
           to="/mypage"
           style={{ textDecoration: "none", display: "flex", height: "5vh" }}

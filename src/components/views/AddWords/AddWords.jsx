@@ -53,7 +53,7 @@ export default function AddWords({ cookies }) {
           formData.append("category", wordList.category);
           formData.append("meaning", wordList.meaning);
           return axios
-            .post("https://wordcheck.sulrae.com/api/words/", formData, {
+            .post(`${process.env.REACT_APP_API}words/`, formData, {
               headers: {
                 Authorization: cookies.token,
               },

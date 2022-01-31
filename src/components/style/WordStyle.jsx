@@ -6,6 +6,9 @@ import styled from "styled-components";
 export const StyledBottomNavigation = styled(BottomNavigation)`
   width: 100%;
   height: 5vh;
+  display: flex;
+  justify-content: space-around;
+
   @media only screen and (min-width: 750px) {
     width: 750px;
   }
@@ -106,7 +109,7 @@ export const HeaderDiv = styled.div`
   padding-bottom: 2vh;
   /* padding-top: 3vh; */
   @media only screen and (min-width: 750px) {
-    width: 750px;
+    width: 637.5px;
   }
 `;
 
@@ -275,6 +278,9 @@ export const CardAddContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media only screen and (min-width: 750px) {
+    width: 555px;
+  }
 
   :active {
     background-color: #adebad;
@@ -287,6 +293,9 @@ export const TitleDiv = styled.div`
   justify-content: space-between;
   padding-top: 2.2vh;
   padding-bottom: 1vh;
+  @media only screen and (min-width: 750px) {
+    width: 660px;
+  }
 `;
 
 // AddWordForm.jsx 의 styled-container
@@ -299,6 +308,9 @@ export const CardContainer = styled.div`
   margin-top: 2vh;
   font-size: 0.7em;
   border-radius: 1.5vh;
+  @media only screen and (min-width: 750px) {
+    width: 555px;
+  }
 `;
 
 export const Label = styled.div`
@@ -368,6 +380,10 @@ export const ImgDiv = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media only screen and (min-width: 750px) {
+    width: 250px;
+    height: 250px;
+  }
 `;
 
 export const UserDiv = styled.div`
@@ -377,13 +393,18 @@ export const UserDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media only screen and (min-width: 750px) {
+    width: 668px;
+  }
 `;
 export const AccountSettingDiv = styled.div`
   width: 100vw;
-
   .info {
     padding-top: 5vh;
     padding-left: 4vw;
+  }
+  @media only screen and (min-width: 750px) {
+    width: 750px;
   }
 `;
 
@@ -397,13 +418,17 @@ export const AccountSettingDiv2 = styled.div`
   border-bottom: 1px solid lightgray;
   padding: 1vh;
   padding-left: 5vw;
+  @media only screen and (min-width: 750px) {
+    width: 690px;
+  }
   :active {
     background-color: lightgray;
   }
 `;
 export const UserDataDiv = styled.div`
   font-size: 0.7em;
-  height: 25vh;
+  height: 150px;
+
   background-color: #e6e6e6;
   padding: 1vh;
   border-radius: 1vh;
@@ -430,6 +455,10 @@ export const DataTop3Li = styled.li`
   padding: 0.5vh;
   margin-bottom: 0.5vh;
   border-radius: 1vh;
+
+  @media only screen and (min-width: 750px) {
+    width: 450px;
+  }
 `;
 export const DataTop3Span = styled.span`
   font-size: 0.9em;
@@ -451,7 +480,6 @@ export const FootDiv = styled.div`
 export const NicknameChangeFormDiv = styled.div`
   width: 90vw;
   padding-top: 3vh;
-
   display: flex;
   justify-content: space-around;
 `;
@@ -479,6 +507,10 @@ export const TestContentDiv = styled.div`
   overflow: visible;
   :active {
     background-color: lightgray;
+  }
+  @media only screen and (min-width: 750px) {
+    width: 675px;
+    height: 75px;
   }
 `;
 
@@ -602,4 +634,23 @@ export const FalseModalButtonDiv = styled.div`
 export const BottomNavBoxContainer = styled.div`
   width: 80vw;
   height: 10vh;
+`;
+
+// WordSearch.jsx
+export const WordSearchInputDiv = styled.div`
+  width: 80vw;
+  padding: 3vh;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const WordSearchCardDiv = styled.div`
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
 `;

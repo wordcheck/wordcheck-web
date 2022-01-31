@@ -24,7 +24,7 @@ export default function Card({ cookies }) {
   useEffect(() => {
     axios
       .get(
-        `https://wordcheck.sulrae.com/api/words/detail_list/?contents=${contents}`,
+        `${process.env.REACT_APP_API}words/detail_list/?contents=${contents}`,
         {
           headers: {
             Authorization: cookies.token,
@@ -48,7 +48,7 @@ export default function Card({ cookies }) {
           state={{ wordlist }}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          <ColorButton style={{ height: "100%", width: "25vw" }}>
+          <ColorButton style={{ height: "100%", width: "10vw" }}>
             그룹 테스트
           </ColorButton>
         </Link>

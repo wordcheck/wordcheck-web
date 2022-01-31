@@ -23,8 +23,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import WordSearch from "./components/views/WordSearch/WordSearch";
 import { StyledBottomNavigation } from "./components/style/WordStyle";
 import axios from "axios";
+
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
+  const [showBottomNav, setShowBottomNav] = useState(true);
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
 
@@ -51,12 +53,22 @@ function App() {
             <Route
               path="/"
               element={
-                <Home cookies={cookies} cards={cards} setCards={setCards} />
+                <Home
+                  cookies={cookies}
+                  cards={cards}
+                  setCards={setCards}
+                  setShowBottomNav={setShowBottomNav}
+                />
               }
             />
             <Route
               path="/login"
-              element={<LoginPage setCookie={setCookie} />}
+              element={
+                <LoginPage
+                  setCookie={setCookie}
+                  setShowBottomNav={setShowBottomNav}
+                />
+              }
             />
             <Route path="/login/signup" element={<SignUpPage />} />
             <Route path="/addwords" element={<AddWords cookies={cookies} />} />
@@ -104,71 +116,65 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </>
         </Routes>
-        <StyledBottomNavigation
-          showLabels
-          style={{
-            position: "fixed",
-            bottom: "0",
-            borderTop: "1px solid lightgray",
-          }}
-        >
-          <BottomNavigationAction
-            // label="test all"
-            icon={
-              <Link
-                to="/alltestchoice"
-                state={{ cards }}
-                style={{ color: "inherit", textDecoration: "inherit" }}
-              >
-                <QuizIcon />
-              </Link>
-            }
-          />
-          <BottomNavigationAction
-            // label="add words"
-            icon={
-              <Link
-                to="/addwords"
-                style={{ color: "inherit", textDecoration: "inherit" }}
-              >
-                <AddIcon />
-              </Link>
-            }
-          />
-          <BottomNavigationAction
-            // label="home"
-            icon={
-              <Link
-                to="/"
-                style={{ color: "inherit", textDecoration: "inherit" }}
-              >
-                <HomeIcon />
-              </Link>
-            }
-          />
-          <BottomNavigationAction
-            // label="search"
-            icon={
-              <Link
-                to="/wordsearch"
-                style={{ color: "inherit", textDecoration: "inherit" }}
-              >
-                <SearchIcon />
-              </Link>
-            }
-          />
-          <BottomNavigationAction
-            // label="marks"
-            icon={
-              <Link
-                to="/marks"
-                style={{ color: "inherit", textDecoration: "inherit" }}
-              >
-                <StarIcon />
-              </Link>
-            }
-          />
-        </StyledBottomNavigation>
+        {showBottomNav && (
+          <StyledBottomNavigation
+            showLabels
+            style={{
+              position: "fixed",
+              bottom: "0",
+              borderTop: "1px solid lightgray",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+            <Link
+              to="/alltestchoice"
+              state={{ cards }}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <BottomNavigationAction
+                // label="test all"
+                icon={<QuizIcon />}
+              />
+            </Link>
+            <Link
+              to="/addwords"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <BottomNavigationAction
+                // label="add words"
+                icon={<AddIcon />}
+              />
+            </Link>
+            <Link
+              to="/"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <BottomNavigationAction
+                // label="home"
+                icon={<HomeIcon />}
+              />
+            </Link>
+            <Link
+              to="/wordsearch"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <BottomNavigationAction
+                // label="search"
+                icon={<SearchIcon />}
+              />
+            </Link>
+            <Link
+              to="/marks"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              <BottomNavigationAction
+                // label="marks"
+                icon={<StarIcon />}
+              />
+            </Link>
+          </StyledBottomNavigation>
+        )}
       </Router>
     </div>
   );

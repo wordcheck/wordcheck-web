@@ -26,7 +26,7 @@ export default function Modal({
   const OnClickAnswerProcessingHandler = () => {
     axios
       .patch(
-        `https://wordcheck.sulrae.com/api/words/${wordList[currentNo].id}/test/?state=correct`,
+        `${process.env.REACT_APP_API}words/${wordList[currentNo].id}/test/?state=correct`,
         {},
         {
           headers: {

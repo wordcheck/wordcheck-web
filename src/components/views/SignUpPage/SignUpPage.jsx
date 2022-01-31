@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import styled from "styled-components";
+import { Container } from "../../style/WordStyle";
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function SignUpPage() {
     nicknameformData.append("nickname", Nickname);
     axios
       .post(
-        "https://wordcheck.sulrae.com/api/accounts/nickname_check/",
+        `${process.env.REACT_APP_API}accounts/nickname_check/`,
         nicknameformData
       )
       .then((response) => {
@@ -146,19 +147,13 @@ export default function SignUpPage() {
   );
 }
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 const Logo = styled.div`
   padding-top: 3vh;
-  font-size: 5vh;
+  font-size: 1.2em;
   font-size: bolder;
 `;
 const Info = styled.div`
   padding-bottom: 4vh;
-  padding-top: 1vh;
+  padding-top: 2vh;
+  font-size: 0.6em;
 `;

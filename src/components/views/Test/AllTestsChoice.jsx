@@ -24,7 +24,7 @@ export default function AllTestsChoice({ cookies }) {
     const fetchData = async () => {
       try {
         const { data: cards } = await axios.get(
-          "https://wordcheck.sulrae.com/api/words/",
+          `${process.env.REACT_APP_API}words/`,
           {
             headers: {
               Authorization: cookies.token,
@@ -35,7 +35,7 @@ export default function AllTestsChoice({ cookies }) {
 
         const cardsPromises = cards.map((contents) =>
           axios.get(
-            `https://wordcheck.sulrae.com/api/words/detail_list/?contents=${contents.contents}`,
+            `${process.env.REACT_APP_API}words/detail_list/?contents=${contents.contents}`,
             {
               headers: {
                 Authorization: cookies.token,
@@ -67,7 +67,7 @@ export default function AllTestsChoice({ cookies }) {
         <BackButton onClick={() => navigate(-1)}>
           <ArrowBackIosIcon />
         </BackButton>
-        <TopNav>모든단어 테스트</TopNav>
+        <TopNav>모든 단어 테스트</TopNav>
       </TopNavDivContainer>
       <TestContentDiv>
         <Link
@@ -101,7 +101,7 @@ export default function AllTestsChoice({ cookies }) {
         </Link>
         <ArrowForwardIosIcon />
       </TestContentDiv>
-      {/* <TestContentDiv>
+      <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
           to={`/spellspelling/${wordlist[0]?.contents}`}
@@ -117,7 +117,7 @@ export default function AllTestsChoice({ cookies }) {
           </ButtonContainer>
         </Link>
         <ArrowForwardIosIcon />
-      </TestContentDiv> */}
+      </TestContentDiv>
     </Container>
   );
 }

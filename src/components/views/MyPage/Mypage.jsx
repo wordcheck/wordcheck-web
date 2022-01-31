@@ -39,7 +39,7 @@ export default function Mypage({ cookies, removeCookie }) {
   useEffect(() => {
     axios
       .patch(
-        "https://wordcheck.sulrae.com/api/accounts/profile/",
+        `${process.env.REACT_APP_API}accounts/profile/`,
         {},
         {
           headers: {
@@ -61,7 +61,7 @@ export default function Mypage({ cookies, removeCookie }) {
     const fetchData = async () => {
       try {
         const { data: cards } = await axios.get(
-          "https://wordcheck.sulrae.com/api/words/",
+          `${process.env.REACT_APP_API}words/`,
           {
             headers: {
               Authorization: cookies.token,
@@ -72,7 +72,7 @@ export default function Mypage({ cookies, removeCookie }) {
 
         const cardsPromises = cards.map((contents) =>
           axios.get(
-            `https://wordcheck.sulrae.com/api/words/detail_list/?contents=${contents.contents}`,
+            `${process.env.REACT_APP_API}words/detail_list/?contents=${contents.contents}`,
             {
               headers: {
                 Authorization: cookies.token,
@@ -115,7 +115,7 @@ export default function Mypage({ cookies, removeCookie }) {
     console.log(e.target.files[0]);
     formData.append("profile_image", e.target.files[0]);
     axios
-      .patch("https://wordcheck.sulrae.com/api/accounts/profile/", formData, {
+      .patch(`${process.env.REACT_APP_API}accounts/profile/`, formData, {
         headers: {
           Authorization: cookies.token,
         },
@@ -154,7 +154,7 @@ export default function Mypage({ cookies, removeCookie }) {
           Sign out
         </ColorButton>
       </UserDiv>
-      <UserDataDiv>
+      {/* <UserDataDiv>
         <DataInfoDiv>
           현재까지 등록된 단어는{" "}
           <DataTop3BoldSpan>{wordlist.length}</DataTop3BoldSpan>개입니다.
@@ -189,7 +189,7 @@ export default function Mypage({ cookies, removeCookie }) {
             </DataTop3Span>
           </DataTop3Li>
         </ul>
-      </UserDataDiv>
+      </UserDataDiv> */}
 
       <AccountSettingDiv>
         <div className="info">Account Settings</div>

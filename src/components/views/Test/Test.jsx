@@ -55,7 +55,7 @@ export default function Test({ cookies }) {
       setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `https://wordcheck.sulrae.com/api/words/${answer.id}/test/`,
+          `${process.env.REACT_APP_API}words/${answer.id}/test/`,
           {},
           {
             headers: {

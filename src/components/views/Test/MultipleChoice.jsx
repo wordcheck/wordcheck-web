@@ -60,7 +60,7 @@ export default function MultipleChoice({ cookies }) {
       // setCurrentNo(currentNo + 1);
       axios
         .patch(
-          `https://wordcheck.sulrae.com/api/words/${ans.id}/test/`,
+          `${process.env.REACT_APP_API}words/${ans.id}/test/`,
           {},
           {
             headers: {

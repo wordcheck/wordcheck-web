@@ -15,6 +15,8 @@ import {
   WordCardRightDiv,
   TopNavDivContainer,
   BottomNavBoxContainer,
+  WordSearchInputDiv,
+  WordSearchCardDiv,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
@@ -43,7 +45,7 @@ export default function WordSearch({ cookies }) {
     const fetchData = async () => {
       try {
         const { data: cards } = await axios.get(
-          "https://wordcheck.sulrae.com/api/words/",
+          `${process.env.REACT_APP_API}words/`,
           {
             headers: {
               Authorization: cookies.token,
@@ -54,7 +56,7 @@ export default function WordSearch({ cookies }) {
 
         const cardsPromises = cards.map((contents) =>
           axios.get(
-            `https://wordcheck.sulrae.com/api/words/detail_list/?contents=${contents.contents}`,
+            `${process.env.REACT_APP_API}words/detail_list/?contents=${contents.contents}`,
             {
               headers: {
                 Authorization: cookies.token,
@@ -92,16 +94,16 @@ export default function WordSearch({ cookies }) {
         </BackButton>
         <TopNav>단어 찾기</TopNav>
       </TopNavDivContainer>
-      <NicknameChangeFormDiv>
+      <WordSearchInputDiv>
         <CssTextField
-          style={{ width: "70vw" }}
+          style={{ width: "60vw" }}
           onChange={(e) => {
             setSearchWord(e.target.value);
           }}
         />
         <ColorButton>검색하기</ColorButton>
-      </NicknameChangeFormDiv>
-      <div>
+      </WordSearchInputDiv>
+      <WordSearchCardDiv>
         {wordAll
           .filter((word) => {
             if (searchWord == "") {
@@ -149,7 +151,7 @@ export default function WordSearch({ cookies }) {
             );
           })}
         <BottomNavBoxContainer></BottomNavBoxContainer>
-      </div>
+      </WordSearchCardDiv>
     </Container>
   );
 }
