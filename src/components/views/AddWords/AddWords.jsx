@@ -21,6 +21,7 @@ import {
   BottomNavBoxContainer,
   CardAddContainer,
   Container,
+  ModalContainer,
   TitleDiv,
   TopNav,
   TopNavDivContainer,
@@ -28,9 +29,13 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { FilterFrames } from "@mui/icons-material";
+import AddWordsConfirmModal from "../AddWords/AddWordsConfirmModal";
 export default function AddWords({ cookies }) {
   const [contents, setContents] = useState("");
   const [titleAlert, setTitleAlert] = useState(false);
+  const [failAlert, setFailAlert] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+
   const [wordList, setWordList] = useState([
     {
       contents: "",
@@ -51,38 +56,40 @@ export default function AddWords({ cookies }) {
   };
 
   const onClickSubmitWords = () => {
-    const formData = new FormData();
     if (contents == "") {
       setTitleAlert(true);
-    } else if (window.confirm("추가하시겠습니까?")) {
-      Promise.all(
-        wordList.map((wordList) => {
-          formData.append("contents", wordList.contents);
-          formData.append("spelling", wordList.spelling);
-          formData.append("category", wordList.category);
-          formData.append("meaning", wordList.meaning);
-          return axios
-            .post(`${process.env.REACT_APP_API}words/`, formData, {
-              headers: {
-                Authorization: cookies.token,
-              },
-            })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((error) => {
-              console.log("err==>", error);
-            });
-        })
-      )
-        .then(() => {
-          navigate(-1);
-          alert("단어가 성공적으로 추가되었습니다");
-        })
-        .catch((err) => {
-          alert("단어를 저장시키지 못했습니다. 다시 시도해주세요");
-        });
+    } else {
+      console.log("fff");
+      setConfirm(true);
     }
+    // } else if (window.confirm("추가하시겠습니까?")) {
+    //   Promise.all(
+    //     wordList.map((wordList) => {
+    //       formData.append("contents", wordList.contents);
+    //       formData.append("spelling", wordList.spelling);
+    //       formData.append("category", wordList.category);
+    //       formData.append("meaning", wordList.meaning);
+    //       return axios
+    //         .post(`${process.env.REACT_APP_API}words/`, formData, {
+    //           headers: {
+    //             Authorization: cookies.token,
+    //           },
+    //         })
+    //         .then((res) => {
+    //           console.log(res);
+    //         })
+    //         .catch((error) => {
+    //           console.log("err==>", error);
+    //         });
+    //     })
+    //   )
+    //     .then(() => {
+    //       navigate(-1);
+    //     })
+    //     .catch((err) => {
+    //       setFailAlert(true);
+    //     });
+    // }
   };
 
   const inputData = {
@@ -147,8 +154,12 @@ export default function AddWords({ cookies }) {
         <BottomNavBoxContainer></BottomNavBoxContainer>
 
         <Snackbar
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
           open={titleAlert}
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           onClose={() => setTitleAlert(false)}
         >
           <Alert
@@ -164,6 +175,36 @@ export default function AddWords({ cookies }) {
             title 칸을 채워주세요
           </Alert>
         </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          open={failAlert}
+          autoHideDuration={3000}
+          onClose={() => setFailAlert(false)}
+        >
+          <Alert
+            onClose={() => setFailAlert(false)}
+            severity="success"
+            sx={{
+              width: "100%",
+              background: "rgb(211, 47, 47)",
+              color: "rgb(255, 255, 255)",
+              fontSize: "17px",
+            }}
+          >
+            단어를 저장시키지 못했습니다. 다시 시도해주세요
+          </Alert>
+        </Snackbar>
+        {confirm && (
+          <AddWordsConfirmModal
+            wordList={wordList}
+            cookies={cookies}
+            setFailAlert={setFailAlert}
+            setConfirm={setConfirm}
+          />
+        )}
       </Container>
     </>
   );

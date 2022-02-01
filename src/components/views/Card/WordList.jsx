@@ -27,6 +27,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useSpeechSynthesis } from "react-speech-kit";
 import Home from "../Home";
 import { useNavigate } from "react-router-dom";
+
 export default function WordList({
   wordlist,
   cookies,

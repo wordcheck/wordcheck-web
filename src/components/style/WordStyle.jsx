@@ -342,6 +342,27 @@ export const InputInfo = styled.div`
   justify-content: space-between;
 `;
 
+// ConfirmModal.jsx;
+export const ConfirmModalDiv = styled.div`
+  width: 72vw;
+  height: 15vh;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 6vw;
+  z-index: 3;
+  font-size: 1em;
+`;
+export const ConfirmModalAnswer = styled(Button)`
+  width: 20vw;
+  text-transform: none;
+`;
+export const ConfirmModalBox = styled.div``;
+
 // TestEnd.jsx
 
 export const WrongWordsInfo = styled.div`
