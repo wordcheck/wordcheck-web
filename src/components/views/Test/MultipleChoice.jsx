@@ -9,6 +9,7 @@ import {
   MultipleChoiceDiv,
   QuestionDiv,
   TopNav,
+  TopNavDivContainer,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import TestEnd from "./TestEnd";
@@ -52,13 +53,13 @@ export default function MultipleChoice({ cookies }) {
   const onClickMultipleChoiceButtonHandler = (ans) => {
     if (ans.meaning == wordList[currentNo].meaning) {
       console.log("correct");
-      // setCurrentNo(currentNo + 1);
 
+      setCorrectAnswer(wordList[currentNo].meaning);
       setModalOpen(true);
       setIsTrueAnswer(true);
     } else {
       console.log("not correct");
-      // setCurrentNo(currentNo + 1);
+
       axios
         .patch(
           `${process.env.REACT_APP_API}words/${ans.id}/test/`,
@@ -98,14 +99,17 @@ export default function MultipleChoice({ cookies }) {
   return (
     <>
       <Container>
-        <TopNav>
+        <TopNavDivContainer>
           <BackButton onClick={() => navigate(-2)}>
             <ArrowBackIosIcon />
           </BackButton>
-          <div className="wordscount">
-            {currentNo + 1}of {wordList.length}
-          </div>
-        </TopNav>
+          <TopNav>
+            <div className="wordscount">
+              {currentNo + 1}of {wordList.length}
+            </div>
+          </TopNav>
+        </TopNavDivContainer>
+
         <QuestionDiv>{wordList[currentNo].spelling}</QuestionDiv>
 
         <MultipleChoiceDiv>

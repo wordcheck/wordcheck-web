@@ -1,4 +1,4 @@
-import { BottomNavigation, Button } from "@mui/material";
+import { BottomNavigation, Button, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -113,12 +113,14 @@ export const HeaderDiv = styled.div`
   }
 `;
 
-//? wordList.jsx
+//? WordList.jsx
+//공용으로 사용되는 Container
 export const Container = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
   font-family: "Nanum Gothic", sans-serif;
   width: 100vw;
-  height: ${(props) => (props.isInner ? "80vh" : "100vh")};
+  height: ${(props) => (props.isInner ? "80vh" : "100%")};
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,6 +130,15 @@ export const Container = styled.div`
     font-size: 3vw;
   }
 `;
+export const WordListInputContainer = styled.div`
+  width: 75vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const StyledInput = styled(Input)``;
 
 export const Carddiv = styled.div`
   width: 75vw;
@@ -209,6 +220,7 @@ export const EditDeleteIconDiv = styled.div``;
 export const TopNavDivContainer = styled.div`
   width: 100%;
   border-bottom: 1px solid lightgray;
+  display: flex;
 `;
 
 export const TopNav = styled.div`
@@ -227,7 +239,7 @@ export const TopNav = styled.div`
   }
 `;
 export const BackButton = styled.div`
-  position: absolute;
+  position: relative;
   display: flex;
   left: 2.5vh;
   top: 2.5vh;
@@ -244,7 +256,7 @@ export const QuestionDiv = styled.div`
   border-radius: 1vh;
 `;
 export const AnswerDiv = styled.div`
-  width: 100%;
+  width: 90%;
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -331,6 +343,11 @@ export const InputInfo = styled.div`
 `;
 
 // TestEnd.jsx
+
+export const WrongWordsInfo = styled.div`
+  padding-top: 2vh;
+  padding-bottom: 1vh;
+`;
 
 export const WrongWordsContainer = styled.div`
   width: 65vw;
@@ -638,12 +655,12 @@ export const BottomNavBoxContainer = styled.div`
 
 // WordSearch.jsx
 export const WordSearchInputDiv = styled.div`
-  width: 80vw;
+  width: 90vw;
   padding: 3vh;
   display: flex;
   justify-content: space-between;
   @media only screen and (min-width: 750px) {
-    width: 600px;
+    width: 675px;
   }
 `;
 

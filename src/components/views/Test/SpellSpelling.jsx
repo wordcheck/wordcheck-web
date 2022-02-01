@@ -11,6 +11,7 @@ import {
   MultipleChoiceDiv,
   QuestionDiv,
   TopNav,
+  TopNavDivContainer,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import TestEnd from "./TestEnd";
@@ -44,9 +45,9 @@ export default function SpellSpellingTest({ cookies }) {
         )
         .then((response) => console.log(response));
       console.log("correct");
-
       setModalOpen(true);
       setIsTrueAnswer(true);
+      setCorrectAnswer(wordList[currentNo].spelling);
       // setCurrentNo(currentNo + 1);
       setAnswer("");
     } else {
@@ -62,7 +63,6 @@ export default function SpellSpellingTest({ cookies }) {
           }
         )
         .then((response) => {
-          console.log(response);
           let lastWrongWords = [...wrongWords];
           let nextWrongWords = {
             spelling: wordList[currentNo].spelling,
@@ -77,7 +77,6 @@ export default function SpellSpellingTest({ cookies }) {
         .catch((error) => {
           console.log("err===>", error);
         });
-      // setAnswer("");
     }
   };
 
@@ -97,14 +96,17 @@ export default function SpellSpellingTest({ cookies }) {
   }
   return (
     <Container>
-      <TopNav>
+      <TopNavDivContainer>
         <BackButton onClick={() => navigate(-2)}>
           <ArrowBackIosIcon />
         </BackButton>
-        <div className="wordscount">
-          {currentNo + 1}of {wordList.length}
-        </div>
-      </TopNav>
+        <TopNav>
+          <div className="wordscount">
+            {currentNo + 1}of {wordList.length}
+          </div>
+        </TopNav>
+      </TopNavDivContainer>
+
       <QuestionDiv>{wordList[currentNo].meaning}</QuestionDiv>
       <AnswerDiv>
         <CssTextField
@@ -118,6 +120,7 @@ export default function SpellSpellingTest({ cookies }) {
           // variant="standard"
         />
         <ColorButton
+          sx={{ height: "55px" }}
           onClick={() => {
             setModalOpen(true);
             onClickSpellingInputHandler();

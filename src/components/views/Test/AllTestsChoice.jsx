@@ -72,7 +72,7 @@ export default function AllTestsChoice({ cookies }) {
       <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/multiplechoice/${wordlist[0]?.contents}`}
+          to={`/wordcheck-web/multiplechoice/${wordlist[0]?.contents}`}
           state={{ wordlist }}
         >
           <ButtonContainer>
@@ -89,7 +89,7 @@ export default function AllTestsChoice({ cookies }) {
       <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/spellspelling/${wordlist[0]?.contents}`}
+          to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
           state={{ wordlist }}
         >
           <ButtonContainer>
@@ -101,10 +101,10 @@ export default function AllTestsChoice({ cookies }) {
         </Link>
         <ArrowForwardIosIcon />
       </TestContentDiv>
-      <TestContentDiv>
+      {/* <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/spellspelling/${wordlist[0]?.contents}`}
+          to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
           state={{ wordlist }}
         >
           <ButtonContainer>
@@ -117,7 +117,7 @@ export default function AllTestsChoice({ cookies }) {
           </ButtonContainer>
         </Link>
         <ArrowForwardIosIcon />
-      </TestContentDiv>
+      </TestContentDiv> */}
     </Container>
   );
 }

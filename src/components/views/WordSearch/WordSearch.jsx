@@ -26,9 +26,9 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import StarIcon from "@mui/icons-material/Star";
 import { useSpeechSynthesis } from "react-speech-kit";
 import { yellow, grey } from "@mui/material/colors";
+
 export default function WordSearch({ cookies }) {
   const [searchWord, setSearchWord] = useState("");
-  const [wordlist, setWordlist] = useState([]);
   const navigate = useNavigate();
   const [marks, setMarks] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
@@ -37,9 +37,6 @@ export default function WordSearch({ cookies }) {
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
   const { speak } = useSpeechSynthesis();
-  useEffect(() => {
-    window.localStorage.setItem("marks", JSON.stringify(marks));
-  }, [marks]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,9 +51,9 @@ export default function WordSearch({ cookies }) {
         );
         setCards(cards);
 
-        const cardsPromises = cards.map((contents) =>
+        const cardsPromises = cards.map((cards) =>
           axios.get(
-            `${process.env.REACT_APP_API}words/detail_list/?contents=${contents.contents}`,
+            `${process.env.REACT_APP_API}words/detail_list/?contents=${cards.contents}`,
             {
               headers: {
                 Authorization: cookies.token,
@@ -74,6 +71,10 @@ export default function WordSearch({ cookies }) {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+    window.localStorage.setItem("marks", JSON.stringify(marks));
+  }, [marks]);
+
   console.log(wordAll);
   const onClickMarkButtonHandler = (info) => {
     let beforeInfo = [...marks];
@@ -96,12 +97,12 @@ export default function WordSearch({ cookies }) {
       </TopNavDivContainer>
       <WordSearchInputDiv>
         <CssTextField
-          style={{ width: "470px", paddingRight: "10px" }}
+          style={{ width: "490px", paddingRight: "10px" }}
           onChange={(e) => {
             setSearchWord(e.target.value);
           }}
         />
-        <ColorButton>검색하기</ColorButton>
+        <ColorButton sx={{ width: "100px" }}>검색하기</ColorButton>
       </WordSearchInputDiv>
       <WordSearchCardDiv>
         {wordAll

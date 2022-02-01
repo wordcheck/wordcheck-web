@@ -10,7 +10,12 @@ import Home from "../Home";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import WordList from "../Card/WordList";
-import { SliderValueLabelUnstyled } from "@mui/material";
+import {
+  Alert,
+  SliderValueLabelUnstyled,
+  Snackbar,
+  Stack,
+} from "@mui/material";
 import {
   BackButton,
   BottomNavBoxContainer,
@@ -20,9 +25,12 @@ import {
   TopNav,
   TopNavDivContainer,
 } from "../../style/WordStyle";
+import { ToastContainer, toast } from "react-toastify";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { FilterFrames } from "@mui/icons-material";
 export default function AddWords({ cookies }) {
   const [contents, setContents] = useState("");
+  const [titleAlert, setTitleAlert] = useState(false);
   const [wordList, setWordList] = useState([
     {
       contents: "",
@@ -44,8 +52,9 @@ export default function AddWords({ cookies }) {
 
   const onClickSubmitWords = () => {
     const formData = new FormData();
-
-    if (window.confirm("추가하시겠습니까?")) {
+    if (contents == "") {
+      setTitleAlert(true);
+    } else if (window.confirm("추가하시겠습니까?")) {
       Promise.all(
         wordList.map((wordList) => {
           formData.append("contents", wordList.contents);
@@ -115,12 +124,13 @@ export default function AddWords({ cookies }) {
             value={contents}
             label="title"
             variant="standard"
-            style={{ width: "66vw" }}
+            style={{ width: "500px" }}
           />
           <ColorButton
             onClick={() => {
               onClickSubmitWords();
             }}
+            sx={{ width: "100px", height: "50px" }}
           >
             만들기
           </ColorButton>
@@ -135,6 +145,25 @@ export default function AddWords({ cookies }) {
           <span>단어카드 추가하기</span>
         </CardAddContainer>
         <BottomNavBoxContainer></BottomNavBoxContainer>
+
+        <Snackbar
+          open={titleAlert}
+          autoHideDuration={6000}
+          onClose={() => setTitleAlert(false)}
+        >
+          <Alert
+            onClose={() => setTitleAlert(false)}
+            severity="error"
+            sx={{
+              width: "100%",
+              background: "rgb(211, 47, 47)",
+              color: "rgb(255, 255, 255)",
+              fontSize: "17px",
+            }}
+          >
+            title 칸을 채워주세요
+          </Alert>
+        </Snackbar>
       </Container>
     </>
   );

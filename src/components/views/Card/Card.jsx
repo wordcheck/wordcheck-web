@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ColorButton } from "../../style/LoginStyle";
+import QuizIcon from "@mui/icons-material/Quiz";
 import {
   BottomNavBoxContainer,
   Container,
@@ -20,6 +21,7 @@ export default function Card({ cookies }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [editId, setEditId] = useState("");
   const { contents } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -39,16 +41,20 @@ export default function Card({ cookies }) {
       });
   }, [isDeleted, editId]);
 
+  if (wordlist == "") {
+    navigate(`/wordcheck-web/`);
+  }
+
   return (
     <Container>
       <HeaderDiv>
         <ContentDiv>{wordlist[0]?.contents}</ContentDiv>
         <Link
-          to={`/testschoice`}
+          to={`/wordcheck-web/testschoice`}
           state={{ wordlist }}
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
-          <ColorButton style={{ height: "100%", width: "10vw" }}>
+          <ColorButton style={{ height: "100%", width: "100px" }}>
             그룹 테스트
           </ColorButton>
         </Link>

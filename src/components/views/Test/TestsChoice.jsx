@@ -7,6 +7,7 @@ import {
   Container,
   TestContentDiv,
   TopNav,
+  TopNavDivContainer,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -20,14 +21,17 @@ export default function TestsChoice({ cookies }) {
 
   return (
     <Container>
-      <BackButton onClick={() => navigate(-1)}>
-        <ArrowBackIosIcon />
-      </BackButton>
-      <TopNav>단어 테스트</TopNav>
+      <TopNavDivContainer>
+        <BackButton onClick={() => navigate(-1)}>
+          <ArrowBackIosIcon />
+        </BackButton>
+        <TopNav>단어 테스트</TopNav>
+      </TopNavDivContainer>
+
       <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/multiplechoice/${wordlist[0]?.contents}`}
+          to={`/wordcheck-web/multiplechoice/${wordlist[0]?.contents}`}
           state={{ wordlist }}
         >
           <ButtonContainer>
@@ -44,7 +48,7 @@ export default function TestsChoice({ cookies }) {
       <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/spellspelling/${wordlist[0]?.contents}`}
+          to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
           state={{ wordlist }}
         >
           <ButtonContainer>

@@ -41,7 +41,7 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   const CardList = cards.map((card, index) => (
     <HomeCardLink
       key={card.contents}
-      to={`/card/${card.contents}`}
+      to={`/wordcheck-web/card/${card.contents}`}
       style={{ textDecoration: "none", color: "black" }}
     >
       <WordListDiv key={index}>{card.contents}</WordListDiv>
@@ -58,7 +58,7 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
         <Logo>wordcheck</Logo>
 
         <Link
-          to="/mypage"
+          to="/wordcheck-web/mypage"
           style={{ textDecoration: "none", display: "flex", height: "5vh" }}
         >
           <ColorButton>

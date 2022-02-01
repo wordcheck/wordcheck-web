@@ -7,6 +7,7 @@ import {
   LinkButtonDiv,
   TestEndInfoDiv,
   WrongWordsContainer,
+  WrongWordsInfo,
   WrongWordsOthersDiv,
   WrongWordsSpellingDiv,
 } from "../../style/WordStyle";
@@ -26,7 +27,7 @@ export default function TestEnd({ wrongWords }) {
             카드 공부하러 가기
           </ColorButton>
         </LinkButtonDiv>
-        <div>틀린문제는 총 {wrongWords.length}개에요</div>
+        <WrongWordsInfo>틀린 단어 다시보기</WrongWordsInfo>
         {wrongWords.map((word, key) => (
           <WrongWordsContainer key={key}>
             <WrongWordsSpellingDiv>{word.spelling} </WrongWordsSpellingDiv>

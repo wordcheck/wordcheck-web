@@ -194,7 +194,7 @@ export default function Mypage({ cookies, removeCookie }) {
       <AccountSettingDiv>
         <div className="info">Account Settings</div>
         <Link
-          to="/mypage/nicknamechange"
+          to="/wordcheck-web/mypage/nicknamechange"
           style={{ color: "inherit", textDecoration: "inherit" }}
         >
           <AccountSettingDiv2>닉네임</AccountSettingDiv2>

@@ -41,19 +41,19 @@ export default function Modal({
     setAnswer("");
     setOpenModal(false);
   };
-
+  console.log("correctAnswer", correctAnswer);
   function TrueModal() {
     return (
       <>
         <ModalContainer>
           <div>정답입니다!</div>
-          {/* <ModalAnswer
+          <ModalAnswer
             variant="contained"
             color="success"
             sx={{ textTransform: "none" }}
           >
             {correctAnswer}
-          </ModalAnswer> */}
+          </ModalAnswer>
           <ColorButton
             onClick={() => {
               setOpenModal(false);

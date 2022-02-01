@@ -18,12 +18,15 @@ import {
   CategoryMeaningDiv,
   EditDeleteIconDiv,
   WordCardRightDiv,
+  WordListInputContainer,
 } from "../../style/WordStyle";
 import StarIcon from "@mui/icons-material/Star";
 import { grey, yellow } from "@mui/material/colors";
 import { useEffect } from "react";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useSpeechSynthesis } from "react-speech-kit";
+import Home from "../Home";
+import { useNavigate } from "react-router-dom";
 export default function WordList({
   wordlist,
   cookies,
@@ -41,7 +44,13 @@ export default function WordList({
   const [marks, setMarks] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
+
+  useEffect(() => {
+    window.localStorage.setItem("marks", JSON.stringify(marks));
+  }, [marks]);
+
   const { speak } = useSpeechSynthesis();
+  const navigate = useNavigate();
 
   const { spelling, meaning, category } = editedInputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
@@ -113,48 +122,42 @@ export default function WordList({
     setMarks(beforeInfo);
   };
 
-  useEffect(() => {
-    window.localStorage.setItem("marks", JSON.stringify(marks));
-  }, [marks]);
-
   return (
     <Container>
       {wordlist.map((word) => (
         <Carddiv key={word.id}>
           {word.id === editId ? (
             <>
-              <div>
+              <WordListInputContainer>
                 <Input
                   name="spelling"
                   value={spelling}
                   onChange={onChangeEditedInputHandler}
                   color="secondary"
                   defaultValue={word.spelling}
+                />
+
+                <NativeSelect
+                  name="category"
+                  value={category}
+                  defaultValue={word.category}
+                  onChange={onChangeEditedInputHandler}
+                >
+                  {categoryList.map((category, index) => (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </NativeSelect>
+                <Input
+                  name="meaning"
+                  value={meaning}
+                  defaultValue={word.meaning}
+                  onChange={onChangeEditedInputHandler}
                 ></Input>
-              </div>
-              <CardDiv2>
-                <div>
-                  <NativeSelect
-                    name="category"
-                    value={category}
-                    defaultValue={word.category}
-                    onChange={onChangeEditedInputHandler}
-                  >
-                    {categoryList.map((category, index) => (
-                      <option key={index} value={category}>
-                        {category}
-                      </option>
-                    ))}
-                  </NativeSelect>
-                  <Input
-                    name="meaning"
-                    value={meaning}
-                    defaultValue={word.meaning}
-                    onChange={onChangeEditedInputHandler}
-                  ></Input>
-                </div>
+
                 <CheckIcon onClick={onClickModificatedButtonHandler} />
-              </CardDiv2>
+              </WordListInputContainer>
             </>
           ) : (
             <>

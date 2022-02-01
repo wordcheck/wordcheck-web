@@ -30,28 +30,13 @@ function App() {
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://52.78.37.13/api/words/", {
-  //       headers: {
-  //         Authorization: cookies.token,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       setCards(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // console.log("cards", cards);
   return (
     <div>
       <Router>
         <Routes>
           <>
             <Route
-              path="/"
+              path="/wordcheck-web/"
               element={
                 <Home
                   cookies={cookies}
@@ -62,7 +47,7 @@ function App() {
               }
             />
             <Route
-              path="/login"
+              path="/wordcheck-web/login"
               element={
                 <LoginPage
                   setCookie={setCookie}
@@ -70,19 +55,28 @@ function App() {
                 />
               }
             />
-            <Route path="/login/signup" element={<SignUpPage />} />
-            <Route path="/addwords" element={<AddWords cookies={cookies} />} />
-            <Route path="/marks" element={<Marks cookies={cookies} />} />
             <Route
-              path="/card/:contents"
+              path="/wordcheck-web/login/signup"
+              element={<SignUpPage />}
+            />
+            <Route
+              path="/wordcheck-web/addwords"
+              element={<AddWords cookies={cookies} />}
+            />
+            <Route
+              path="/wordcheck-web/marks"
+              element={<Marks cookies={cookies} />}
+            />
+            <Route
+              path="/wordcheck-web/card/:contents"
               element={<Card cookies={cookies} />}
             />
             <Route
-              path="/testschoice"
+              path="/wordcheck-web/testschoice"
               element={<TestsChoice cookies={cookies} />}
             />
             <Route
-              path="/alltestchoice"
+              path="/wordcheck-web/alltestchoice"
               element={
                 <AllTestsChoice
                   wordlist={wordAll}
@@ -92,23 +86,23 @@ function App() {
               }
             />
             <Route
-              path="/multiplechoice/:contents"
+              path="/wordcheck-web/multiplechoice/:contents"
               element={<MultipleChoice cookies={cookies} />}
             />
             <Route
-              path="/spellspelling/:contents"
+              path="/wordcheck-web/spellspelling/:contents"
               element={<SpellSpelling cookies={cookies} />}
             />
             <Route
-              path="/wordsearch"
+              path="/wordcheck-web/wordsearch"
               element={<WordSearch cookies={cookies} cards={cards} />}
             />
             <Route
-              path="/mypage"
+              path="/wordcheck-web/mypage"
               element={<Mypage cookies={cookies} removeCookie={removeCookie} />}
             />
             <Route
-              path="/mypage/nicknamechange"
+              path="/wordcheck-web/mypage/nicknamechange"
               element={
                 <NicknameChange cookies={cookies} removeCookie={removeCookie} />
               }
@@ -128,7 +122,7 @@ function App() {
             }}
           >
             <Link
-              to="/alltestchoice"
+              to="/wordcheck-web/alltestchoice"
               state={{ cards }}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
@@ -138,7 +132,7 @@ function App() {
               />
             </Link>
             <Link
-              to="/addwords"
+              to="/wordcheck-web/addwords"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <BottomNavigationAction
@@ -147,7 +141,7 @@ function App() {
               />
             </Link>
             <Link
-              to="/"
+              to="/wordcheck-web/"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <BottomNavigationAction
@@ -156,7 +150,7 @@ function App() {
               />
             </Link>
             <Link
-              to="/wordsearch"
+              to="/wordcheck-web/wordsearch"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <BottomNavigationAction
@@ -165,7 +159,7 @@ function App() {
               />
             </Link>
             <Link
-              to="/marks"
+              to="/wordcheck-web/marks"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <BottomNavigationAction

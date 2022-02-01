@@ -96,7 +96,7 @@ export default function LoginPage({ setCookie, setShowBottomNav }) {
         </ColorButton>
       </form>
       <Link
-        to="signup"
+        to="/wordcheck-web/signup"
         style={{ textDecoration: "none", color: "black", paddingTop: "1vh" }}
       >
         <div style={{ fontSize: "0.5em", marginTop: "2vh" }}>Sign up</div>

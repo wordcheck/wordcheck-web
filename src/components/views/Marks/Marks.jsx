@@ -38,7 +38,6 @@ export default function Marks() {
     let beforeMark = [...marksList];
     const idx = beforeMark.indexOf(mark);
     beforeMark.splice(idx, 1);
-    console.log("del", beforeMark);
     setMarksList(beforeMark);
   };
   console.log(marksList.length == true);
@@ -52,32 +51,30 @@ export default function Marks() {
         <TopNav>Mark Book</TopNav>
       </TopNavDivContainer>
       {marksList.length ? (
-        marksList?.map((mark) => (
-          <>
-            <Carddiv>
-              <div>
-                <WrongCountDiv>틀린횟수 :{mark.wrong_count}</WrongCountDiv>
-                <SpellingVolumeUpDiv>
-                  <SpellingDiv>{mark.spelling}</SpellingDiv>
+        marksList?.map((mark, key) => (
+          <Carddiv key={key}>
+            <div>
+              <WrongCountDiv>틀린횟수 :{mark.wrong_count}</WrongCountDiv>
+              <SpellingVolumeUpDiv>
+                <SpellingDiv>{mark.spelling}</SpellingDiv>
 
-                  <VolumeUpIcon
-                    sx={{ height: "2.5vh" }}
-                    onClick={() => speak({ text: mark.spelling })}
-                  />
-                </SpellingVolumeUpDiv>
-                <CategoryMeaningDiv>
-                  <CategoryList>{mark.category}.</CategoryList>
-                  <MeaningDiv> {mark.meaning}</MeaningDiv>
-                </CategoryMeaningDiv>
-              </div>
-              <WordCardRightDiv>
-                <StarIcon
-                  onClick={() => onClickMarkButtonHandler(mark)}
-                  sx={{ color: yellow[600] }}
+                <VolumeUpIcon
+                  sx={{ height: "2.5vh" }}
+                  onClick={() => speak({ text: mark.spelling })}
                 />
-              </WordCardRightDiv>
-            </Carddiv>
-          </>
+              </SpellingVolumeUpDiv>
+              <CategoryMeaningDiv>
+                <CategoryList>{mark.category}.</CategoryList>
+                <MeaningDiv> {mark.meaning}</MeaningDiv>
+              </CategoryMeaningDiv>
+            </div>
+            <WordCardRightDiv>
+              <StarIcon
+                onClick={() => onClickMarkButtonHandler(mark)}
+                sx={{ color: yellow[600] }}
+              />
+            </WordCardRightDiv>
+          </Carddiv>
         ))
       ) : (
         <EmptyMarkDiv>
@@ -90,16 +87,4 @@ export default function Marks() {
       )}
     </Container>
   );
-}
-{
-  /* <Carddiv key={mark.id}>
-          <StarIcon
-            onClick={() => onClickMarkButtonHandler(mark)}
-            sx={{ color: yellow[600] }}
-          />
-          <SpellingDiv> {mark.spelling}</SpellingDiv>
-          <CategoryList> {mark.category}</CategoryList>
-
-          {mark.meaning}
-        </Carddiv> */
 }
