@@ -36,12 +36,12 @@ export default function LoginPage({ setCookie, setShowBottomNav }) {
       .then((response) => {
         if (response.data) {
           setCookie("token", response.data.account_token, {
-            path: "/",
+            path: "/wordcheck-web/",
           });
           setCookie("nickname", response.data.nickname, {
-            path: "/",
+            path: "/wordcheck-web/",
           });
-          navigate("/");
+          navigate("/wordcheck-web/");
         }
       })
       .catch((err) => {
@@ -96,7 +96,7 @@ export default function LoginPage({ setCookie, setShowBottomNav }) {
         </ColorButton>
       </form>
       <Link
-        to="/wordcheck-web/signup"
+        to="/wordcheck-web/login/signup"
         style={{ textDecoration: "none", color: "black", paddingTop: "1vh" }}
       >
         <div style={{ fontSize: "0.5em", marginTop: "2vh" }}>Sign up</div>

@@ -15,7 +15,6 @@ export default function SignUpPage() {
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [SecretCode, setSecretCode] = useState("");
   const [CheckNickname, setCheckNickname] = useState(false);
 
   const onNicknameHandler = (event) => {
@@ -28,10 +27,6 @@ export default function SignUpPage() {
 
   const onConfirmPasswordHandler = (event) => {
     setConfirmPassword(event.currentTarget.value);
-  };
-
-  const onSecretCodeHandler = (event) => {
-    setSecretCode(event.currentTarget.value);
   };
 
   const onNicknameCheckHandler = () => {
@@ -84,12 +79,12 @@ export default function SignUpPage() {
     const body = {
       nickname: Nickname,
       password: Password,
-      secret_code: SecretCode,
+      secret_code: "980117",
     };
 
     dispatch(SignUpUser(body)).then((response) => {
       if (response.payload?.msg === "success") {
-        navigate("/");
+        navigate("/wordcheck-web/");
         console.log("success");
         alert("회원가입에 성공했어요");
       } else {
@@ -130,14 +125,6 @@ export default function SignUpPage() {
           onChange={onConfirmPasswordHandler}
           type="password"
           value={ConfirmPassword}
-        />
-
-        <CssTextField
-          label="Secret code"
-          margin="normal"
-          onChange={onSecretCodeHandler}
-          type="password"
-          value={SecretCode}
         />
         <br />
         <ColorButton type="submit">회원가입</ColorButton>
