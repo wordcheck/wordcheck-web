@@ -9,7 +9,7 @@ export async function loginUser(dataToSubmit) {
     .post(`${process.env.REACT_APP_API}accounts/normal_login/`, formData)
     .then((response) => response.data)
     .catch((err) => {
-      console.log("==>", err);
+      // console.log("==>", err);
     });
 
   return {
@@ -27,7 +27,7 @@ export function SignUpUser(dataToSubmit) {
     .post(`${process.env.REACT_APP_API}accounts/normal_signup/`, formData)
     .then((response) => response.data)
     .catch((err) => {
-      console.log("==>", err);
+      // console.log("==>", err);
     });
 
   return {

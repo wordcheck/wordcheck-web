@@ -12,7 +12,6 @@ import {
   WrongWordsSpellingDiv,
 } from "../../style/WordStyle";
 export default function TestEnd({ wrongWords }) {
-  console.log(wrongWords);
   const navigation = useNavigate();
   return (
     <>

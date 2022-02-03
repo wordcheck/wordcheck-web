@@ -51,7 +51,7 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
       )
       .then((response) => {
         setProfile(response.data);
-        console.log(response.data);
+
         setLoading(false);
       })
       .catch((error) => {
@@ -98,7 +98,6 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
   });
   let WrongSum = 0;
   wordlist.forEach((item) => (WrongSum += item.wrong_count));
-  console.log("reduce : ", WrongSum);
 
   const onClickLogoutHandler = () => {
     setGetLogoutModal(true);
@@ -152,13 +151,9 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
           Sign out
         </ColorButton>
       </UserDiv>
-      {/* <UserDataDiv>
+      <UserDataDiv>
         <DataInfoDiv>
-          현재까지 등록된 단어는{" "}
-          <DataTop3BoldSpan>{wordlist.length}</DataTop3BoldSpan>개입니다.
-        </DataInfoDiv>
-        <DataInfoDiv>
-          한 단어당 평균 틀린횟수는
+          {profile.nickname}님의 평균 틀린횟수는
           <DataTop3BoldSpan>
             {(WrongSum / wordlist.length).toFixed(2)}
           </DataTop3BoldSpan>
@@ -187,7 +182,7 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
             </DataTop3Span>
           </DataTop3Li>
         </ul>
-      </UserDataDiv> */}
+      </UserDataDiv>
 
       <AccountSettingDiv>
         <div className="info">Account Settings</div>
@@ -197,7 +192,6 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
         >
           <AccountSettingDiv2>닉네임</AccountSettingDiv2>
         </Link>
-
         <input
           ref={profileImgInput}
           onChange={onChangeImgChange}
@@ -209,10 +203,9 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
         <AccountSettingDiv2 onClick={onClickInputBtn}>
           프로필 사진 수정
         </AccountSettingDiv2>
-
         <AccountSettingDiv2> 회원탈퇴</AccountSettingDiv2>
       </AccountSettingDiv>
-      {/* <FootDiv>버전정보 : 0.1.0v</FootDiv> */}
+      <FootDiv>버전정보 : 0.1.0v</FootDiv>
       {getLogoutModal && (
         <LogoutModal
           setGetLogoutModal={setGetLogoutModal}

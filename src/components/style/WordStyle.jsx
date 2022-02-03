@@ -124,7 +124,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.7em")};
+  font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.5em")};
   @media only screen and (min-width: 750px) {
     width: 750px;
     font-size: 3vw;
@@ -355,7 +355,7 @@ export const ConfirmModalDiv = styled.div`
   justify-content: space-evenly;
   padding: 6vw;
   z-index: 3;
-  font-size: 1em;
+  font-size: 0.9em;
   @media only screen and (min-width: 750px) {
     width: 525px;
     font-size: 20px;
@@ -364,6 +364,10 @@ export const ConfirmModalDiv = styled.div`
 export const ConfirmModalAnswer = styled(Button)`
   width: 20vw;
   text-transform: none;
+  @media only screen and (min-width: 750px) {
+    width: 200px;
+    font-size: 20px;
+  }
 `;
 export const ConfirmModalBox = styled.div``;
 
@@ -469,10 +473,10 @@ export const AccountSettingDiv2 = styled.div`
 `;
 export const UserDataDiv = styled.div`
   font-size: 0.7em;
-  height: 150px;
+  height: 20vh;
 
   background-color: #e6e6e6;
-  padding: 1vh;
+  padding: 1.5vh;
   border-radius: 1vh;
 `;
 
@@ -489,14 +493,15 @@ export const DataInfoTipDiv = styled.div`
 export const DataTop3Div = styled.div`
   font-weight: 700;
   padding-top: 0.7vh;
-  padding-bottom: 0.3vh;
+  padding-bottom: 0.5vh;
 `;
 export const DataTop3Li = styled.li`
   width: 60vw;
   /* background-color: #ffdb4d; */
-  padding: 0.5vh;
+  padding: 0.15vh;
   margin-bottom: 0.5vh;
   border-radius: 1vh;
+  padding-left: 1vh;
 
   @media only screen and (min-width: 750px) {
     width: 450px;
@@ -511,9 +516,8 @@ export const DataTop3BoldSpan = styled.span`
   font-weight: 700;
 `;
 export const FootDiv = styled.div`
-  position: absolute;
-  bottom: 2vh;
-  width: 100%;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   text-align: center;
   font-size: 0.7em;
 `;

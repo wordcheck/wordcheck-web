@@ -63,7 +63,6 @@ export default function WordSearch({ cookies }) {
         const wordAll = wordAllResponse.map(({ data }) => data);
         setWordAll(wordAll.flat());
       } catch (error) {
-        // handle any errors, rejected Promises, etc..
         console.log(error);
       }
     };
@@ -73,7 +72,6 @@ export default function WordSearch({ cookies }) {
     window.localStorage.setItem("marks", JSON.stringify(marks));
   }, [marks]);
 
-  console.log(wordAll);
   const onClickMarkButtonHandler = (info) => {
     let beforeInfo = [...marks];
     if (JSON.stringify(marks).includes(JSON.stringify(info))) {
@@ -149,7 +147,6 @@ export default function WordSearch({ cookies }) {
               </div>
             );
           })}
-        <BottomNavBoxContainer></BottomNavBoxContainer>
       </WordSearchCardDiv>
     </Container>
   );

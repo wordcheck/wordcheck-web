@@ -22,11 +22,10 @@ export default function DeleteModal({
         },
       })
       .then((response) => {
-        console.log("response", response);
         setDeleteWordId("");
       })
       .catch((error) => {
-        console.log("err===>", error);
+        // console.log("err===>", error);
       });
 
     setGetDeleteModal(false);

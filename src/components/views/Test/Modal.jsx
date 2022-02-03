@@ -24,24 +24,23 @@ export default function Modal({
   setWrongWords,
 }) {
   const OnClickAnswerProcessingHandler = () => {
-    axios
-      .patch(
-        `${process.env.REACT_APP_API}words/${wordList[currentNo].id}/test/?state=correct`,
-        {},
-        {
-          headers: {
-            Authorization: cookies.token,
-          },
-        }
-      )
-      .then((response) => console.log(response));
-    console.log("fixorrect");
+    axios.patch(
+      `${process.env.REACT_APP_API}words/${wordList[currentNo].id}/test/?state=correct`,
+      {},
+      {
+        headers: {
+          Authorization: cookies.token,
+        },
+      }
+    );
+    // .then((response) => console.log(response));
+
     setWrongWords(wrongWords.filter((item) => correctAnswer.id !== item.id));
     setCurrentNo(currentNo + 1);
     setAnswer("");
     setOpenModal(false);
   };
-  console.log("correctAnswer", correctAnswer);
+
   function TrueModal() {
     return (
       <>

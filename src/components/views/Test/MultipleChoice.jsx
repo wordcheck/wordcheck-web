@@ -27,7 +27,7 @@ export default function MultipleChoice({ cookies }) {
 
   // Link에서 가져온 wordList
   const wordList = location.state.wordlist;
-  console.log("dd", wordList);
+
   // currentNo index를 제거한 리스트를 생성
   let unshuffledfiltered = wordList.filter((element, i) => i !== currentNo);
 
@@ -52,14 +52,10 @@ export default function MultipleChoice({ cookies }) {
 
   const onClickMultipleChoiceButtonHandler = (ans) => {
     if (ans.meaning == wordList[currentNo].meaning) {
-      console.log("correct");
-
       setCorrectAnswer(wordList[currentNo].meaning);
       setModalOpen(true);
       setIsTrueAnswer(true);
     } else {
-      console.log("not correct");
-
       axios
         .patch(
           `${process.env.REACT_APP_API}words/${ans.id}/test/`,
@@ -71,7 +67,6 @@ export default function MultipleChoice({ cookies }) {
           }
         )
         .then((response) => {
-          console.log(response);
           let lastWrongWords = [...wrongWords];
           let nextWrongWords = {
             spelling: ans.spelling,
@@ -85,13 +80,14 @@ export default function MultipleChoice({ cookies }) {
           setIsTrueAnswer(false);
         })
         .catch((error) => {
-          console.log("err===>", error);
+          // console.log("err===>", error);
         });
     }
   };
 
-  console.log("wrongWords", wrongWords);
-
+  if (wordList.length <= 3) {
+    return <div>hello</div>;
+  }
   // 문제를 다 풀었을 때
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
@@ -100,7 +96,7 @@ export default function MultipleChoice({ cookies }) {
     <>
       <Container>
         <TopNavDivContainer>
-          <BackButton onClick={() => navigate(-2)}>
+          <BackButton onClick={() => navigate("/wordcheck-web/home")}>
             <ArrowBackIosIcon />
           </BackButton>
           <TopNav>

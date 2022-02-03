@@ -40,7 +40,6 @@ export default function Marks() {
     beforeMark.splice(idx, 1);
     setMarksList(beforeMark);
   };
-  console.log(marksList.length == true);
 
   return (
     <Container>

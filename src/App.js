@@ -112,7 +112,7 @@ function App() {
           <StyledBottomNavigation
             showLabels
             style={{
-              position: "fixed",
+              position: "sticky",
               bottom: "0",
               borderTop: "1px solid lightgray",
               display: "flex",

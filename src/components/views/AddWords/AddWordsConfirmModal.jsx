@@ -23,18 +23,17 @@ export default function ConfirmModal({
           formData.append("spelling", wordList.spelling);
           formData.append("category", wordList.category);
           formData.append("meaning", wordList.meaning);
-          return axios
-            .post(`${process.env.REACT_APP_API}words/`, formData, {
-              headers: {
-                Authorization: cookies.token,
-              },
-            })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((error) => {
-              console.log("err==>", error);
-            });
+          return axios.post(`${process.env.REACT_APP_API}words/`, formData, {
+            headers: {
+              Authorization: cookies.token,
+            },
+          });
+          // .then((res) => {
+          //   console.log(res);
+          // })
+          // .catch((error) => {
+          //   console.log("err==>", error);
+          // });
         })
       )
         .then(() => {

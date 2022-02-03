@@ -26,7 +26,6 @@ export default function Card({ cookies }) {
   const [deleteWordId, setDeleteWordId] = useState("");
   const { contents } = useParams();
   const navigate = useNavigate();
-  console.log(deleteWordId);
 
   useEffect(() => {
     axios
@@ -42,11 +41,11 @@ export default function Card({ cookies }) {
         setWordlist(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, [editId, deleteWordId]);
 
-  if (wordlist == "") {
+  if (wordlist === "") {
     navigate(`/wordcheck-web/`);
   }
 

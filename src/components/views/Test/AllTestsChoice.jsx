@@ -12,11 +12,14 @@ import {
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
+import { Alert, Snackbar } from "@mui/material";
 
 export default function AllTestsChoice({ cookies }) {
   // const [wordlist, setWordlist] = useState([]);
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
+  const [mulChoicefailAlert, setMulChoiceFailAlert] = useState(false);
+  const [spellFailAlert, setSpellFailAlert] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,7 +35,6 @@ export default function AllTestsChoice({ cookies }) {
           }
         );
         setCards(cards);
-
         const cardsPromises = cards.map((contents) =>
           axios.get(
             `${process.env.REACT_APP_API}words/detail_list/?contents=${contents.contents}`,
@@ -47,18 +49,14 @@ export default function AllTestsChoice({ cookies }) {
         const wordAll = wordAllResponse.map(({ data }) => data);
         setWordAll(wordAll);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchData();
   }, []);
 
   const wordlist = wordAll.flat();
-  // const newWord = [].concat(wordAll.map((x) => x));
-  // console.log("newWord", newWord);
 
-  // const newWord = wordAll.map((x) => x);
-  // console.log("newWord", newWord);
   if (!cookies.token) {
     return <Navigate to="/wordcheck-web/" />;
   }
@@ -72,12 +70,8 @@ export default function AllTestsChoice({ cookies }) {
         <TopNav>모든 단어 테스트</TopNav>
       </TopNavDivContainer>
       <TestContentDiv>
-        <Link
-          style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/wordcheck-web/multiplechoice/${wordlist[0]?.contents}`}
-          state={{ wordlist }}
-        >
-          <ButtonContainer>
+        {wordlist.length <= 3 ? (
+          <ButtonContainer onClick={() => setMulChoiceFailAlert(true)}>
             <div className="buttons">
               <span style={{ paddingBottom: "1vh" }}>사지선다</span>
               <div className="contentInfo">
@@ -85,22 +79,50 @@ export default function AllTestsChoice({ cookies }) {
               </div>
             </div>
           </ButtonContainer>
-        </Link>
+        ) : (
+          <Link
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            to={`/wordcheck-web/multiplechoice/${wordlist[0]?.contents}`}
+            state={{ wordlist }}
+          >
+            <ButtonContainer>
+              <div className="buttons">
+                <span style={{ paddingBottom: "1vh" }}>사지선다</span>
+                <div className="contentInfo">
+                  문제를 읽고 올바른 정답을 선택하세요.
+                </div>
+              </div>
+            </ButtonContainer>
+          </Link>
+        )}
+
         <ArrowForwardIosIcon />
       </TestContentDiv>
       <TestContentDiv>
-        <Link
-          style={{ color: "inherit", textDecoration: "inherit" }}
-          to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
-          state={{ wordlist }}
-        >
+        {wordlist.length < 1 ? (
           <ButtonContainer>
-            <div className="buttons">
+            <div className="buttons" onClick={() => setSpellFailAlert(true)}>
               <span style={{ paddingBottom: "1vh" }}>철자맞히기 </span>
               <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
             </div>
           </ButtonContainer>
-        </Link>
+        ) : (
+          <Link
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
+            state={{ wordlist }}
+          >
+            <ButtonContainer>
+              <div className="buttons">
+                <span style={{ paddingBottom: "1vh" }}>철자맞히기 </span>
+                <div className="contentInfo">
+                  단어의 철자를 직접 입력하세요.
+                </div>
+              </div>
+            </ButtonContainer>
+          </Link>
+        )}
+
         <ArrowForwardIosIcon />
       </TestContentDiv>
       {/* <TestContentDiv>
@@ -120,6 +142,50 @@ export default function AllTestsChoice({ cookies }) {
         </Link>
         <ArrowForwardIosIcon />
       </TestContentDiv> */}
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        open={mulChoicefailAlert}
+        autoHideDuration={3000}
+        onClose={() => setMulChoiceFailAlert(false)}
+      >
+        <Alert
+          onClose={() => setMulChoiceFailAlert(false)}
+          severity="error"
+          sx={{
+            width: "250px",
+            background: "rgb(211, 47, 47)",
+            color: "rgb(255, 255, 255)",
+            fontSize: "17px",
+          }}
+        >
+          단어를 4개 이상 저장해주세요
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        open={spellFailAlert}
+        autoHideDuration={3000}
+        onClose={() => setSpellFailAlert(false)}
+      >
+        <Alert
+          onClose={() => setSpellFailAlert(false)}
+          severity="error"
+          sx={{
+            width: "250px",
+            background: "rgb(211, 47, 47)",
+            color: "rgb(255, 255, 255)",
+            fontSize: "17px",
+          }}
+        >
+          단어를 1개 이상 저장해주세요
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

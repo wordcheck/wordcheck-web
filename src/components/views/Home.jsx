@@ -20,7 +20,7 @@ import {
 
 export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   // const [profile, setProfile] = useState([]);
-  console.log("home");
+
   useEffect(() => {
     setShowBottomNav(true);
     axios
@@ -31,10 +31,9 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
       })
       .then((response) => {
         setCards(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 

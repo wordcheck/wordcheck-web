@@ -11,7 +11,7 @@ import { useCookies } from "react-cookie";
 export default function LogoutModal({ setGetLogoutModal }) {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  console.log("logout", cookies);
+
   const onClickLogoutButtonHandler = () => {
     removeCookie("token", { path: "/wordcheck-web/" });
     navigate("/wordcheck-web/");

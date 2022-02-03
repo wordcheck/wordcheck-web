@@ -49,7 +49,6 @@ export default function SignUpPage() {
         }
       })
       .catch((error) => {
-        console.log("err", error);
         if (!Nickname) {
           toast.error("사용할 닉네임 값을 입력해주세요.", {
             autoClose: 2000,
@@ -77,7 +76,7 @@ export default function SignUpPage() {
         position: toast.POSITION.BOTTOM_CENTER,
       });
     }
-    console.log("ee");
+
     const body = {
       nickname: Nickname,
       password: Password,
@@ -87,9 +86,8 @@ export default function SignUpPage() {
     dispatch(SignUpUser(body)).then((response) => {
       if (response.payload?.msg === "success") {
         setIsLoginSuccess(true);
-        console.log("success");
       } else {
-        console.log("sign up error");
+        // console.log("sign up error");
       }
     });
   };

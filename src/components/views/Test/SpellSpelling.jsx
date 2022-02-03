@@ -33,18 +33,16 @@ export default function SpellSpellingTest({ cookies }) {
 
   const onClickSpellingInputHandler = () => {
     if (wordList[currentNo].spelling == answer) {
-      axios
-        .patch(
-          `${process.env.REACT_APP_API}words/${wordList[currentNo].id}/test/?state=correct`,
-          {},
-          {
-            headers: {
-              Authorization: cookies.token,
-            },
-          }
-        )
-        .then((response) => console.log(response));
-      console.log("correct");
+      axios.patch(
+        `${process.env.REACT_APP_API}words/${wordList[currentNo].id}/test/?state=correct`,
+        {},
+        {
+          headers: {
+            Authorization: cookies.token,
+          },
+        }
+      );
+      // .then((response) => console.log(response));
       setModalOpen(true);
       setIsTrueAnswer(true);
       setCorrectAnswer(wordList[currentNo].spelling);
@@ -89,7 +87,6 @@ export default function SpellSpellingTest({ cookies }) {
       onClickSpellingInputHandler();
     }
   }
-  console.log("wrongWords", wrongWords);
 
   if (currentNo == wordList.length) {
     return <TestEnd wrongWords={wrongWords} />;
@@ -97,7 +94,7 @@ export default function SpellSpellingTest({ cookies }) {
   return (
     <Container>
       <TopNavDivContainer>
-        <BackButton onClick={() => navigate(-2)}>
+        <BackButton onClick={() => navigate("/wordcheck-web/home")}>
           <ArrowBackIosIcon />
         </BackButton>
         <TopNav>

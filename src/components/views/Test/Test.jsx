@@ -48,10 +48,8 @@ export default function Test({ cookies }) {
 
   const onClickMultipleChoiceButtonHandler = (answer) => {
     if (answer.meaning == wordList[currentNo].meaning) {
-      console.log("correct");
       setCurrentNo(currentNo + 1);
     } else {
-      console.log("not correct");
       setCurrentNo(currentNo + 1);
       axios
         .patch(
@@ -75,7 +73,7 @@ export default function Test({ cookies }) {
           setWrongWords(lastWrongWords);
         })
         .catch((error) => {
-          console.log("err===>", error);
+          // console.log("err===>", error);
         });
     }
   };

@@ -95,11 +95,10 @@ export default function WordList({
         }
       )
       .then((response) => {
-        console.log("response", response);
         setEditId("");
       })
       .catch((error) => {
-        console.log("err===>", error);
+        // console.log("err===>", error);
       });
   };
   const onClickEditButtonHandler = (id) => {

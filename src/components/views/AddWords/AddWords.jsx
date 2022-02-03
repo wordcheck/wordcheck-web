@@ -59,7 +59,6 @@ export default function AddWords({ cookies }) {
     if (contents == "") {
       setTitleAlert(true);
     } else {
-      console.log("fff");
       setConfirm(true);
     }
     // } else if (window.confirm("추가하시겠습니까?")) {
