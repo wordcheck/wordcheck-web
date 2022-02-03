@@ -49,7 +49,7 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   ));
 
   if (!cookies.token) {
-    return <Navigate to="/wordcheck-web/login" />;
+    return <Navigate to="/wordcheck-web/" />;
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,12 +9,11 @@ import { useCookies } from "react-cookie";
 import { Container } from "../../style/WordStyle";
 // import Button from "@mui/material/Button";
 
-export default function LoginPage({ setCookie, setShowBottomNav }) {
+export default function LoginPage({ setCookie, cookies, setShowBottomNav }) {
   const navigate = useNavigate();
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
 
-  console.log("loginpage");
   useEffect(() => {
     setShowBottomNav(false);
   }, []);
@@ -39,8 +38,7 @@ export default function LoginPage({ setCookie, setShowBottomNav }) {
           setCookie("token", response.data.account_token, {
             path: "/wordcheck-web/",
           });
-
-          navigate("/wordcheck-web/");
+          navigate("/wordcheck-web/home");
         }
       })
       .catch((err) => {
@@ -63,7 +61,9 @@ export default function LoginPage({ setCookie, setShowBottomNav }) {
         }
       });
   };
-
+  if (cookies.token) {
+    return <Navigate to="/wordcheck-web/home" />;
+  }
   return (
     <Container>
       <Logo>WordCheck</Logo>

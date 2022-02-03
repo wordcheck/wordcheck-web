@@ -38,6 +38,16 @@ function App() {
           <Route
             path="/wordcheck-web/"
             element={
+              <LoginPage
+                setCookie={setCookie}
+                cookies={cookies}
+                setShowBottomNav={setShowBottomNav}
+              />
+            }
+          />
+          <Route
+            path="/wordcheck-web/home"
+            element={
               <Home
                 cookies={cookies}
                 cards={cards}
@@ -46,15 +56,7 @@ function App() {
               />
             }
           />
-          <Route
-            path="/wordcheck-web/login"
-            element={
-              <LoginPage
-                setCookie={setCookie}
-                setShowBottomNav={setShowBottomNav}
-              />
-            }
-          />
+
           <Route path="/wordcheck-web/login/signup" element={<SignUpPage />} />
           <Route
             path="/wordcheck-web/addwords"
