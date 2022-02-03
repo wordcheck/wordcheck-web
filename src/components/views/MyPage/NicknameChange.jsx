@@ -56,7 +56,7 @@ export default function NicknameChange({ cookies }) {
         </BackButton>
         <TopNav>닉네임 설정</TopNav>
       </TopNavDivContainer>
-      <div> 닉네임을 입력해주세요.</div>
+
       <WordSearchInputDiv>
         <CssTextField
           value={changedNickname}
