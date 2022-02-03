@@ -16,7 +16,7 @@ export default function LoginSuccessModal() {
           variant="contained"
           color="success"
           sx={{ textTransform: "none" }}
-          onClick={() => navigate("/wordcheck-web/login")}
+          onClick={() => navigate("/wordcheck-web/")}
         >
           확인
         </ConfirmModalAnswer>

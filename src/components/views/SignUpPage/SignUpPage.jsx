@@ -67,17 +67,17 @@ export default function SignUpPage() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (!CheckNickname) {
-      toast.error("아이디 중복 검사를 해주세요", {
+      return toast.error("아이디 중복 검사를 해주세요", {
         autoClose: 2000,
         position: toast.POSITION.BOTTOM_CENTER,
       });
     } else if (Password !== ConfirmPassword) {
-      toast.error("비밀번호를 확인해주세요", {
+      return toast.error("비밀번호를 확인해주세요", {
         autoClose: 2000,
         position: toast.POSITION.BOTTOM_CENTER,
       });
     }
-
+    console.log("ee");
     const body = {
       nickname: Nickname,
       password: Password,
@@ -87,7 +87,6 @@ export default function SignUpPage() {
     dispatch(SignUpUser(body)).then((response) => {
       if (response.payload?.msg === "success") {
         setIsLoginSuccess(true);
-
         console.log("success");
       } else {
         console.log("sign up error");

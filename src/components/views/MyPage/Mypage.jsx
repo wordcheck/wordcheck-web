@@ -213,7 +213,12 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
         <AccountSettingDiv2> 회원탈퇴</AccountSettingDiv2>
       </AccountSettingDiv>
       {/* <FootDiv>버전정보 : 0.1.0v</FootDiv> */}
-      {getLogoutModal && <LogoutModal setGetLogoutModal={setGetLogoutModal} />}
+      {getLogoutModal && (
+        <LogoutModal
+          setGetLogoutModal={setGetLogoutModal}
+          removeCookie={removeCookie}
+        />
+      )}
     </Container>
   );
 }

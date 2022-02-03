@@ -17,6 +17,9 @@ export default function LoginPage({ setCookie, cookies, setShowBottomNav }) {
   useEffect(() => {
     setShowBottomNav(false);
   }, []);
+  useEffect(() => {
+    console.log("loginpage", cookies);
+  }, [cookies]);
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);

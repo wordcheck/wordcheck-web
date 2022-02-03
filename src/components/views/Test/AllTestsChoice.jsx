@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import {
   BackButton,
@@ -47,7 +47,6 @@ export default function AllTestsChoice({ cookies }) {
         const wordAll = wordAllResponse.map(({ data }) => data);
         setWordAll(wordAll);
       } catch (error) {
-        // handle any errors, rejected Promises, etc..
         console.log(error);
       }
     };
@@ -60,6 +59,9 @@ export default function AllTestsChoice({ cookies }) {
 
   // const newWord = wordAll.map((x) => x);
   // console.log("newWord", newWord);
+  if (!cookies.token) {
+    return <Navigate to="/wordcheck-web/" />;
+  }
 
   return (
     <Container>

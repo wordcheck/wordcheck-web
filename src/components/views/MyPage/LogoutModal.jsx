@@ -6,15 +6,15 @@ import {
   ModalBackground,
 } from "../../style/WordStyle";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+import { useCookies } from "react-cookie";
 
 export default function LogoutModal({ setGetLogoutModal }) {
   const navigate = useNavigate();
-  const cookies = new Cookies();
-
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  console.log("logout", cookies);
   const onClickLogoutButtonHandler = () => {
-    cookies.remove("token");
-    navigate("/wordcheck-web/login");
+    removeCookie("token", { path: "/wordcheck-web/" });
+    navigate("/wordcheck-web/");
   };
 
   return (
