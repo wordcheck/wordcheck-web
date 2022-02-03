@@ -25,8 +25,8 @@ import { grey, yellow } from "@mui/material/colors";
 import { useEffect } from "react";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useSpeechSynthesis } from "react-speech-kit";
-import Home from "../Home";
 import { useNavigate } from "react-router-dom";
+import DeleteModal from "./DeleteModal";
 
 export default function WordList({
   wordlist,
@@ -34,6 +34,7 @@ export default function WordList({
   setIsDeleted,
   editId,
   setEditId,
+  setGetDeleteModal,
 }) {
   const [editedInputs, setEditedInputs] = useState([
     {
@@ -51,7 +52,6 @@ export default function WordList({
   }, [marks]);
 
   const { speak } = useSpeechSynthesis();
-  const navigate = useNavigate();
 
   const { spelling, meaning, category } = editedInputs;
   const categoryList = ["n", "v", "adj", "adv", "phr", "prep"];
@@ -94,22 +94,24 @@ export default function WordList({
   };
 
   const onClickDeleteButtonHandler = (wordid) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      axios
-        .delete(`${process.env.REACT_APP_API}words/${wordid}`, {
-          headers: {
-            Authorization: cookies.token,
-          },
-        })
-        .then((response) => {
-          console.log("response", response);
-          setIsDeleted(true);
-        })
-        .catch((error) => {
-          console.log("err===>", error);
-        });
-    }
-    setIsDeleted(false);
+    setGetDeleteModal(true);
+
+    // if (window.confirm("정말 삭제하시겠습니까?")) {
+    //   axios
+    //     .delete(`${process.env.REACT_APP_API}words/${wordid}`, {
+    //       headers: {
+    //         Authorization: cookies.token,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log("response", response);
+    //       setIsDeleted(true);
+    //     })
+    //     .catch((error) => {
+    //       console.log("err===>", error);
+    //     });
+    // }
+    // setIsDeleted(false);
   };
 
   const onClickMarkButtonHandler = (info) => {
@@ -156,7 +158,6 @@ export default function WordList({
                   defaultValue={word.meaning}
                   onChange={onChangeEditedInputHandler}
                 ></Input>
-
                 <CheckIcon onClick={onClickModificatedButtonHandler} />
               </WordListInputContainer>
             </>

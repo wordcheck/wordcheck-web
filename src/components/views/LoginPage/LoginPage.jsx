@@ -9,15 +9,12 @@ import { useCookies } from "react-cookie";
 import { Container } from "../../style/WordStyle";
 // import Button from "@mui/material/Button";
 
-export default function LoginPage({
-  setCookie,
-  setShowBottomNav,
-  setGetToken,
-}) {
+export default function LoginPage({ setCookie, setShowBottomNav }) {
   const navigate = useNavigate();
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
 
+  console.log("loginpage");
   useEffect(() => {
     setShowBottomNav(false);
   }, []);
@@ -42,7 +39,7 @@ export default function LoginPage({
           setCookie("token", response.data.account_token, {
             path: "/wordcheck-web/",
           });
-          setGetToken(true);
+
           navigate("/wordcheck-web/");
         }
       })

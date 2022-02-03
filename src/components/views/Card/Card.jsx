@@ -14,12 +14,14 @@ import Test from "../Test/Test";
 // import DeleteIcon from "@mui/icons-material/Delete";
 // import EditIcon from "@mui/icons-material/Edit";
 import WordList from "./WordList";
+import DeleteModal from "./DeleteModal";
 
 export default function Card({ cookies }) {
   const [wordlist, setWordlist] = useState([]);
-
   const [isDeleted, setIsDeleted] = useState(false);
   const [editId, setEditId] = useState("");
+  const [getDeleteModal, setGetDeleteModal] = useState(false);
+  const [isDeleteWord, setIsDeleteWord] = useState(false);
   const { contents } = useParams();
   const navigate = useNavigate();
 
@@ -67,6 +69,12 @@ export default function Card({ cookies }) {
         editId={editId}
         setEditId={setEditId}
       />
+      {!getDeleteModal && (
+        <DeleteModal
+          setGetDeleteModal={setGetDeleteModal}
+          setIsDeleteWord={setIsDeleteWord}
+        />
+      )}
     </Container>
   );
 }

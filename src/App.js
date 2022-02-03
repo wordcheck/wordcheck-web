@@ -35,84 +35,76 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <>
-            <Route
-              path="/wordcheck-web/"
-              element={
-                <Home
-                  cookies={cookies}
-                  cards={cards}
-                  setCards={setCards}
-                  setShowBottomNav={setShowBottomNav}
-                />
-              }
-            />
-
-            <Route
-              path="/wordcheck-web/login/signup"
-              element={<SignUpPage />}
-            />
-            <Route
-              path="/wordcheck-web/addwords"
-              element={<AddWords cookies={cookies} />}
-            />
-            <Route
-              path="/wordcheck-web/marks"
-              element={<Marks cookies={cookies} />}
-            />
-            <Route
-              path="/wordcheck-web/card/:contents"
-              element={<Card cookies={cookies} />}
-            />
-            <Route
-              path="/wordcheck-web/testschoice"
-              element={<TestsChoice cookies={cookies} />}
-            />
-            <Route
-              path="/wordcheck-web/alltestchoice"
-              element={
-                <AllTestsChoice
-                  wordlist={wordAll}
-                  cookies={cookies}
-                  wordAll={wordAll}
-                />
-              }
-            />
-            <Route
-              path="/wordcheck-web/multiplechoice/:contents"
-              element={<MultipleChoice cookies={cookies} />}
-            />
-            <Route
-              path="/wordcheck-web/spellspelling/:contents"
-              element={<SpellSpelling cookies={cookies} />}
-            />
-            <Route
-              path="/wordcheck-web/wordsearch"
-              element={<WordSearch cookies={cookies} cards={cards} />}
-            />
-            <Route
-              path="/wordcheck-web/mypage"
-              element={<Mypage cookies={cookies} removeCookie={removeCookie} />}
-            />
-            <Route
-              path="/wordcheck-web/mypage/nicknamechange"
-              element={
-                <NicknameChange cookies={cookies} removeCookie={removeCookie} />
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </>
-
+          <Route
+            path="/wordcheck-web/"
+            element={
+              <Home
+                cookies={cookies}
+                cards={cards}
+                setCards={setCards}
+                setShowBottomNav={setShowBottomNav}
+              />
+            }
+          />
           <Route
             path="/wordcheck-web/login"
             element={
               <LoginPage
                 setCookie={setCookie}
                 setShowBottomNav={setShowBottomNav}
-                setGetToken={setGetToken}
               />
             }
           />
+          <Route path="/wordcheck-web/login/signup" element={<SignUpPage />} />
+          <Route
+            path="/wordcheck-web/addwords"
+            element={<AddWords cookies={cookies} />}
+          />
+          <Route
+            path="/wordcheck-web/marks"
+            element={<Marks cookies={cookies} />}
+          />
+          <Route
+            path="/wordcheck-web/card/:contents"
+            element={<Card cookies={cookies} />}
+          />
+          <Route
+            path="/wordcheck-web/testschoice"
+            element={<TestsChoice cookies={cookies} />}
+          />
+          <Route
+            path="/wordcheck-web/alltestchoice"
+            element={
+              <AllTestsChoice
+                wordlist={wordAll}
+                cookies={cookies}
+                wordAll={wordAll}
+              />
+            }
+          />
+          <Route
+            path="/wordcheck-web/multiplechoice/:contents"
+            element={<MultipleChoice cookies={cookies} />}
+          />
+          <Route
+            path="/wordcheck-web/spellspelling/:contents"
+            element={<SpellSpelling cookies={cookies} />}
+          />
+          <Route
+            path="/wordcheck-web/wordsearch"
+            element={<WordSearch cookies={cookies} cards={cards} />}
+          />
+          <Route
+            path="/wordcheck-web/mypage"
+            element={<Mypage cookies={cookies} removeCookie={removeCookie} />}
+          />
+          <Route
+            path="/wordcheck-web/mypage/nicknamechange"
+            element={
+              <NicknameChange cookies={cookies} removeCookie={removeCookie} />
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         {showBottomNav && (
           <StyledBottomNavigation

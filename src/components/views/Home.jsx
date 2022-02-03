@@ -1,6 +1,6 @@
 // 로그인 했을 때 보이는 첫 홈페이지 화면
 // 로그인한 유저만 들어올 수 있음
-import React, { useState } from "react";
+import React from "react";
 import { Link, Navigate } from "react-router-dom";
 import { ColorButton } from "../style/LoginStyle";
 import axios from "axios";
@@ -20,7 +20,7 @@ import {
 
 export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   // const [profile, setProfile] = useState([]);
-
+  console.log("home");
   useEffect(() => {
     setShowBottomNav(true);
     axios
