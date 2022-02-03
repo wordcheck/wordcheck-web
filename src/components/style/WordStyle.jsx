@@ -344,7 +344,7 @@ export const InputInfo = styled.div`
 
 // ConfirmModal.jsx;
 export const ConfirmModalDiv = styled.div`
-  width: 72vw;
+  width: 70vw;
   height: 15vh;
   border-radius: 12px;
   background-color: white;
@@ -356,6 +356,10 @@ export const ConfirmModalDiv = styled.div`
   padding: 6vw;
   z-index: 3;
   font-size: 1em;
+  @media only screen and (min-width: 750px) {
+    width: 525px;
+    font-size: 20px;
+  }
 `;
 export const ConfirmModalAnswer = styled(Button)`
   width: 20vw;
@@ -668,6 +672,9 @@ export const FalseModalButtonDiv = styled.div`
   width: 72vw;
   display: flex;
   justify-content: space-around;
+  @media only screen and (min-width: 750px) {
+    width: 525px;
+  }
 `;
 export const BottomNavBoxContainer = styled.div`
   width: 80vw;
