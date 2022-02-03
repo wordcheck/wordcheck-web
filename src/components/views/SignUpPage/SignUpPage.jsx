@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import styled from "styled-components";
 import { Container } from "../../style/WordStyle";
+import LoginSuccessModal from "./LoginSuccessModal";
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function SignUpPage() {
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [CheckNickname, setCheckNickname] = useState(false);
+  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
 
   const onNicknameHandler = (event) => {
     setNickname(event.currentTarget.value);
@@ -84,9 +86,9 @@ export default function SignUpPage() {
 
     dispatch(SignUpUser(body)).then((response) => {
       if (response.payload?.msg === "success") {
-        navigate("/wordcheck-web/");
+        setIsLoginSuccess(true);
+
         console.log("success");
-        alert("회원가입에 성공했어요");
       } else {
         console.log("sign up error");
       }
@@ -130,6 +132,7 @@ export default function SignUpPage() {
         <ColorButton type="submit">회원가입</ColorButton>
         <ToastContainer />
       </form>
+      {isLoginSuccess && <LoginSuccessModal />}
     </Container>
   );
 }

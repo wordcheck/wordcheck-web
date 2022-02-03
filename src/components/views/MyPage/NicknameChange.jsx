@@ -5,6 +5,8 @@ import {
   NicknameChangeFormDiv,
   NicknameChangeInfo,
   TopNav,
+  TopNavDivContainer,
+  WordSearchInputDiv,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
@@ -38,22 +40,26 @@ export default function NicknameChange({ cookies }) {
 
   return (
     <Container>
-      <BackButton onClick={() => navigate(-1)}>
-        <ArrowBackIosIcon />
-      </BackButton>
-
-      <TopNav>닉네임 설정</TopNav>
-      <NicknameChangeInfo> 닉네임을 입력해주세요.</NicknameChangeInfo>
-      <NicknameChangeFormDiv>
+      <TopNavDivContainer>
+        <BackButton onClick={() => navigate(-1)}>
+          <ArrowBackIosIcon />
+        </BackButton>
+        <TopNav>닉네임 설정</TopNav>
+      </TopNavDivContainer>
+      <div> 닉네임을 입력해주세요.</div>
+      <WordSearchInputDiv>
         <CssTextField
           value={changedNickname}
           onChange={onChangeNicknameChangeInputHandler}
-          style={{ width: "80vw" }}
+          style={{ width: "490px", paddingRight: "10px" }}
         />
-        <ColorButton onClick={onClickNicknameChangeButtonHandler}>
+        <ColorButton
+          onClick={onClickNicknameChangeButtonHandler}
+          sx={{ width: "100px" }}
+        >
           수정하기
         </ColorButton>
-      </NicknameChangeFormDiv>
+      </WordSearchInputDiv>
     </Container>
   );
 }

@@ -26,13 +26,15 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ProfileLottie from "../../../utils/ProfileLottie";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import { Button, IconButton, Input } from "@mui/material";
+import LogoutModal from "./LogoutModal";
 
-export default function Mypage({ cookies, removeCookie }) {
+export default function Mypage({ cookies, removeCookie, setGetToken }) {
   const [profile, setProfile] = useState("");
   const [loading, setLoading] = useState(true);
   const [imgsubmit, setImgsubmit] = useState(false);
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
+  const [getLogoutModal, setGetLogoutModal] = useState(false);
   const navigate = useNavigate();
   const profileImgInput = useRef();
 
@@ -99,11 +101,7 @@ export default function Mypage({ cookies, removeCookie }) {
   console.log("reduce : ", WrongSum);
 
   const onClickLogoutHandler = () => {
-    if (window.confirm("정말 로그아웃하시겠습니까?")) {
-      removeCookie("token");
-      removeCookie("nickname");
-      navigate("/");
-    }
+    setGetLogoutModal(true);
   };
   const onClickInputBtn = (e) => {
     e.preventDefault();
@@ -215,6 +213,7 @@ export default function Mypage({ cookies, removeCookie }) {
         <AccountSettingDiv2> 회원탈퇴</AccountSettingDiv2>
       </AccountSettingDiv>
       {/* <FootDiv>버전정보 : 0.1.0v</FootDiv> */}
+      {getLogoutModal && <LogoutModal setGetLogoutModal={setGetLogoutModal} />}
     </Container>
   );
 }

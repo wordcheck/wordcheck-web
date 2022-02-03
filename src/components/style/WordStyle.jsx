@@ -439,7 +439,7 @@ export const AccountSettingDiv = styled.div`
   width: 100vw;
   .info {
     padding-top: 5vh;
-    padding-left: 4vw;
+    padding-left: 2vh;
   }
   @media only screen and (min-width: 750px) {
     width: 750px;
@@ -447,7 +447,7 @@ export const AccountSettingDiv = styled.div`
 `;
 
 export const AccountSettingDiv2 = styled.div`
-  width: 100vw;
+  width: 94vw;
   height: 6vh;
   display: flex;
   justify-content: space-between;
@@ -677,7 +677,7 @@ export const BottomNavBoxContainer = styled.div`
 // WordSearch.jsx
 export const WordSearchInputDiv = styled.div`
   width: 90vw;
-  padding: 3vh;
+  padding: 2vh;
   display: flex;
   justify-content: space-between;
   @media only screen and (min-width: 750px) {

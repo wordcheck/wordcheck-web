@@ -166,7 +166,7 @@ export default function AddWords({ cookies }) {
             onClose={() => setTitleAlert(false)}
             severity="error"
             sx={{
-              width: "100%",
+              width: "250px",
               background: "rgb(211, 47, 47)",
               color: "rgb(255, 255, 255)",
               fontSize: "17px",
@@ -188,7 +188,7 @@ export default function AddWords({ cookies }) {
             onClose={() => setFailAlert(false)}
             severity="success"
             sx={{
-              width: "100%",
+              width: "250px",
               background: "rgb(211, 47, 47)",
               color: "rgb(255, 255, 255)",
               fontSize: "17px",

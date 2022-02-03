@@ -3,8 +3,6 @@ import {
   BackButton,
   Carddiv,
   Container,
-  NicknameChangeFormDiv,
-  NicknameChangeInfo,
   SpellingDiv,
   SpellingVolumeUpDiv,
   TopNav,

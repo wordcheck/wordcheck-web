@@ -25,10 +25,11 @@ import { StyledBottomNavigation } from "./components/style/WordStyle";
 import axios from "axios";
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies(["token", "nickname"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [showBottomNav, setShowBottomNav] = useState(true);
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
+  const [getToken, setGetToken] = useState(false);
 
   return (
     <div>
@@ -46,15 +47,7 @@ function App() {
                 />
               }
             />
-            <Route
-              path="/wordcheck-web/login"
-              element={
-                <LoginPage
-                  setCookie={setCookie}
-                  setShowBottomNav={setShowBottomNav}
-                />
-              }
-            />
+
             <Route
               path="/wordcheck-web/login/signup"
               element={<SignUpPage />}
@@ -109,6 +102,17 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </>
+
+          <Route
+            path="/wordcheck-web/login"
+            element={
+              <LoginPage
+                setCookie={setCookie}
+                setShowBottomNav={setShowBottomNav}
+                setGetToken={setGetToken}
+              />
+            }
+          />
         </Routes>
         {showBottomNav && (
           <StyledBottomNavigation

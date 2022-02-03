@@ -9,7 +9,11 @@ import { useCookies } from "react-cookie";
 import { Container } from "../../style/WordStyle";
 // import Button from "@mui/material/Button";
 
-export default function LoginPage({ setCookie, setShowBottomNav }) {
+export default function LoginPage({
+  setCookie,
+  setShowBottomNav,
+  setGetToken,
+}) {
   const navigate = useNavigate();
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
@@ -38,9 +42,7 @@ export default function LoginPage({ setCookie, setShowBottomNav }) {
           setCookie("token", response.data.account_token, {
             path: "/wordcheck-web/",
           });
-          setCookie("nickname", response.data.nickname, {
-            path: "/wordcheck-web/",
-          });
+          setGetToken(true);
           navigate("/wordcheck-web/");
         }
       })
