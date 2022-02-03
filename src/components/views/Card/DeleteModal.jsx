@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import {
   ConfirmModalAnswer,
@@ -6,7 +7,33 @@ import {
   ModalBackground,
 } from "../../style/WordStyle";
 
-export default function DeleteModal({ setGetDeleteModal }) {
+export default function DeleteModal({
+  setGetDeleteModal,
+  setIsDeleteWord,
+  deleteWordId,
+  setDeleteWordId,
+  cookies,
+}) {
+  const onClickDeleteWordButtonHandler = () => {
+    axios
+      .delete(`${process.env.REACT_APP_API}words/${deleteWordId}`, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      })
+      .then((response) => {
+        console.log("response", response);
+        setDeleteWordId("");
+      })
+      .catch((error) => {
+        console.log("err===>", error);
+      });
+
+    setGetDeleteModal(false);
+
+    setIsDeleteWord(true);
+  };
+
   return (
     <ModalBackground>
       <ConfirmModalDiv>
@@ -24,6 +51,7 @@ export default function DeleteModal({ setGetDeleteModal }) {
             variant="contained"
             color="success"
             sx={{ textTransform: "none" }}
+            onClick={() => onClickDeleteWordButtonHandler()}
           >
             네
           </ConfirmModalAnswer>

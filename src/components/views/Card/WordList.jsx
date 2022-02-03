@@ -31,10 +31,10 @@ import DeleteModal from "./DeleteModal";
 export default function WordList({
   wordlist,
   cookies,
-  setIsDeleted,
   editId,
   setEditId,
   setGetDeleteModal,
+  setDeleteWordId,
 }) {
   const [editedInputs, setEditedInputs] = useState([
     {
@@ -50,6 +50,25 @@ export default function WordList({
   useEffect(() => {
     window.localStorage.setItem("marks", JSON.stringify(marks));
   }, [marks]);
+
+  // useEffect(() => {
+  //   if (isDeleted) {
+  //     console.log("delete useeffect");
+  //     axios
+  //       .delete(`${process.env.REACT_APP_API}words/${deleteWordId}`, {
+  //         headers: {
+  //           Authorization: cookies.token,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log("response", response);
+  //       })
+  //       .catch((error) => {
+  //         console.log("err===>", error);
+  //       });
+  //   }
+  //   setIsDeleted(false);
+  // }, [deleteWordId]);
 
   const { speak } = useSpeechSynthesis();
 
@@ -95,23 +114,7 @@ export default function WordList({
 
   const onClickDeleteButtonHandler = (wordid) => {
     setGetDeleteModal(true);
-
-    // if (window.confirm("정말 삭제하시겠습니까?")) {
-    //   axios
-    //     .delete(`${process.env.REACT_APP_API}words/${wordid}`, {
-    //       headers: {
-    //         Authorization: cookies.token,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       console.log("response", response);
-    //       setIsDeleted(true);
-    //     })
-    //     .catch((error) => {
-    //       console.log("err===>", error);
-    //     });
-    // }
-    // setIsDeleted(false);
+    setDeleteWordId(wordid);
   };
 
   const onClickMarkButtonHandler = (info) => {

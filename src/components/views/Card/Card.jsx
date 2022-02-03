@@ -21,9 +21,12 @@ export default function Card({ cookies }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [editId, setEditId] = useState("");
   const [getDeleteModal, setGetDeleteModal] = useState(false);
+  // useeffect
   const [isDeleteWord, setIsDeleteWord] = useState(false);
+  const [deleteWordId, setDeleteWordId] = useState("");
   const { contents } = useParams();
   const navigate = useNavigate();
+  console.log(deleteWordId);
 
   useEffect(() => {
     axios
@@ -41,7 +44,7 @@ export default function Card({ cookies }) {
       .catch((error) => {
         console.log(error);
       });
-  }, [isDeleted, editId]);
+  }, [editId, deleteWordId]);
 
   if (wordlist == "") {
     navigate(`/wordcheck-web/`);
@@ -66,13 +69,21 @@ export default function Card({ cookies }) {
         cookies={cookies}
         setWordlist={setWordlist}
         setIsDeleted={setIsDeleted}
+        isDeleteWord={isDeleteWord}
         editId={editId}
         setEditId={setEditId}
+        isDeleted={isDeleted}
+        setGetDeleteModal={setGetDeleteModal}
+        setDeleteWordId={setDeleteWordId}
       />
-      {!getDeleteModal && (
+      {getDeleteModal && (
         <DeleteModal
+          cookies={cookies}
           setGetDeleteModal={setGetDeleteModal}
           setIsDeleteWord={setIsDeleteWord}
+          setIsDeleted={setIsDeleted}
+          deleteWordId={deleteWordId}
+          setDeleteWordId={setDeleteWordId}
         />
       )}
     </Container>
