@@ -129,6 +129,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: #e6fff7; */
 
   font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.5em")};
   @media only screen and (min-width: 750px) {
@@ -422,7 +423,7 @@ export const NameDiv = styled.div`
 `;
 
 export const ImgDiv = styled.div`
-  width: 40vw;
+  width: 20vh;
   height: 20vh;
   border-radius: 70%;
   overflow: hidden;
@@ -494,11 +495,15 @@ export const EmptyUserDataInfoDiv = styled.div`
   color: gray;
 `;
 export const UserDataDiv = styled.div`
+  width: 80vw;
   font-size: 0.7em;
-  height: 20vh;
+  height: 21vh;
   background-color: #e6e6e6;
   padding: 1.5vh;
   border-radius: 1vh;
+  @media only screen and (min-width: 750px) {
+    width: 600px;
+  }
 `;
 
 export const DataInfoDiv = styled.div`
@@ -587,15 +592,15 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: space-evenly; */
+
   .buttons {
-    width: 30vh;
+    /* width: 30vh; */
     padding-top: "1vh";
     padding-bottom: "1vh";
     font-size: 1em;
     display: flex;
     flex-direction: column;
     .contentInfo {
-      width: 40vh;
       color: gray;
       :hover {
         color: green;
@@ -657,8 +662,8 @@ export const EmptyMarkDiv = styled.div`
 export const ModalBackground = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
   font-family: "Nanum Gothic", sans-serif;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(200, 200, 200, 0.5);
   position: fixed;
   display: flex;
@@ -668,7 +673,7 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  width: 72vw;
+  width: 75vw;
   height: 23vh;
   border-radius: 12px;
   background-color: white;
@@ -681,6 +686,10 @@ export const ModalContainer = styled.div`
   padding: 6vw;
   z-index: 3;
   font-size: 0.7em;
+  @media only screen and (min-width: 750px) {
+    width: 562.5px;
+    height: 200px;
+  }
 `;
 // in Modal.jsx  //falseModal()
 

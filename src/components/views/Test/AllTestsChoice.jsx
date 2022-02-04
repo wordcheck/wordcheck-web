@@ -69,9 +69,10 @@ export default function AllTestsChoice({ cookies }) {
         </BackButton>
         <TopNav>모든 단어 테스트</TopNav>
       </TopNavDivContainer>
-      <TestContentDiv>
-        {wordlist.length <= 3 ? (
-          <ButtonContainer onClick={() => setMulChoiceFailAlert(true)}>
+
+      {wordlist.length <= 3 ? (
+        <TestContentDiv onClick={() => setMulChoiceFailAlert(true)}>
+          <ButtonContainer>
             <div className="buttons">
               <span style={{ paddingBottom: "1vh" }}>사지선다</span>
               <div className="contentInfo">
@@ -79,12 +80,15 @@ export default function AllTestsChoice({ cookies }) {
               </div>
             </div>
           </ButtonContainer>
-        ) : (
-          <Link
-            style={{ color: "inherit", textDecoration: "inherit" }}
-            to={`/wordcheck-web/multiplechoice/${wordlist[0]?.contents}`}
-            state={{ wordlist }}
-          >
+          <ArrowForwardIosIcon />
+        </TestContentDiv>
+      ) : (
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          to={`/wordcheck-web/multiplechoice/${wordlist[0]?.contents}`}
+          state={{ wordlist }}
+        >
+          <TestContentDiv>
             <ButtonContainer>
               <div className="buttons">
                 <span style={{ paddingBottom: "1vh" }}>사지선다</span>
@@ -93,25 +97,29 @@ export default function AllTestsChoice({ cookies }) {
                 </div>
               </div>
             </ButtonContainer>
-          </Link>
-        )}
+            <ArrowForwardIosIcon />
+          </TestContentDiv>
+        </Link>
+      )}
 
-        <ArrowForwardIosIcon />
-      </TestContentDiv>
-      <TestContentDiv>
-        {wordlist.length < 1 ? (
+      {wordlist.length < 1 ? (
+        <TestContentDiv onClick={() => setSpellFailAlert(true)}>
           <ButtonContainer>
-            <div className="buttons" onClick={() => setSpellFailAlert(true)}>
+            <div className="buttons">
               <span style={{ paddingBottom: "1vh" }}>철자맞히기 </span>
               <div className="contentInfo">단어의 철자를 직접 입력하세요.</div>
             </div>
           </ButtonContainer>
-        ) : (
-          <Link
-            style={{ color: "inherit", textDecoration: "inherit" }}
-            to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
-            state={{ wordlist }}
-          >
+
+          <ArrowForwardIosIcon />
+        </TestContentDiv>
+      ) : (
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          to={`/wordcheck-web/spellspelling/${wordlist[0]?.contents}`}
+          state={{ wordlist }}
+        >
+          <TestContentDiv>
             <ButtonContainer>
               <div className="buttons">
                 <span style={{ paddingBottom: "1vh" }}>철자맞히기 </span>
@@ -120,11 +128,12 @@ export default function AllTestsChoice({ cookies }) {
                 </div>
               </div>
             </ButtonContainer>
-          </Link>
-        )}
 
-        <ArrowForwardIosIcon />
-      </TestContentDiv>
+            <ArrowForwardIosIcon />
+          </TestContentDiv>
+        </Link>
+      )}
+
       {/* <TestContentDiv>
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}

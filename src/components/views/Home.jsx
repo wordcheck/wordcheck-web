@@ -73,6 +73,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: #e6fff7; */
   font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.5em")};
   @media only screen and (min-width: 750px) {
     width: 750px;
