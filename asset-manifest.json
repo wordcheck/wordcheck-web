@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/wordcheck-web/static/css/main.43c86f1c.css",
-    "main.js": "/wordcheck-web/static/js/main.b0d05063.js",
+    "main.js": "/wordcheck-web/static/js/main.9ce55ee8.js",
     "index.html": "/wordcheck-web/index.html",
     "main.43c86f1c.css.map": "/wordcheck-web/static/css/main.43c86f1c.css.map",
-    "main.b0d05063.js.map": "/wordcheck-web/static/js/main.b0d05063.js.map"
+    "main.9ce55ee8.js.map": "/wordcheck-web/static/js/main.9ce55ee8.js.map"
   },
   "entrypoints": [
     "static/css/main.43c86f1c.css",
-    "static/js/main.b0d05063.js"
+    "static/js/main.9ce55ee8.js"
   ]
 }
