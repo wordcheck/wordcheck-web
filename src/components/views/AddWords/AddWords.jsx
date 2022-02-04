@@ -7,7 +7,7 @@ import AddWordsForm from "./AddWordsForm";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import Home from "../Home";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import WordList from "../Card/WordList";
 import {
@@ -113,6 +113,9 @@ export default function AddWords({ cookies }) {
     WordInputs.push(nextWordInputs);
     setWordList(WordInputs);
   };
+  if (!cookies.token) {
+    return <Navigate to="/wordcheck-web/" />;
+  }
 
   return (
     <>

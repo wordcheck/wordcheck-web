@@ -8,7 +8,6 @@ import {
   BottomNavBoxContainer,
   Container,
   ContentDiv,
-  HeaderDiv,
 } from "../../style/WordStyle";
 import Test from "../Test/Test";
 // import DeleteIcon from "@mui/icons-material/Delete";
@@ -88,3 +87,18 @@ export default function Card({ cookies }) {
     </Container>
   );
 }
+const HeaderDiv = styled.div`
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  /* padding: 1.2vh; */
+  /* padding-right: 1.6=vh;
+  padding-left: 1.6vh;
+  padding-bottom: 2vh;
+  /* padding-top: 3vh; */
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
+`;

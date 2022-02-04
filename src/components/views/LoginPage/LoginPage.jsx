@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import { useCookies } from "react-cookie";
-import { Container } from "../../style/WordStyle";
+import { Container, ToastInfoDiv } from "../../style/WordStyle";
 // import Button from "@mui/material/Button";
 
 export default function LoginPage({ setCookie, cookies, setShowBottomNav }) {
@@ -47,20 +47,23 @@ export default function LoginPage({ setCookie, cookies, setShowBottomNav }) {
       .catch((err) => {
         // console.log("==>", err);
         if (!Nickname) {
-          toast.error("닉네임을 입력해주세요", {
+          toast.error(<ToastInfoDiv>닉네임을 입력해주세요</ToastInfoDiv>, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         } else if (!Password) {
-          toast.error("패스워드를 입력해주세요", {
+          toast.error(<ToastInfoDiv>패스워드를 입력해주세요</ToastInfoDiv>, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         } else {
-          toast.error("닉네임이나 패스워드가 올바르지 않아요.", {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
+          toast.error(
+            <ToastInfoDiv>닉네임이나 패스워드가 올바르지 않아요.</ToastInfoDiv>,
+            {
+              autoClose: 2000,
+              position: toast.POSITION.BOTTOM_CENTER,
+            }
+          );
         }
       });
   };

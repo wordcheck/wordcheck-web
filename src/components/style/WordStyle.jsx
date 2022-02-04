@@ -57,12 +57,17 @@ export const TopLogoMypageContainer = styled.div`
   padding-bottom: 4vh;
   @media only screen and (min-width: 750px) {
     width: 750px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2.5vh;
+    padding-bottom: 4vh;
   }
 `;
 
 export const Logo = styled.div`
   font-size: 5vh;
   font-weight: bolder;
+  color: rebeccapurple;
 `;
 
 // 단어 리스트가 없을 때
@@ -124,6 +129,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.5em")};
   @media only screen and (min-width: 750px) {
     width: 750px;
@@ -721,5 +727,12 @@ export const WordSearchCardDiv = styled.div`
 
   @media only screen and (min-width: 750px) {
     width: 750px;
+  }
+`;
+
+export const ToastInfoDiv = styled.div`
+  font-size: 1em;
+  @media only screen and (min-width: 750px) {
+    font-size: 16px;
   }
 `;

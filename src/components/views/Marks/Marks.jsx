@@ -21,8 +21,8 @@ import { yellow } from "@mui/material/colors";
 import { useSpeechSynthesis } from "react-speech-kit";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useNavigate } from "react-router-dom";
-export default function Marks() {
+import { Navigate, useNavigate } from "react-router-dom";
+export default function Marks({ cookies }) {
   const [marksList, setMarksList] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
@@ -40,6 +40,9 @@ export default function Marks() {
     beforeMark.splice(idx, 1);
     setMarksList(beforeMark);
   };
+  if (!cookies.token) {
+    return <Navigate to="/wordcheck-web/" />;
+  }
 
   return (
     <Container>

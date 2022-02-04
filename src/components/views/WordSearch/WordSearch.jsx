@@ -18,7 +18,7 @@ import {
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import StarIcon from "@mui/icons-material/Star";
@@ -82,6 +82,9 @@ export default function WordSearch({ cookies }) {
     }
     setMarks(beforeInfo);
   };
+  if (!cookies.token) {
+    return <Navigate to="/wordcheck-web/" />;
+  }
 
   return (
     <Container>

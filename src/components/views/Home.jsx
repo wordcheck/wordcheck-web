@@ -6,22 +6,11 @@ import { ColorButton } from "../style/LoginStyle";
 import axios from "axios";
 import { useEffect } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-
-import {
-  Container,
-  EmptyWordDiv,
-  HomeCardLink,
-  HomeCardListContainer,
-  Logo,
-  TopLogoMypageContainer,
-  WordListContainer,
-  WordListDiv,
-} from "../style/WordStyle";
+import styled from "styled-components";
 
 export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   // const [profile, setProfile] = useState([]);
 
-  console.log("home cookies", cookies);
   useEffect(() => {
     setShowBottomNav(true);
     axios
@@ -49,7 +38,6 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   ));
 
   if (!cookies.token) {
-    console.log("쿠키가 없어서 다시 로그인페이지로 감 ==>", cookies.token);
     return <Navigate to="/wordcheck-web/" />;
   }
 
@@ -57,7 +45,6 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
     <Container>
       <TopLogoMypageContainer>
         <Logo>wordcheck</Logo>
-
         <Link
           to="/wordcheck-web/mypage"
           style={{ textDecoration: "none", display: "flex", height: "5vh" }}
@@ -76,3 +63,77 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
     </Container>
   );
 }
+
+const Container = styled.div`
+  @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap");
+  font-family: "Nanum Gothic", sans-serif;
+  width: 100vw;
+  height: ${(props) => (props.isInner ? "80vh" : "100%")};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: ${(props) => (props.isInnerFontSize ? "1em" : "1.5em")};
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+    font-size: 30px;
+  }
+`;
+const TopLogoMypageContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2.5vh;
+  padding-bottom: 4vh;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2.5vh;
+    padding-bottom: 4vh;
+  }
+`;
+
+const Logo = styled.div`
+  font-size: 5vh;
+  font-weight: bolder;
+`;
+const EmptyWordDiv = styled.div`
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  @media only screen and (min-width: 750px) {
+    width: 750px;
+  }
+`;
+
+const HomeCardLink = styled(Link)`
+  width: 85vw;
+  display: flex;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
+`;
+const WordListContainer = styled.div`
+  width: 85vw;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
+`;
+
+const WordListDiv = styled.div`
+  position: relative;
+  width: 85vw;
+  background-color: #e6e6e6;
+  /* border: 2px solid lightgray; */
+  border-radius: 1vh;
+  padding: 1.7vh;
+  margin-bottom: 2vh;
+  font-size: 0.6em;
+  @media only screen and (min-width: 750px) {
+    width: 637.5px;
+  }
+`;

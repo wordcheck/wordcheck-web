@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ColorButton, CssTextField } from "../../style/LoginStyle";
 import styled from "styled-components";
-import { Container } from "../../style/WordStyle";
+import { Container, ToastInfoDiv } from "../../style/WordStyle";
 import LoginSuccessModal from "./LoginSuccessModal";
 
 export default function SignUpPage() {
@@ -42,7 +42,7 @@ export default function SignUpPage() {
       .then((response) => {
         if (response.data.msg === "success") {
           setCheckNickname(true);
-          toast.success("사용가능한 닉네임입니다.", {
+          toast.success(<ToastInfoDiv>사용가능한 닉네임입니다.</ToastInfoDiv>, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -50,12 +50,15 @@ export default function SignUpPage() {
       })
       .catch((error) => {
         if (!Nickname) {
-          toast.error("사용할 닉네임 값을 입력해주세요.", {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
+          toast.error(
+            <ToastInfoDiv>사용할 닉네임 값을 입력해주세요.</ToastInfoDiv>,
+            {
+              autoClose: 2000,
+              position: toast.POSITION.BOTTOM_CENTER,
+            }
+          );
         } else {
-          toast.error("중복된 닉네임입니다.", {
+          toast.error(<ToastInfoDiv>중복된 닉네임입니다.</ToastInfoDiv>, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
@@ -66,15 +69,21 @@ export default function SignUpPage() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (!CheckNickname) {
-      return toast.error("아이디 중복 검사를 해주세요", {
-        autoClose: 2000,
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
+      return toast.error(
+        <ToastInfoDiv>닉네임 중복 검사를 해주세요</ToastInfoDiv>,
+        {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        }
+      );
     } else if (Password !== ConfirmPassword) {
-      return toast.error("비밀번호를 확인해주세요", {
-        autoClose: 2000,
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
+      return toast.error(
+        <ToastInfoDiv>비밀번호가 올바른지 확인해주세요</ToastInfoDiv>,
+        {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        }
+      );
     }
 
     const body = {
@@ -87,7 +96,15 @@ export default function SignUpPage() {
       if (response.payload?.msg === "success") {
         setIsLoginSuccess(true);
       } else {
-        console.log("sign up error");
+        return toast.error(
+          <ToastInfoDiv>
+            알 수 없는 이유로 아이디 생성에 실패했습니다.
+          </ToastInfoDiv>,
+          {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          }
+        );
       }
     });
   };
@@ -127,7 +144,7 @@ export default function SignUpPage() {
         />
         <br />
         <ColorButton type="submit">회원가입</ColorButton>
-        <ToastContainer />
+        <ToastContainer style={{ fontsize: "10px" }} />
       </form>
       {isLoginSuccess && <LoginSuccessModal />}
     </Container>
