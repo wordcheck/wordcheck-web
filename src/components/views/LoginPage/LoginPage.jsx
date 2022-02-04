@@ -11,6 +11,7 @@ import { Container } from "../../style/WordStyle";
 
 export default function LoginPage({ setCookie, cookies, setShowBottomNav }) {
   const navigate = useNavigate();
+  // const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
 
@@ -38,8 +39,10 @@ export default function LoginPage({ setCookie, cookies, setShowBottomNav }) {
           setCookie("token", response.data.account_token, {
             path: "/wordcheck-web/",
           });
-          navigate("/wordcheck-web/home");
         }
+      })
+      .then(() => {
+        navigate("/wordcheck-web/home");
       })
       .catch((err) => {
         // console.log("==>", err);

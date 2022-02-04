@@ -58,7 +58,7 @@ export default function ConfirmModal({
             sx={{ textTransform: "none" }}
             onClick={() => onClickConfirmAnswerHandler(false)}
           >
-            no
+            아니오
           </ConfirmModalAnswer>
           <ConfirmModalAnswer
             variant="contained"
@@ -66,7 +66,7 @@ export default function ConfirmModal({
             sx={{ textTransform: "none" }}
             onClick={() => onClickConfirmAnswerHandler(true)}
           >
-            yes
+            네
           </ConfirmModalAnswer>
         </FalseModalButtonDiv>
       </ConfirmModalDiv>

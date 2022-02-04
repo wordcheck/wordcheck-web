@@ -455,7 +455,7 @@ export const AccountSettingDiv = styled.div`
 `;
 
 export const AccountSettingDiv2 = styled.div`
-  width: 94vw;
+  width: 93vw;
   height: 6vh;
   display: flex;
   justify-content: space-between;
@@ -471,10 +471,25 @@ export const AccountSettingDiv2 = styled.div`
     background-color: lightgray;
   }
 `;
+export const EmptyUserDataDiv = styled.div`
+  height: 10vh;
+  background-color: #e6e6e6;
+  font-size: 0.7em;
+  border-radius: 1vh;
+  padding: 1.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const EmptyUserDataInfoDiv = styled.div`
+  padding: 1vh;
+  color: gray;
+`;
 export const UserDataDiv = styled.div`
   font-size: 0.7em;
   height: 20vh;
-
   background-color: #e6e6e6;
   padding: 1.5vh;
   border-radius: 1vh;
@@ -520,6 +535,8 @@ export const FootDiv = styled.div`
   padding-bottom: 1vh;
   text-align: center;
   font-size: 0.7em;
+  position: sticky;
+  bottom: 0;
 `;
 
 //NicknameChange.jsx

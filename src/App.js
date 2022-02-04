@@ -30,6 +30,7 @@ function App() {
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
   const [getToken, setGetToken] = useState(false);
+  console.log("app cookies", cookies);
 
   return (
     <div>
@@ -98,7 +99,13 @@ function App() {
           />
           <Route
             path="/wordcheck-web/mypage"
-            element={<Mypage cookies={cookies} removeCookie={removeCookie} />}
+            element={
+              <Mypage
+                cookies={cookies}
+                removeCookie={removeCookie}
+                setShowBottomNav={setShowBottomNav}
+              />
+            }
           />
           <Route
             path="/wordcheck-web/mypage/nicknamechange"

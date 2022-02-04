@@ -11,6 +11,8 @@ import {
   DataTop3Div,
   DataTop3Li,
   DataTop3Span,
+  EmptyUserDataDiv,
+  EmptyUserDataInfoDiv,
   FootDiv,
   ImgDiv,
   NameDiv,
@@ -27,16 +29,24 @@ import ProfileLottie from "../../../utils/ProfileLottie";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import { Button, IconButton, Input } from "@mui/material";
 import LogoutModal from "./LogoutModal";
+import ProfileChangeModal from "./ProfileChangeModal";
+import WithdrawalModal from "./WithdrawalModal";
 
-export default function Mypage({ cookies, removeCookie, setGetToken }) {
+export default function Mypage({ cookies, removeCookie, setShowBottomNav }) {
   const [profile, setProfile] = useState("");
   const [loading, setLoading] = useState(true);
   const [imgsubmit, setImgsubmit] = useState(false);
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
   const [getLogoutModal, setGetLogoutModal] = useState(false);
+  const [getProfileChangeModal, setGetProfileChangeModal] = useState(false);
+  const [getWithdrawalModal, setGetWithdrawalModal] = useState(false);
   const navigate = useNavigate();
   const profileImgInput = useRef();
+
+  useEffect(() => {
+    setShowBottomNav(false);
+  }, []);
 
   useEffect(() => {
     axios
@@ -50,6 +60,7 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
         }
       )
       .then((response) => {
+        console.log(response.data);
         setProfile(response.data);
 
         setLoading(false);
@@ -92,6 +103,7 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
     };
     fetchData();
   }, []);
+
   const wordlist = wordAll.flat();
   wordlist.sort(function (a, b) {
     return b.wrong_count - a.wrong_count;
@@ -120,10 +132,11 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
       .then((res) => {
         setImgsubmit(true);
 
-        alert("프로필 사진을 성공적으로 바꿨어요.");
+        setGetProfileChangeModal(true);
       })
       .catch((err) => console.log(err));
   };
+  console.log(wordlist.length);
 
   if (loading) return <ProfileLottie />;
 
@@ -151,38 +164,53 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
           Sign out
         </ColorButton>
       </UserDiv>
-      <UserDataDiv>
-        <DataInfoDiv>
-          {profile.nickname}님의 평균 틀린횟수는
-          <DataTop3BoldSpan>
-            {(WrongSum / wordlist.length).toFixed(2)}
-          </DataTop3BoldSpan>
-          회입니다.
-        </DataInfoDiv>
-        <DataInfoTipDiv>Tip:시험을 통해 틀린횟수를 줄여보세요!</DataInfoTipDiv>
+      {wordlist.length === 0 ? (
+        <>
+          <EmptyUserDataDiv>
+            <EmptyUserDataInfoDiv>
+              단어를 채워 테스트를 진행해보세요
+            </EmptyUserDataInfoDiv>
+            <EmptyUserDataInfoDiv>
+              재미있는 결과를 알려드릴게요!
+            </EmptyUserDataInfoDiv>
+          </EmptyUserDataDiv>
+        </>
+      ) : (
+        <UserDataDiv>
+          <DataInfoDiv>
+            {profile.nickname}님의 평균 틀린횟수는
+            <DataTop3BoldSpan>
+              {(WrongSum / wordlist.length).toFixed(2)}
+            </DataTop3BoldSpan>
+            회입니다.
+          </DataInfoDiv>
+          <DataInfoTipDiv>
+            Tip:시험을 통해 틀린횟수를 줄여보세요!
+          </DataInfoTipDiv>
 
-        <DataTop3Div>가장 많이 틀린 단어 Top3</DataTop3Div>
-        <ul>
-          <DataTop3Li>
-            {wordlist[0]?.spelling}{" "}
-            <DataTop3Span>
-              {wordlist[0]?.category} {wordlist[0]?.meaning}
-            </DataTop3Span>
-          </DataTop3Li>
-          <DataTop3Li>
-            {wordlist[1]?.spelling}{" "}
-            <DataTop3Span>
-              {wordlist[1]?.category} {wordlist[1]?.meaning}
-            </DataTop3Span>
-          </DataTop3Li>
-          <DataTop3Li>
-            {wordlist[2]?.spelling}{" "}
-            <DataTop3Span>
-              {wordlist[2]?.category} {wordlist[2]?.meaning}
-            </DataTop3Span>
-          </DataTop3Li>
-        </ul>
-      </UserDataDiv>
+          <DataTop3Div>가장 많이 틀린 단어 Top3</DataTop3Div>
+          <ul>
+            <DataTop3Li>
+              {wordlist[0]?.spelling}{" "}
+              <DataTop3Span>
+                {wordlist[0]?.category} {wordlist[0]?.meaning}
+              </DataTop3Span>
+            </DataTop3Li>
+            <DataTop3Li>
+              {wordlist[1]?.spelling}{" "}
+              <DataTop3Span>
+                {wordlist[1]?.category} {wordlist[1]?.meaning}
+              </DataTop3Span>
+            </DataTop3Li>
+            <DataTop3Li>
+              {wordlist[2]?.spelling}{" "}
+              <DataTop3Span>
+                {wordlist[2]?.category} {wordlist[2]?.meaning}
+              </DataTop3Span>
+            </DataTop3Li>
+          </ul>
+        </UserDataDiv>
+      )}
 
       <AccountSettingDiv>
         <div className="info">Account Settings</div>
@@ -203,12 +231,27 @@ export default function Mypage({ cookies, removeCookie, setGetToken }) {
         <AccountSettingDiv2 onClick={onClickInputBtn}>
           프로필 사진 수정
         </AccountSettingDiv2>
-        <AccountSettingDiv2> 회원탈퇴</AccountSettingDiv2>
+        <AccountSettingDiv2 onClick={() => setGetWithdrawalModal(true)}>
+          회원탈퇴
+        </AccountSettingDiv2>
       </AccountSettingDiv>
-      <FootDiv>버전정보 : 0.1.0v</FootDiv>
+      {/* <FootDiv>버전정보 : 0.1.0v</FootDiv> */}
       {getLogoutModal && (
         <LogoutModal
           setGetLogoutModal={setGetLogoutModal}
+          removeCookie={removeCookie}
+        />
+      )}
+      {getProfileChangeModal && (
+        <ProfileChangeModal
+          setGetProfileChangeModal={setGetProfileChangeModal}
+        />
+      )}
+      {getWithdrawalModal && (
+        <WithdrawalModal
+          setGetWithdrawalModal={setGetWithdrawalModal}
+          cookies={cookies}
+          nickname={profile.nickname}
           removeCookie={removeCookie}
         />
       )}

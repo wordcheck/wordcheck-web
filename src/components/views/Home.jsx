@@ -21,6 +21,7 @@ import {
 export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   // const [profile, setProfile] = useState([]);
 
+  console.log("home cookies", cookies);
   useEffect(() => {
     setShowBottomNav(true);
     axios
@@ -48,6 +49,7 @@ export default function Home({ cookies, setCards, cards, setShowBottomNav }) {
   ));
 
   if (!cookies.token) {
+    console.log("쿠키가 없어서 다시 로그인페이지로 감 ==>", cookies.token);
     return <Navigate to="/wordcheck-web/" />;
   }
 

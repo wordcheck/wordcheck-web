@@ -87,7 +87,7 @@ export default function SignUpPage() {
       if (response.payload?.msg === "success") {
         setIsLoginSuccess(true);
       } else {
-        // console.log("sign up error");
+        console.log("sign up error");
       }
     });
   };
