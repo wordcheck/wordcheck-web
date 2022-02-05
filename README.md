@@ -9,9 +9,11 @@
 
 ## 2. 기능소개
 
-공부할 단어를 그룹별로 구분하여 나만의 단어장을 만들 수 있습니다.  
-무작정 단어만 보면서 외우는 것이 아닌 다양한 퀴즈를 통해 재미있고 자연스럽게 영어단어를 외울 수 있습니다.  
-TTS를 통해 단어의 정확한 발음을 들으며 공부할 수 있습니다.
+사람이 제일 많이 만지는 물건은 스마트폰입니다.
+가장 많이 만지는 스마트폰에 나만의 영어 단어장이 있으면 공책으로 써놓은 단어장보다 많이 보게 되지 않을까요? 
+무작정 단어만 보면서 외우는 것이 아닌 다양한 퀴즈를 통해 단어를 외운다면 얼마나 재미있을까요? 
+워드체크를 통해 나만의 단어를 만들고 퀴즈를 통해 재미있게 단어를 외워봅시다.
+
 
 ## 3. 적용기술
 
@@ -27,7 +29,6 @@ TTS를 통해 단어의 정확한 발음을 들으며 공부할 수 있습니다
 
 - [react-speech-kit](https://www.npmjs.com/package/react-speech-kit)
 
-- [react-lottie](https://www.npmjs.com/package/react-lottie)
 
 ## 4. 주요 구현기능
 
@@ -90,7 +91,7 @@ const onClickConfirmAnswerHandler = (ans) => {
   }
 };
 ```
-(3) 단어 수정/삭제 기능 및 TTS/북마크 기능 
+- (3) 단어 수정/삭제 기능 및 TTS/북마크 기능 
  
 <p float="left">
 <img src="https://user-images.githubusercontent.com/49505843/152649831-32bc68f8-88b5-44a0-9640-f64c5344afe6.png"  width="200" height="380">
@@ -101,11 +102,10 @@ const onClickConfirmAnswerHandler = (ans) => {
 
 
 
-(4) 시험 기능
+- (4) 시험 기능
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/49505843/152649209-1121df48-c320-427e-b60d-7fb8196da346.png"  width="200" height="380">
-<img src="https://user-images.githubusercontent.com/49505843/152649237-4355cc60-08e0-49f9-a3d7-7b797cbf866d.png"  width="200" height="380">
 <img src="https://user-images.githubusercontent.com/49505843/152649237-4355cc60-08e0-49f9-a3d7-7b797cbf866d.png"  width="200" height="380">
 <img src="https://user-images.githubusercontent.com/49505843/152649248-1bb15dd6-6b94-46ca-b739-44b6f5a867fe.png"  width="200" height="380">
 <img src="https://user-images.githubusercontent.com/49505843/152649276-1c2ae52b-2a29-4f7b-ad2d-48161144152d.png"  width="200" height="380">
@@ -115,7 +115,7 @@ const onClickConfirmAnswerHandler = (ans) => {
 사지선다 보기는 정답 단어 1개와 이외 틀린단어 3개를 랜덤으로 가져와 보여줄 수 있도록 했습니다.
 정답이 틀렸을 때 모달 창을 띄워, 틀린 답과 올바른 답을 확인할 수 있도록 했습니다. 
 
-(5) 마크북 기능
+- (5) 마크북 기능
 
 <img src="https://user-images.githubusercontent.com/49505843/152649359-5101b214-98d7-4761-981a-f2287525e41b.png"  width="200" height="380">
 
@@ -123,7 +123,7 @@ const onClickConfirmAnswerHandler = (ans) => {
 - 별 아이콘을 눌러 마크북에 단어를 저장할 수 있습니다.
 - 마크북은 로컬 스토리지에 저장되어 오프라인 환경에서도 마크북 단어를 확인할 수 있습니다.
 
-(6) 검색기능
+- (6) 검색기능
 <p float="left">
 <img src="https://user-images.githubusercontent.com/49505843/152649414-e642afb8-f8af-4681-a95d-db28acbb3311.png"  width="200" height="380">
 <img src="https://user-images.githubusercontent.com/49505843/152649421-2e8c784b-7ef3-4b8e-9e6f-bde88e224260.png"  width="200" height="380">
