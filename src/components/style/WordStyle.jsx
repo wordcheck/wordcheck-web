@@ -364,7 +364,7 @@ export const ConfirmModalDiv = styled.div`
   z-index: 3;
   font-size: 0.9em;
   @media only screen and (min-width: 750px) {
-    width: 525px;
+    width: 500px;
     font-size: 20px;
   }
 `;
@@ -583,7 +583,7 @@ export const TestContentDiv = styled.div`
     background-color: lightgray;
   }
   @media only screen and (min-width: 750px) {
-    width: 675px;
+    width: 645px;
     height: 75px;
   }
 `;
