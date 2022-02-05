@@ -124,8 +124,38 @@ const onClickConfirmAnswerHandler = (ans) => {
 ### (6) 검색기능
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/49505843/152650911-ce37bc23-ebd4-45d0-a45a-931bcf3f6021.png"  width="200" height="380">
+<img src="https://user-images.githubusercontent.com/49505843/152654749-1df698aa-ce9a-4eaf-b1dc-a8a011833def.png"  width="200" height="380">
 <img src="https://user-images.githubusercontent.com/49505843/152649421-2e8c784b-7ef3-4b8e-9e6f-bde88e224260.png"  width="200" height="380">
 </p>
 
-- 전체 단어에서 원하는 단어를 검색할 수 있습니다.
+
+- '단어 찾기'화면에서는 유저가 저장해놓은 단어를 검색할 수 있습니다.
+- '검색하기'버튼의 onClickEvent는 아래와 같이 구현했습니다.
+
+```jsx
+const onClickSearchButtonHandler = () => {
+  axios
+    .get(`${process.env.REACT_APP_API}words/search/?target=${searchWord}`, {
+      headers: {
+        Authorization: cookies.token,
+      },
+    })
+    .then((res) => {
+      if (res.data.length === 0) {
+        // 단어가 없을 때
+        setAnswerShow(false);
+        setEmptyAnswer(true);
+      } else {
+        // 단어가 있을 때
+        setAnswerWord(res.data);
+        setAnswerShow(true);
+      }
+    })
+    .catch((err) => {
+      // 에러 처리 (ex. 빈 값 입력)
+      setAnswerShow(false);
+      setEmptyAnswer(true);
+    });
+};
+```
+
