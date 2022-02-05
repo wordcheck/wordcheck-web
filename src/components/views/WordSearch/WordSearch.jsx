@@ -27,7 +27,6 @@ import { yellow, grey } from "@mui/material/colors";
 
 export default function WordSearch({ cookies }) {
   const [searchWord, setSearchWord] = useState("");
-  const navigate = useNavigate();
   const [marks, setMarks] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
@@ -36,6 +35,7 @@ export default function WordSearch({ cookies }) {
   const [emptyAnswer, setEmptyAnswer] = useState(false);
   const { speak } = useSpeechSynthesis();
 
+  const navigate = useNavigate();
   useEffect(() => {
     window.localStorage.setItem("marks", JSON.stringify(marks));
   }, [marks]);
@@ -48,12 +48,11 @@ export default function WordSearch({ cookies }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        setAnswerWord(res.data);
         if (res.data.length === 0) {
           setAnswerShow(false);
           setEmptyAnswer(true);
         } else {
+          setAnswerWord(res.data);
           setAnswerShow(true);
         }
       })
