@@ -30,7 +30,7 @@
 
 ## 4. 주요 구현기능
 
-### (1) 로그인/회원가입 기능
+### (1) 로그인/ 회원가입 기능
 
 <p float="left">
  <img src="https://user-images.githubusercontent.com/49505843/152646257-7651c5ed-93de-4bc3-8ca7-7faef690488b.png" width="200" height="380">
@@ -97,7 +97,7 @@ const onClickConfirmAnswerHandler = (ans) => {
 </p>
 
 - 단어 리스트 화면에서는 오른쪽 하단의 아이콘들을 눌러 수정하거나 지울 수 있습니다.
-- 별 아이콘을 클릭하여 중요한 단어 표시를 할 수 있습니다(마크북 표시,(5)마크북 기능 참고).
+- 별 아이콘을 클릭하여 중요한 단어 표시를 할 수 있습니다((5)마크북 기능 참고).
 - 확성기 아이콘을 통해 해당 단어의 발음을 들어볼 수 있습니다.
 
 ### (4) 시험 기능
@@ -111,7 +111,7 @@ const onClickConfirmAnswerHandler = (ans) => {
 
 - 시험선택 페이지에서 원하는 시험을 선택해 시험을 볼 수 있습니다.
 - 사지선다 보기는 정답 단어 1개와 이외 틀린단어 3개를 랜덤으로 가져와 보여줄 수 있도록 했습니다.
-- 정답이 틀렸을 때 모달 창을 띄워, 틀린 답과 올바른 답을 확인할 수 있도록 했습니다.
+- 정답이 틀렸을 때는 모달 창을 띄워, 틀린 답과 올바른 답을 확인할 수 있도록 했습니다.
 
 ### (5) 마크북 기능
 
@@ -123,7 +123,7 @@ const onClickConfirmAnswerHandler = (ans) => {
 ### (6) 검색기능
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/49505843/152649414-e642afb8-f8af-4681-a95d-db28acbb3311.png"  width="200" height="380">
+
 <img src="https://user-images.githubusercontent.com/49505843/152649421-2e8c784b-7ef3-4b8e-9e6f-bde88e224260.png"  width="200" height="380">
 </p>
 
