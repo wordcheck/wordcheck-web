@@ -188,7 +188,7 @@ export const Carddiv = styled.div`
   padding: 1.5vh;
   margin-top: 1.8vh;
   border-radius: 1vh;
-  font-size: 0.7em;
+  font-size: 0.6em;
 
   /* box-shadow: 0.5vw 0.5vw 2vw gray; */
   /* border: 1px solid lightgray; */
