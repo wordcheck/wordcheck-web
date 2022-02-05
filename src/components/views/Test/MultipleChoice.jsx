@@ -101,7 +101,7 @@ export default function MultipleChoice({ cookies }) {
           </BackButton>
           <TopNav>
             <div className="wordscount">
-              {currentNo + 1}of {wordList.length}
+              {currentNo + 1} of {wordList.length}
             </div>
           </TopNav>
         </TopNavDivContainer>

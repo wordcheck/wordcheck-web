@@ -28,12 +28,6 @@ export default function ConfirmModal({
               Authorization: cookies.token,
             },
           });
-          // .then((res) => {
-          //   console.log(res);
-          // })
-          // .catch((error) => {
-          //   console.log("err==>", error);
-          // });
         })
       )
         .then(() => {

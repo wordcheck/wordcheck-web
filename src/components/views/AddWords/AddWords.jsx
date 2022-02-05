@@ -109,8 +109,7 @@ export default function AddWords({ cookies }) {
 
   const onClickCardAddHandler = () => {
     let WordInputs = [...wordList];
-    let nextWordInputs = inputData;
-    WordInputs.push(nextWordInputs);
+    WordInputs.push(inputData);
     setWordList(WordInputs);
   };
   if (!cookies.token) {
