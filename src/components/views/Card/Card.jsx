@@ -1,8 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import styled from "styled-components";
-import { ColorButton } from "../../style/LoginStyle";
+import { ColorButton } from "../../style/WordStyle";
 import QuizIcon from "@mui/icons-material/Quiz";
 import {
   BottomNavBoxContainer,
@@ -16,7 +22,7 @@ import WordList from "./WordList";
 import DeleteModal from "./DeleteModal";
 
 export default function Card({ cookies }) {
-  const [wordlist, setWordlist] = useState([]);
+  const [wordlist, setWordlist] = useState(["length"]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [editId, setEditId] = useState("");
   const [getDeleteModal, setGetDeleteModal] = useState(false);
@@ -42,10 +48,11 @@ export default function Card({ cookies }) {
       .catch((error) => {
         // console.log(error);
       });
-  }, [editId, deleteWordId]);
+  }, [editId, deleteWordId, isDeleteWord]);
 
-  if (wordlist === "") {
-    navigate(`/wordcheck-web/`);
+  console.log(wordlist.length);
+  if (wordlist.length === 0) {
+    return <Navigate to="/wordcheck-web/" />;
   }
 
   return (

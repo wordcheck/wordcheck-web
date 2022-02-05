@@ -10,7 +10,7 @@ import {
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useNavigate } from "react-router-dom";
-import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { ColorButton, CssTextField } from "../../style/WordStyle";
 import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
 import NickNameChangeSuccessModal from "./NickNameChangeSuccessModal";

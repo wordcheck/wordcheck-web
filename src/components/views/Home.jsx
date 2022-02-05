@@ -2,7 +2,7 @@
 // 로그인한 유저만 들어올 수 있음
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
-import { ColorButton } from "../style/LoginStyle";
+import { ColorButton } from "../style/WordStyle";
 import axios from "axios";
 import { useEffect } from "react";
 import PersonIcon from "@mui/icons-material/Person";

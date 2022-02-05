@@ -29,7 +29,6 @@ export default function DeleteModal({
       });
 
     setGetDeleteModal(false);
-
     setIsDeleteWord(true);
   };
 

@@ -12,12 +12,11 @@ import {
   MeaningDiv,
   WordCardRightDiv,
   TopNavDivContainer,
-  BottomNavBoxContainer,
   WordSearchInputDiv,
   WordSearchCardDiv,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { ColorButton, CssTextField } from "../../style/WordStyle";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";

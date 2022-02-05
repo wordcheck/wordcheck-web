@@ -30,7 +30,6 @@ function App() {
   const [wordAll, setWordAll] = useState([]);
   const [cards, setCards] = useState([]);
   const [getToken, setGetToken] = useState(false);
-  console.log("app cookies", cookies);
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { ColorButton, CssTextField } from "../../style/WordStyle";
 import Input from "@mui/material/Input";
 import NativeSelect from "@mui/material/NativeSelect";
 import styled from "styled-components";
@@ -139,7 +139,7 @@ export default function AddWords({ cookies }) {
             onClick={() => {
               onClickSubmitWords();
             }}
-            sx={{ width: "100px", height: "50px" }}
+            sx={{ width: "10vw", height: "50px", marginLeft: "10px" }}
           >
             만들기
           </ColorButton>

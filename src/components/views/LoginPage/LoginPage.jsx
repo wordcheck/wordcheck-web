@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { ColorButton, CssTextField } from "../../style/WordStyle";
 import { useCookies } from "react-cookie";
 import { Container, ToastInfoDiv } from "../../style/WordStyle";
 // import Button from "@mui/material/Button";

@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { ColorButton, CssTextField } from "../../style/WordStyle";
 import {
   AnswerDiv,
   BackButton,

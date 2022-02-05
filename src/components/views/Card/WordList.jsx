@@ -166,7 +166,7 @@ export default function WordList({
           ) : (
             <>
               <div>
-                <WrongCountDiv>틀린횟수 :{word.wrong_count}</WrongCountDiv>
+                <WrongCountDiv>틀린횟수 : {word.wrong_count}</WrongCountDiv>
                 <SpellingVolumeUpDiv>
                   <SpellingDiv>{word.spelling}</SpellingDiv>
 

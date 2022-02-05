@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SignUpUser } from "../../../_actions/user_action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ColorButton, CssTextField } from "../../style/LoginStyle";
+import { ColorButton, CssTextField } from "../../style/WordStyle";
 import styled from "styled-components";
 import { Container, ToastInfoDiv } from "../../style/WordStyle";
 import LoginSuccessModal from "./LoginSuccessModal";

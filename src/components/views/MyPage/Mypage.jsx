@@ -22,7 +22,7 @@ import {
   UserDiv,
 } from "../../style/WordStyle";
 
-import { ColorButton } from "../../style/LoginStyle";
+import { ColorButton } from "../../style/WordStyle";
 import axios from "axios";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ProfileLottie from "../../../utils/ProfileLottie";
@@ -60,7 +60,7 @@ export default function Mypage({ cookies, removeCookie, setShowBottomNav }) {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setProfile(response.data);
 
         setLoading(false);
@@ -121,7 +121,7 @@ export default function Mypage({ cookies, removeCookie, setShowBottomNav }) {
 
   const onChangeImgChange = (e) => {
     const formData = new FormData();
-    console.log(e.target.files[0]);
+
     formData.append("profile_image", e.target.files[0]);
     axios
       .patch(`${process.env.REACT_APP_API}accounts/profile/`, formData, {
@@ -136,7 +136,6 @@ export default function Mypage({ cookies, removeCookie, setShowBottomNav }) {
       })
       .catch((err) => console.log(err));
   };
-  console.log(wordlist.length);
 
   if (loading) return <ProfileLottie />;
 

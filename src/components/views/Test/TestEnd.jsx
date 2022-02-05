@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ColorButton } from "../../style/LoginStyle";
+import { ColorButton } from "../../style/WordStyle";
 import {
   Container,
   InfoDiv,

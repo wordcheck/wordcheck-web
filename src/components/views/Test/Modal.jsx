@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import axios from "axios";
 import React from "react";
-import { ColorButton } from "../../style/LoginStyle";
+import { ColorButton } from "../../style/WordStyle";
 import {
   FalseModalButtonDiv,
   ModalAnswer,
