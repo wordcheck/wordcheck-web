@@ -14,6 +14,7 @@ import {
   TopNavDivContainer,
   WordSearchInputDiv,
   WordSearchCardDiv,
+  EmptyWordDiv,
 } from "../../style/WordStyle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ColorButton, CssTextField } from "../../style/WordStyle";
@@ -30,46 +31,38 @@ export default function WordSearch({ cookies }) {
   const [marks, setMarks] = useState(
     JSON.parse(localStorage.getItem("marks")) || ""
   );
-
-  const [wordAll, setWordAll] = useState([]);
-  const [cards, setCards] = useState([]);
+  const [answerWord, setAnswerWord] = useState("answer");
+  const [answerShow, setAnswerShow] = useState(false);
+  const [emptyAnswer, setEmptyAnswer] = useState(false);
   const { speak } = useSpeechSynthesis();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: cards } = await axios.get(
-          `${process.env.REACT_APP_API}words/`,
-          {
-            headers: {
-              Authorization: cookies.token,
-            },
-          }
-        );
-        setCards(cards);
-
-        const cardsPromises = cards.map((cards) =>
-          axios.get(
-            `${process.env.REACT_APP_API}words/detail_list/?contents=${cards.contents}`,
-            {
-              headers: {
-                Authorization: cookies.token,
-              },
-            }
-          )
-        );
-        const wordAllResponse = await Promise.all(cardsPromises);
-        const wordAll = wordAllResponse.map(({ data }) => data);
-        setWordAll(wordAll.flat());
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-  useEffect(() => {
     window.localStorage.setItem("marks", JSON.stringify(marks));
   }, [marks]);
+
+  const onClickSearchButtonHandler = () => {
+    axios
+      .get(`${process.env.REACT_APP_API}words/search/?target=${searchWord}`, {
+        headers: {
+          Authorization: cookies.token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAnswerWord(res.data);
+        if (res.data.length === 0) {
+          setAnswerShow(false);
+          setEmptyAnswer(true);
+        } else {
+          setAnswerShow(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setAnswerShow(false);
+        setEmptyAnswer(true);
+      });
+  };
 
   const onClickMarkButtonHandler = (info) => {
     let beforeInfo = [...marks];
@@ -81,6 +74,7 @@ export default function WordSearch({ cookies }) {
     }
     setMarks(beforeInfo);
   };
+
   if (!cookies.token) {
     return <Navigate to="/wordcheck-web/" />;
   }
@@ -100,10 +94,62 @@ export default function WordSearch({ cookies }) {
             setSearchWord(e.target.value);
           }}
         />
-        <ColorButton sx={{ width: "100px" }}>검색하기</ColorButton>
+        <ColorButton
+          sx={{ width: "100px" }}
+          onClick={() => onClickSearchButtonHandler()}
+        >
+          검색하기
+        </ColorButton>
       </WordSearchInputDiv>
-      <WordSearchCardDiv>
-        {wordAll
+
+      {answerShow ? (
+        <WordSearchCardDiv>
+          <Carddiv>
+            <div>
+              <WrongCountDiv>
+                틀린횟수 :{answerWord[0]?.wrong_count}
+              </WrongCountDiv>
+              <SpellingVolumeUpDiv>
+                <SpellingDiv>{answerWord[0]?.spelling}</SpellingDiv>
+
+                <VolumeUpIcon
+                  sx={{ height: "2.5vh" }}
+                  onClick={() => speak({ text: answerWord[0]?.spelling })}
+                />
+              </SpellingVolumeUpDiv>
+              <CategoryMeaningDiv>
+                <CategoryList>{answerWord[0]?.category}.</CategoryList>
+                <MeaningDiv> {answerWord[0]?.meaning}</MeaningDiv>
+              </CategoryMeaningDiv>
+            </div>
+            <WordCardRightDiv>
+              {JSON.stringify(marks)?.includes(
+                JSON.stringify(answerWord[0])
+              ) ? (
+                <StarIcon
+                  onClick={() => onClickMarkButtonHandler(answerWord[0])}
+                  sx={{ color: yellow[600] }}
+                />
+              ) : (
+                <StarIcon
+                  onClick={() => onClickMarkButtonHandler(answerWord[0])}
+                  sx={{ color: grey[500] }}
+                />
+              )}
+            </WordCardRightDiv>
+          </Carddiv>
+        </WordSearchCardDiv>
+      ) : (
+        <div>
+          {emptyAnswer ? (
+            <EmptyWordDiv>단어를 발견하지 못했습니다.</EmptyWordDiv>
+          ) : (
+            <EmptyWordDiv>단어를 검색해보세요</EmptyWordDiv>
+          )}
+        </div>
+      )}
+
+      {/* {wordAll
           .filter((word) => {
             if (searchWord == "") {
               return word;
@@ -148,8 +194,7 @@ export default function WordSearch({ cookies }) {
                 </Carddiv>
               </div>
             );
-          })}
-      </WordSearchCardDiv>
+          })} */}
     </Container>
   );
 }
