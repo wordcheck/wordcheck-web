@@ -33,8 +33,11 @@ TTS를 통해 단어의 정확한 발음을 들으며 공부할 수 있습니다
 ## 4. 주요 구현기능
 
 - (1) 로그인/회원가입 기능
-<img src="https://user-images.githubusercontent.com/49505843/152646257-7651c5ed-93de-4bc3-8ca7-7faef690488b.png" width="210" height="400">
-<img src="https://user-images.githubusercontent.com/49505843/152646257-7651c5ed-93de-4bc3-8ca7-7faef690488b.png"  width="210" height="400">
+
+<p float="left">
+ <img src="https://user-images.githubusercontent.com/49505843/152646257-7651c5ed-93de-4bc3-8ca7-7faef690488b.png" width="210" height="400">
+ <img src="https://user-images.githubusercontent.com/49505843/152646257-7651c5ed-93de-4bc3-8ca7-7faef690488b.png"  width="210" height="400">
+</p>
 
  - axios 통신 라이브러리를 사용해 로그인을 했을 때 토큰 값을 받아왔습니다.
  - react-cookie를 사용해 받아온 token울 cookie에 저장해줬습니다. 
