@@ -124,8 +124,7 @@ const onClickConfirmAnswerHandler = (ans) => {
 ### (6) 검색기능
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/49505843/152650911-ce37bc23-ebd4-45d0-a45a-931bcf3f6021.png
-"  width="200" height="380">
+<img src="https://user-images.githubusercontent.com/49505843/152650911-ce37bc23-ebd4-45d0-a45a-931bcf3f6021.png"  width="200" height="380">
 <img src="https://user-images.githubusercontent.com/49505843/152649421-2e8c784b-7ef3-4b8e-9e6f-bde88e224260.png"  width="200" height="380">
 </p>
 
